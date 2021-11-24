@@ -1,0 +1,42 @@
+.container {
+    background-image: linear-gradient(270deg, #FFFFFF0A 0%, #8A8989 100%), url("../../../public/img/landing-bg.png");
+    width: 100%;
+    margin: 0 !important;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 6px;
+    min-height: 24rem;
+}
+
+.heading {
+    display: inline-block;
+    color: #FFFFFF;
+    font-size: 40px;
+    font-family: "Larsseit", sans-serif;
+    background-color: #707070;
+    border-radius: 3px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.btn {
+    padding: 0.5rem 1.8rem;
+}
+
+.btnOne {
+    border: 1px solid #ff5555;
+    background-color: #ff5555;
+    color: #fff;
+}
+
+.btn:hover {
+   opacity: 0.8;
+    color: white;
+}
+
+.btnTwo {
+    border: 2px solid #FF5555;
+    background-color: transparent;
+    color:#fff;
+}

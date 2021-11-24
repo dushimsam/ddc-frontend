@@ -1,0 +1,416 @@
+.root {
+    background-color: #F5F5F5;
+    padding-bottom: 0.2rem;
+}
+
+.cardSection {
+    padding: 1.2rem 1rem;
+}
+.card {
+    display: flex;
+    background-color: #FFFFFF;
+    padding: 14px 8px;
+    box-shadow: 0 10px 20px #00000012;
+    border-radius: 5px;
+}
+
+.cardIconArea {
+    padding: 6% 7%;
+}
+.cardIconArea .iconCircle {
+    width: 44px;
+    height: 43px;
+    display: inline-block;
+    padding: 9px 13px;
+    border-radius: 50%
+}
+
+.cardIconArea .iconCircle img {
+    width: 18px;
+    height: 18px;
+}
+
+.card:first-child .cardIconArea .iconCircle{
+    background: #FFF2F2;
+}
+
+.card:nth-child(2) .cardIconArea .iconCircle{
+    background: #E8FFE8;
+}
+
+.card:nth-child(3) .cardIconArea .iconCircle{
+    background: #E4F5FB;
+}
+
+.card:nth-child(4) .cardIconArea .iconCircle{
+    background: #FFECCB;
+}
+
+
+.icon {
+    width: 15px;
+    display: block;
+    margin: auto;
+}
+
+
+.card:first-child .cardIconArea .iconCircle .icon {
+    color: #D9534F;
+}
+.card:nth-child(2) .cardIconArea .iconCircle .icon {
+    color: #449D44;
+}
+.card:nth-child(3) .cardIconArea .iconCircle .icon {
+    color: #2AABD2;
+}
+.card:nth-child(4) .cardIconArea .iconCircle .icon {
+    color: #EE9800;
+}
+
+.cardContentArea {
+    padding: 6%;
+}
+
+.cardContentArea h4{
+    text-align: right;
+    font-weight: bolder;
+    font-size: 18px;
+    /*letter-spacing: 1px;*/
+    /*font-family: serif;*/
+    margin-bottom: 0.3em;
+    color: #000000;
+}
+.cardContentArea p{
+    text-align: right;
+    font-size: 14px;
+    color: #707070;
+    margin-bottom: 0;
+}
+
+.accountHistory{
+    background: #FDFDFD 0% 0% no-repeat padding-box;
+    border: 1px solid #70707030;
+    border-radius: 5px;
+}
+
+.customerAccountHistory{
+    background: #FDFDFD 0% 0% no-repeat padding-box;
+    border: 1px solid #70707030;
+}
+
+
+.accountHistory h4 {
+    font-size: 17px;
+    letter-spacing: 1px;
+    padding: 1rem 1.2rem;
+    padding-bottom: 0;
+    color: #707070;
+    font-weight: bold;
+}
+.accountHistoryHeader {
+    border-bottom: 1px solid #70707030;
+}
+.accountHistoryBody {
+    padding: 1.5%;
+}
+
+.accountCard {
+    position: relative;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #0000000A;
+    border-radius: 3px;
+    padding: 12px 15px;
+}
+
+.accountCard p {
+    margin-bottom: 0;
+    font-size: 14px;
+    color: #707070;
+
+
+
+
+}
+
+.cardActionBtn1 {
+    cursor: pointer;
+    font-size: 0.8em;
+}
+.cardActionBtn1:hover {
+    text-decoration: underline;
+}
+
+
+.cardActionBtn2 {
+    cursor: pointer;
+    font-size: 0.8em;
+
+}
+.cardActionBtn2:hover {
+    text-decoration: underline;
+}
+
+.quickActions {
+    padding-left: 15px;
+}
+
+.quickActionsHeader {
+    margin: 1.5rem 0;
+}
+.quickActionsHeader h4 {
+    color: #000000;
+    font-weight: 600;
+    letter-spacing: .5px;
+    font-size: 20px;
+}
+
+
+.quickActionsCard {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #7070702b;
+    border-radius: 4px;
+    padding: 2%;
+    flex: 0 0 17%;
+    max-width: 17%;
+    cursor: pointer;
+    opacity: 1;
+}
+
+.quickActionsCard:hover {
+    background: #F5F5F5 0% 0% no-repeat padding-box;
+    transition: all 0.4s ease-in;
+}
+
+.sectionArea {
+    flex: 0 0 73%;
+    max-width: 73%;
+}
+.quickActionsCard img {
+    /*background: #707070 0% 0% no-repeat padding-box;*/
+    display: block;
+    margin: auto;
+}
+
+
+.quickActionTitle {
+    margin-top: 10px;
+    margin-bottom: 0 !important;
+    text-align: center;
+    letter-spacing: 0;
+    color: #707070;
+    font-size: 15px;
+    opacity: 1;
+}
+
+.accountCardClose {
+    position: absolute;
+    right: 20px;
+    cursor: pointer;
+    top: 16px;
+}
+
+.icon {
+    color: #D9534F;
+}
+
+.statistics{
+    padding: 1rem 2rem;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 10px 20px #00000012;
+    border-radius: 5px;
+    margin-bottom: 2.7rem;
+
+}
+ .profileArea {
+    padding: 1rem;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 10px 20px #00000012;
+    border-radius: 5px;
+
+}
+
+.countStatsArea {
+    padding: 2rem 1rem;
+
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 10px 20px #00000012;
+    border-radius: 5px;
+    margin-bottom: 2.1rem;
+
+}
+
+.countStatsAreaAmount {
+    color: #666666;
+    font-size: 2rem;
+    font-weight: lighter;
+    margin-bottom: 0;
+}
+
+.countStatsAreaTitle {
+    color: #EC6666;
+    margin-bottom: 0;
+    margin-top: 13px;
+    font-size: 13px;
+}
+
+
+.statisticsHeader h4{
+    font-weight: bold;
+    text-align: center;
+    font-size: 19px;
+    letter-spacing: 0.5px;
+    color: #000000;
+}
+
+.statisticsHeader p {
+    text-align: center;
+    font-size: 14px;
+    color: #7C828A;
+}
+
+.profileAvatar img{
+    width: 45px;
+}
+
+.profile h4 {
+    font-size: 17px;
+    color: #707070;
+    text-transform: capitalize;
+}
+
+.profile p {
+    font-size: 14px;
+    color: #707070;
+    margin-bottom: 0;
+}
+
+.labelArea {
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.squareReddish {
+    width: 18px;
+    height: 18px;
+        margin-right: 0.5rem;
+    background: #EC6666 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 2px;
+}
+
+.statisticsBody {
+    margin: 1.4rem 0;
+}
+.squareWhite {
+    width: 18px;
+    height: 18px;
+    margin-right: 0.5rem;
+    background: #E1E5EB 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #00000029;
+    border-radius: 2px;
+}
+
+.label {
+    font-size: 12px;
+    color: #7C828A;
+}
+
+.chartArea {
+    flex: 0 0 73%;
+    max-width: 73%;
+}
+
+.chartArea > div {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 6px #0000000F;
+    border-radius: 4px;
+    margin-bottom: 2.5rem;
+}
+
+.salesCharts {
+    flex: 0 0 60%;
+    max-width: 60%;
+}
+
+.salesChartsHeader {
+    padding: 10px 25px;
+}
+
+.salesChartsHeader {
+    padding: 10px 25px;
+}
+
+.trafficChartHeader {
+    padding: 10px 25px;
+}
+
+
+.salesChartsBody, .trafficChartBody {
+    padding: 0;
+}
+
+.salesChartsHeader h4, .trafficChartHeader h4 {
+    color: #475F7B;
+    font-size: 17px;
+}
+
+.salesChartsHistory {
+    flex: 0 0 40%;
+    max-width: 40%;
+    padding: 1.5rem;
+    border-left: 0.5px solid #C7CFD6;
+}
+.salesChartsHistory h4 {
+    color: #475F7B;
+    font-size: 18px;
+}
+
+.salesChartsItems {
+    margin-top: 1.5rem;
+        border-bottom: 0.5px solid #C7CFD6;
+
+}
+.salesChartsItems > div {
+    justify-content: space-between;
+    color: #727E8C;
+    font-size: 15px;
+}
+
+.borderBottom {
+            border-bottom: 0.5px solid #C7CFD6;
+
+}
+
+.progressBar {
+    position: relative;
+    margin-top: -10px;
+}
+
+.totalSales {
+    padding-top: 1rem;
+    color: #475F7B;
+}
+
+.progressBar p {
+    color: #5A8DEE;
+    font-size: 14px;
+    margin-bottom: 0;
+}
+.progress .progressUnFilled{
+    width: 100%;
+    height: 6px;
+    display: inline-block;
+    background: #E7EDF3 0% 0% no-repeat padding-box;
+    border-radius: 8px;
+}
+
+.progress .progressFilled{
+    height: 6px;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+    bottom: 8px;
+    background: #5A8DEE 0% 0% no-repeat padding-box;
+    box-shadow: 0px 1px 4px #5A8DEE99;
+    border-radius: 8px;
+}

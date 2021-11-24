@@ -1,0 +1,116 @@
+
+.order-meta span.pending {
+  color: white;
+  background: #FFD151;
+   padding: 4.6px 9px;
+  font-size: 9px;
+  font-family: sans-serif;
+  cursor: pointer;
+  border-radius: 9999px;
+}
+.order-meta span.pending:hover {
+  background-color: #F8C537;
+}
+.order-meta span.inactive {
+  color: white;
+  background: #ef3f2c;
+   padding: 4.6px 9px;
+  font-size: 9px;
+  font-family: sans-serif;
+  cursor: pointer;
+  border-radius: 9999px;
+}
+.order-meta span.inactive:hover {
+  background-color: #ca3625;
+}
+.order-meta span.active {
+  color: white;
+  background: #34ce57;
+  padding: 4.6px 9px;
+  font-size: 9px;
+  font-family: sans-serif;
+  cursor: pointer;
+  border-radius: 9999px;
+}
+.order-meta span.active:hover {
+  background-color: #28a745;
+}
+
+.order-meta span.primary {
+  color: white !important;
+  background: rgba(0, 60, 255, 0.575);
+  padding: 4.6px 9px;
+  font-size: 9px;
+  font-family: sans-serif;
+  cursor: pointer;
+  border-radius: 9999px;
+}
+.order-meta span.primary:hover {
+  background-color: rgba(0, 60, 255, 0.575);
+    opacity: 0.8;
+
+}
+
+.order-meta span.info {
+  color: white;
+  background:#007bff;
+  padding: 4.6px 9px;
+  font-size: 9px;
+  font-family: sans-serif;
+  cursor: pointer;
+  border-radius: 9999px;
+}
+.order-meta span.info:hover {
+  background-color: #007bff;
+  opacity: 0.8;
+}
+
+
+.order-meta span.purple {
+  color: white;
+  background:#34187a;
+  padding: 4.6px 9px;
+  font-size: 9px;
+  font-family: sans-serif;
+  cursor: pointer;
+  border-radius: 9999px;
+}
+.order-meta span.purple:hover {
+  background-color: #34187a;
+  opacity: 0.8;
+}
+
+.infoArea{
+  color: #707070;
+}
+.infoArea h5, .infoArea div {
+  font-family: "Larsseit", sans-serif !important;
+
+}
+
+.infoArea div {
+    font-size: 14px !important;
+}
+
+
+.paymentMeta h5{
+  color: #707070 !important;
+  font-family: "Larsseit", sans-serif;
+}
+
+.paymentMeta div{
+  color: #707070 !important;
+  font-family: "Larsseit", sans-serif;
+  font-size: 14px
+}
+
+
+.btnShow {
+    border: 1px solid #ff5555;
+    background-color: transparent;
+    padding: 0.3rem 0;
+    font-size: 14px;
+    color: #ff5555;
+    border-radius: 4px;
+
+}

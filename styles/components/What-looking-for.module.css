@@ -1,0 +1,69 @@
+.whatLookingFor {
+    background-image: linear-gradient(190deg, #FFFFFF0A 0%, #8A8989 100%), url("../../public/img/landing-bg.png");
+    width: 100%;
+    margin: 0 !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+
+    border-radius: 6px;
+}
+
+.landingHeading {
+    display: inline-block;
+    color: #FFFFFF;
+    font-size: 40px;
+    font-family: "Larsseit", sans-serif;
+    background-color: #707070;
+    border-radius: 3px;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.bg-gray {
+    background-color: gray;
+}
+
+.heading {
+    margin-bottom: 0;
+    font-size: 16px;
+    letter-spacing: 0.4px;
+    font-weight: 700;
+}
+
+.selectFormControl {
+    font-size: 13px !important;
+    -webkit-appearance: none;
+    color: #707070;
+    -moz-appearance: none;
+    background: transparent url(/img/select.svg) no-repeat;
+    background-position-x: 95%;
+    background-position-y: 10px;
+}
+
+.bgLight {
+    background-color: #ECEEEF;
+    border-radius: 8px 8px 0 0;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+.selectorBody {
+    border-radius: 0 0 8px 8px;
+}
+
+.findMyPartsBtn {
+    background-color: #ff5555;
+    font-size: 13px;
+    /*border: 1px solid #1C7CD5;*/
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    letter-spacing: 0.4px;
+    padding: 0.5rem 1.9rem !important;
+}
+
+.findMyPartsBtn:hover {
+    color: white;
+    /*background-color: #017799;*/
+}

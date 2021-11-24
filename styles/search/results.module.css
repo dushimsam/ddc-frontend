@@ -1,0 +1,69 @@
+.categoryTexts{
+    font-size:0.9em;
+}
+
+.myVehicleLoader {
+    height: 100px !important;
+}
+
+.categoriesSideBarHeaderLoader {
+    height: 200px !important;
+}
+
+.productAreaLoader {
+    height: 30em !important;
+}
+
+.noResultsContainer {
+      display: flex;
+  justify-content: center;
+  align-items: center;
+    height: 50vh;
+
+}
+.cardFilterHeader {
+    padding: 6px 20px;
+    font-size: 14px;
+    font-weight: bolder;
+    letter-spacing: 0.5px;
+}
+
+.productName {
+    font-size: 14px;
+    font-weight: bolder;
+    letter-spacing: 0.5px;
+}
+
+.productAttribute {
+    font-size: 13px;
+    margin-right: 10px;
+    color: #707070;
+}
+
+.productValue {
+    font-size: 13px;
+    margin-right: 10px;
+    text-transform: capitalize;
+     color: #707070;
+}
+
+.productCategoryAttribute {
+        font-size: 13px;
+    margin-right: 10px;
+    color: #707070;
+    letter-spacing: 0.3px;
+    font-weight: bolder;
+}
+.productCategoryValue {
+    font-size: 13px;
+    font-style: italic;
+    text-transform: capitalize;
+     color: #707070;
+}
+
+.filterNotFound {
+    margin-top: 9rem;
+    margin-left: 12rem;
+    display: flex;
+
+}

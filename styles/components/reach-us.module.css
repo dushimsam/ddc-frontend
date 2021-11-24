@@ -1,0 +1,56 @@
+
+.container{
+    bottom: 10px;
+    right:5px;
+    z-index: 1;
+}
+
+.icon{
+    position:fixed;
+    width:70px;
+    height:70px;
+    bottom:40px;
+    right:40px;
+    /*background-color:#25d366;*/
+    color:#FFF;
+    border-radius:50px;
+    text-align:center;
+    font-size:20px;
+    box-shadow: 2px 2px 3px #999;
+    z-index:100;
+}
+
+/*.my-float{*/
+/*    margin-top:16px;*/
+/*}*/
+
+/*@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {*/
+/*    .container {*/
+/*        margin-top: -8%;*/
+/*    }*/
+/*}*/
+
+/* Smartphones (landscape) ----------- */
+@media only screen and (min-width : 321px) {
+    /* Styles */
+}
+
+/* Smartphones (portrait) ----------- */
+@media only screen and (max-width : 320px) {
+    /* Styles */
+}
+
+/* iPads (portrait and landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
+    /* Styles */
+}
+
+/* iPads (landscape) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : landscape) {
+    /* Styles */
+}
+
+/* iPads (portrait) ----------- */
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) and (orientation : portrait) {
+    /* Styles */
+}

@@ -1,0 +1,72 @@
+.root {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    padding: 2.5rem;
+    height: 90vh;
+}
+
+.container {
+    background-color: #fff;
+    height: 100%;
+    padding: 2.5rem 4rem;
+}
+
+.containerHeaderModal h4 {
+    letter-spacing: 0.9px;
+    font-size: 27px;
+    color: #000000;
+}
+
+.containerHeader h4 {
+    font-weight: bold;
+    letter-spacing: 0.7px;
+    font-size: 25px;
+    color: #000000;
+}
+.containerBody {
+    margin-top: 2rem;
+}
+
+.formRow {
+    margin-bottom: 2rem !important;
+}
+.containerFooter {
+    margin-top: 5rem;
+}
+
+.containerFooterTitle h5{
+    color: #373A3C;
+    letter-spacing: .5px;
+    font-size: 19px;
+    font-weight: 600;
+}
+.inputLabels {
+    color: #373A3C;;
+    font-size: 15px;
+    display: block;
+}
+
+.submitBtn {
+    margin-top: -1rem;
+    background: #D9534F 0% 0% no-repeat padding-box;
+    border: 1px solid #D9534F;
+    font-size: 14px;
+    border-radius: 20px;
+}
+
+.productsArea {
+    margin-top: 4rem;
+}
+
+.noProducts {
+    text-align: center;
+    color: #707070;
+}
+
+.searchInput {
+    background-color: #F5F5F5;
+}
+.searchImg {
+    position: absolute;
+    right: 26px;
+    width: 15px;
+}

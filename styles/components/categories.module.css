@@ -1,0 +1,24 @@
+.heading {
+    color: #707070;
+    font-size: 24px;
+    font-weight: bolder;
+    margin-bottom: 2rem;
+    letter-spacing: 0.4px;
+}
+
+.categoryImage {
+    height: 200px;
+}
+.shopNowBtn{
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+}
+
+.categoryHeading {
+  font-size: 1.3em;
+    font-weight: bold;
+    letter-spacing: 0.4px;
+    color: #707070;
+    text-transform: capitalize;
+}

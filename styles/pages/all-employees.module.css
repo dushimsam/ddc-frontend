@@ -1,0 +1,24 @@
+/* .breadcrumb-item::before {
+    font-family: 'FontAwesome';
+    content: "\f105";
+} */
+
+
+.badgeText{
+    font-size:0.85em;
+    color:#707070;
+    line-height: 33px;
+}
+
+.badgeDiv{
+    height: 30px;
+}
+
+.badgeButton{
+    font-size:0.8em;
+    margin-right:1em;
+}
+
+/* .badgeButton{
+    background-color: color,fontSize:"0.8em" 
+} */

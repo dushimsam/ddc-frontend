@@ -1,0 +1,58 @@
+
+
+.imageContainer {
+    background: url("../../../public/img/va_car-720x405.jpg") no-repeat;
+    background-size: 100%;
+     clip-path: polygon(37% 0, 100% 0, 100% 100%, 0% 100%);
+     min-height: 20rem;
+     z-index: 0;
+}
+
+.cardHeader {
+    background-color: #FF5555;
+    border: none;
+}
+
+.cardHeader h5 {
+    font-size: 16px;
+}
+
+
+.searchContainer {
+     position: absolute;
+     min-width: 40rem;
+     z-index: 1;
+}
+
+
+.searchBtn {
+    background-color: #ff5555;
+    font-size: 13px;
+    /*border: 1px solid #1C7CD5;*/
+    border-radius: 4px;
+    cursor: pointer;
+    color: white;
+    letter-spacing: 0.4px;
+    padding: 0.5rem 1.9rem !important;
+}
+
+.searchBtn:hover {
+    color: white;
+    /*background-color: #017799;*/
+}
+
+
+.formGroup {
+    font-size: 14px;
+}
+
+
+@media only screen and (max-width : 768px) {
+    .searchContainer {
+        position: relative;
+        min-width: 96%;
+   }
+   .imageContainer {
+       display: none;
+   }
+  }

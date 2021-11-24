@@ -1,0 +1,301 @@
+.root {
+    height: 100%;
+    /*margin-bottom: 20em;*/
+}
+
+.productView {
+    /*height: 10em;*/
+    width: 100%;
+}
+
+.selectedVehicleArea {
+    border: 1px solid #DBDBDB;
+    border-radius: 2px;
+}
+
+.selectedVehicleAreaHeader {
+    background: #F9F9F9 0% 0% no-repeat padding-box;
+    padding: .47em 1.5em;
+    border-bottom: 1px solid #DBDBDB;
+}
+
+.selectedVehicleAreaHeaderTitle{
+    font-size: 14px;
+    letter-spacing: 0.4px;
+    color: #000000;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.selectedVehicleAreaBody {
+    padding: 1.2em 1.5em;
+}
+
+.selectedVehicleAreaBodyText {
+    margin-bottom: 0;
+    font-size: 15px;
+    color: #000000;
+    letter-spacing: 0.4px;
+}
+
+.selectedVehicleAreaBodyIcon {
+    padding: 8px 11px;
+    background: #ff5555 0% 0% no-repeat padding-box;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+    margin-top: -10px;
+}
+
+.selectedVehicleAreaBodyIcon:hover {
+    cursor: pointer;
+}
+
+.selectedVehicleAreaBodyIcon img {
+    width: 18px;
+    height: 18px;
+}
+
+.breadCrumbArea {
+
+}
+
+
+.productsViewArea {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 0.4000000059604645px solid #DDDDDD;
+    border-radius: 5px;
+}
+
+.productsViewArea {
+    height: 70vh;
+    overflow-y: scroll;
+    z-index: 0;
+}
+
+
+.productsViewArea::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f8f8f8;
+}
+
+.productsViewArea::-webkit-scrollbar{
+    width: 6px;
+    background-color: #f8f8f8;
+}
+.productsViewArea::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #707070;
+}
+
+.productsViewAreaHeader {
+    padding: 0.7em 2.5em;
+    border-bottom: 0.4000000059604645px solid #DDDDDD;
+}
+
+.productsViewAreaHeaderTitle {
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #707070;
+}
+
+
+.productsViewAreaBody {
+       padding: 1em 2.5em;
+}
+
+.singleProductView {
+    border-bottom: 1px solid #DDDDDD;
+    margin-bottom: 1em;
+}
+
+.singleProductViewImageArea img{
+    width: 6em;
+}
+
+
+.singleProductViewDescriptionAreaTitle {
+    letter-spacing: 0.52px;
+    font-size: 14px;
+    margin-bottom: 0 !important;
+    font-weight: bold;
+    color: #707070;
+}
+
+.singleProductViewDescriptionAreaTitleSecond{
+    letter-spacing: 0.52px;
+    font-size: 14px;
+    margin-bottom: 0 !important;
+    color: #707070;
+}
+.singleProductViewDescriptionArea {
+
+}
+
+
+.productAttributes {
+
+}
+
+.productAttributeKey {
+    letter-spacing: 0.28px;
+    font-size: 12px;
+
+    color: #707070;
+    margin-bottom: 0;
+}
+
+
+.productAttributeValue {
+    letter-spacing: 0.28px;
+    font-size: 13px;
+    /*font-weight: bold;*/
+    color: #707070;
+    margin-bottom: 0;
+}
+
+.singleProductViewMainArea {
+
+}
+
+.productBottomLine {
+    margin-inline-start: 15px;
+}
+
+.addToCartBtn {
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.8px;
+    font-weight: bold;
+}
+
+
+.addToListBtn {
+    font-size: 14px;
+    letter-spacing: 0.8px;
+}
+
+.productMainImage {
+    width: 20em;
+}
+
+.productModelYear404 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.vehicleTitle {
+    text-align: left;
+    letter-spacing: 0.4px;
+    color: #707070;
+    font-size: 17px;
+}
+
+.modelYearCategoriesArea {
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 0.5px solid #BBBBBB;
+    border-radius: 2px;
+    padding: 25px 35px;
+}
+
+
+    /* display: inline;
+
+/*.categoryViewArea {*/
+/*   padding: 0 4px;*/
+/*}*/
+
+.categoryViewAreaHeader hr {
+    width: 90%;
+    margin-top: 11px;
+}
+
+.categoryLink {
+    display: block;
+    font-size: 14px;
+}
+
+.categoryLink {
+    text-align: left;
+    letter-spacing: 0.32px;
+    color: #3B3BFF;
+}
+
+
+@media
+only screen and (max-width : 768px) {
+  .singleProductViewImageArea img{
+      margin: 0 auto ;
+      display: block;
+    }
+    .singleProductViewDescriptionArea {
+        margin-top: 1.5rem;
+    }
+    .singleProductViewDescriptionAreaTitle {
+        text-align: center;
+        font-size: 22px;
+    letter-spacing: 3px;
+    }
+
+
+
+    .addToCartBtn {
+      margin-top: 0rem !important;
+}
+    .singleProductViewMainArea {
+        margin-top: 1.5rem !important;
+    }
+    .singleProductViewMainArea > p {
+        text-align: center;
+    }
+
+}
+
+.modelYearCategoriesArea {
+    height: 70vh;
+    overflow-y: scroll;
+    z-index: 0;
+}
+
+
+.modelYearCategoriesArea::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: #f8f8f8;
+}
+
+.modelYearCategoriesArea::-webkit-scrollbar{
+    width: 6px;
+    background-color: #f8f8f8;
+}
+.modelYearCategoriesArea::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: #707070;
+}
+.myVehicleLoader {
+    height: 100px !important;
+}
+
+.categoriesSideBarHeaderLoader {
+    height: 200px !important;
+}
+
+.productAreaLoader {
+    height: 30em !important;
+}
+
+
+.singleProductViewImageAreaCars {
+    height: 6rem;
+    border-radius: 2px;
+    background-color: #f3f3f3;
+    padding: 0 15px;
+}
+
+.singleProductViewImageAreaCars img {
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    object-fit: scale-down;
+}

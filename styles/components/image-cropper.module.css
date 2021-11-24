@@ -1,0 +1,7 @@
+.modal_title { font-size: 18px; font-weight: bold; }
+.no_borders { border: 0px; }
+.body_message { font-size: 18px; }
+.centered { text-align: center; }
+.btn { background-color: #c13320; border-color: transparent; outline: none; border-radius: 8px; font-size: 15px; padding: 10px 25px; }
+.btn:hover { background-color: #c53232; border-color: transparent; }
+.btn:focus { outline: none; }

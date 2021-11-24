@@ -1,0 +1,140 @@
+.modal {
+    padding: 1.2rem !important;
+}
+
+.modalHeader {
+    border-bottom: 0 !important;
+    padding: 2rem !important;
+}
+
+.modal .model-content {
+    padding: 100% !important;
+}
+
+.modalBody {
+    padding: 0 3rem !important;
+}
+
+ .modalClose {
+    right: 40px !important;
+    top: 25px !important;
+}
+
+ .modalXBtn {
+     width: 30px;
+     height: 30px;
+        font-size: 11px !important;
+    border-radius: 50% !important;
+    background: #ff5555 !important;
+    color: white !important;
+}
+
+.modalTitle {
+    color: #4B4B4B !important;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    font-size: 15px !important;
+}
+
+.modalTitleCartSuccess {
+    color: #23bc6f !important;
+    font-weight: lighter !important;
+
+    text-decoration: underline;
+}
+
+.productName {
+    color: #707070;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    font-size: 17px;
+}
+
+.productMeta {
+    color: #707070;
+     font-weight: bolder;
+    letter-spacing: 0.5px;
+    font-size: 13px;
+}
+
+.productPrice {
+    font-weight: bolder;
+    letter-spacing: 0.3px;
+}
+
+.productPricing {
+ color: #D9534F;
+    font-size: 18px;
+}
+.productFitNote {
+    color: #666666;
+    font-size: 12px;
+}
+
+
+.productPartNumber {
+    font-size: 13px;
+    color:#707070;
+    margin-top: 7px;
+}
+.productImage {
+    height: auto;
+}
+
+.buttonContinue {
+    text-transform: uppercase;
+    padding: 7px 30px !important;
+    font-size: 13px;
+    color: #ff5555;
+    border: 1px solid #D9534F;
+    border-radius: 4px;
+    opacity: 1;
+}
+
+.buttonContinue:hover {
+    color: #ff5555;
+    opacity: 0.8;
+    border-color: #ff5555;
+    transition: all ease-in-out 0.4s;
+}
+
+
+.buttonCart {
+    text-transform: uppercase;
+    padding: 7px 35px !important;
+    font-size: 13px;
+    color: white;
+    letter-spacing: 0.4px;
+    border: 1px solid #ff5555;
+    background-color: #ff5555;
+    border-radius: 4px;
+    opacity: 1;
+}
+
+.buttonCart:hover {
+    color: white;
+    border-color: #ff0700ba;
+    background-color: #ff0700ba;
+    transition: all ease-in-out 0.4s;
+}
+
+.btnNumber {
+    font-size: 25px;
+    margin-top: -7px;
+    color: #707070;
+    background-color: transparent;
+    border: none;
+}
+
+
+
+.quantityBox {
+    border: 1px solid #707070;
+    margin: 0 8px;
+    /*min-width: 50px !important;*/
+    padding: 3px 18px;
+    text-align: center;
+    font-size: 11px;
+    border-radius: 4px;
+    display: inline-block;
+}

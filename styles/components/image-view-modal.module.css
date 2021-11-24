@@ -1,0 +1,42 @@
+/*.modalDialog {*/
+/*    height: 100%;*/
+/*}*/
+
+/*.modalContent{*/
+/*    height: 100%;*/
+/*}*/
+.modalBody {
+    position: relative;
+}
+
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 0;
+    z-index: 999;
+    font-size: 5rem;
+    font-weight: normal;
+    color: black;
+    opacity: 1;
+}
+
+.image {
+
+}
+
+.arrow {
+    background-color: #ff5555;
+}
+
+.prev {
+
+}
+
+
+@media only screen and (max-width: 600px) {
+    .close {
+        top: 170px;
+        right: 200px;
+    }
+}

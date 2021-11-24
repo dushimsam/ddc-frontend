@@ -1,0 +1,49 @@
+.root {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.pageHeaderTitle {
+    font-size: 30px;
+    font-weight: 600;
+    letter-spacing: 0.8px;
+    color: #707070;
+
+}
+.pageHeaderSubText {
+    font-size: 14px;
+    text-align-last: center;
+    color: #666666;
+}
+.pageHeader {
+
+}
+
+.pageHeaderLineBottom {
+    width: 12em;
+    height: 1px;
+    /*background-color: gray;*/
+}
+
+.inputLabels {
+    color: #666666;
+    font-size: 14px;
+}
+
+.submitBtn {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+
+.metaInfoLink{
+    color: #1492E6!important;
+    font-size: 14px;
+}
+
+

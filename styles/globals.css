@@ -1,0 +1,711 @@
+@import "~react-vis/dist/style.css";
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-MediumItalic.eot');
+    src: local('Larsseit Medium Italic'), local('Larsseit-MediumItalic'),
+    url('./fonts/larsseit/Larsseit-MediumItalic.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-MediumItalic.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-MediumItalic.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-MediumItalic.ttf') format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-Thin.eot');
+    src: local('Larsseit Thin'), local('Larsseit-Thin'),
+    url('./fonts/larsseit/Larsseit-Thin.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-Thin.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-Thin.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-LightItalic.eot');
+    src: local('Larsseit Light Italic'), local('Larsseit-LightItalic'),
+    url('./fonts/larsseit/Larsseit-LightItalic.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-LightItalic.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-LightItalic.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-LightItalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit.eot');
+    src: local('Larsseit'),
+    url('./fonts/larsseit/Larsseit.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-ExtraBold.eot');
+    src: local('Larsseit ExtraBold'), local('Larsseit-ExtraBold'),
+    url('./fonts/larsseit/Larsseit-ExtraBold.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-ExtraBold.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-ExtraBold.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-BoldItalic.eot');
+    src: local('Larsseit Bold Italic'), local('Larsseit-BoldItalic'),
+    url('./fonts/larsseit/Larsseit-BoldItalic.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-BoldItalic.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-BoldItalic.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-Light.eot');
+    src: local('Larsseit Light'), local('Larsseit-Light'),
+    url('./fonts/larsseit/Larsseit-Light.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-Light.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-Light.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-Bold.eot');
+    src: local('Larsseit Bold'), local('Larsseit-Bold'),
+    url('./fonts/larsseit/Larsseit-Bold.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-Bold.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-Bold.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-Italic.eot');
+    src: local('Larsseit Italic'), local('Larsseit-Italic'),
+    url('./fonts/larsseit/Larsseit-Italic.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-Italic.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-Italic.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-Medium.eot');
+    src: local('Larsseit Medium'), local('Larsseit-Medium'),
+    url('./fonts/larsseit/Larsseit-Medium.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-Medium.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-Medium.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-ExtraBoldItalic.eot');
+    src: local('Larsseit ExtraBold Italic'), local('Larsseit-ExtraBoldItalic'),
+    url('./fonts/larsseit/Larsseit-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-ExtraBoldItalic.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-ExtraBoldItalic.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-ExtraBoldItalic.ttf') format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Larsseit';
+    src: url('./fonts/larsseit/Larsseit-ThinItalic.eot');
+    src: local('Larsseit Thin Italic'), local('Larsseit-ThinItalic'),
+    url('./fonts/larsseit/Larsseit-ThinItalic.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/larsseit/Larsseit-ThinItalic.woff2') format('woff2'),
+    url('./fonts/larsseit/Larsseit-ThinItalic.woff') format('woff'),
+    url('./fonts/larsseit/Larsseit-ThinItalic.ttf') format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+.font-weight-thin {
+    font-family: "Larsseit Thin", sans-serif;
+}
+
+.bg-danger,
+.badge-danger,
+.btn-danger {
+    background-color: #ff5555 !important;
+}
+
+.alert-light-success {
+    background-color: #B6FAB1;
+    border: 1px solid #0db18e;
+}
+
+.alert-light-danger {
+    background-color: #ffabab;
+    border: 1px solid #ff5555;
+}
+
+.text-danger {
+    color: #ff5555 !important;
+}
+
+.font-weight-light {
+    font-family: "Larsseit Light", sans-serif !important;
+}
+
+.font-weight-normal {
+    font-family: "Larsseit", sans-serif;
+}
+
+.font-weight-bolder {
+    font-family: "Larsseit ExtraBold", sans-serif;
+}
+
+.font-weight-bold {
+    letter-spacing: .5px;
+}
+
+
+.cursor-pointer{
+  cursor: pointer;
+}
+
+.page {
+    background-color: #F5F5F5;
+}
+
+.__nav-link {
+    transition: .2s;
+}
+
+.__nav-link:hover {
+    background-color: #eeeeee;
+    border: none;
+}
+
+.__nav-link.active {
+    background-color: #FFDBDB;
+    border: none;
+}
+
+.__active-nav-link svg path:nth-child(2) {
+    fill: white
+}
+
+html,
+body {
+  padding: 0 !important;
+  background-color: #FCFCFC;
+  margin: 0 !important;
+  font-family: 'Larsseit', sans-serif !important;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.rounded {
+  border-radius: 8px !important;
+}
+
+.text-app-red {
+  color: #D9534F;
+}
+
+.border-app-red {
+  border: 1px solid #D9534F;
+}
+
+.footer-heading {
+  text-transform: uppercase;
+  font-size: 24px;
+}
+
+.p-relative {
+  position: relative;
+}
+
+.add-to-cart {
+  position: absolute;
+  right: 20px;
+  bottom: 12px;
+}
+
+.home-add-to-cart-btn svg {
+  fill: rgba(217, 83, 79, 1);
+  /* color: #D9534F; */
+
+}
+
+.home-add-to-cart-btn:hover {
+  background-color: #D9534F;
+}
+
+.home-add-to-cart-btn:hover svg {
+  fill: #E4E4E4;
+}
+.model-close{
+  position: absolute;
+  right: 10px;
+  top:10px;
+}
+.model-close button:focus,.model-close button{
+  border: none !important;
+}
+
+@media only screen and (min-width : 768px) {
+  .border-right-md {
+    border-right: 1px solid rgb(179, 174, 174);
+  }
+}
+.c-pointer {
+  cursor: pointer;
+}
+
+.form-control-sm {
+  height: calc(1.5em + .5rem + 7px) !important;
+}
+
+.btn:focus {
+  box-shadow: none !important;
+}
+
+.p-relative {
+  position: relative;
+}
+
+.rounded {
+  border-radius: 8px !important;
+}
+
+input:focus,
+button:focus {
+  outline: none !important;
+}
+
+.form-control.is-valid {
+  background-image: none !important;
+}
+
+.form-control.is-invalid {
+  background-image: none !important;
+}
+
+.loader {
+  width: 21px;
+}
+
+
+.alert {
+  font-size: 14px !important;
+  padding: .55rem 1.25rem !important;
+}
+
+.alert-danger {
+  color: #fff !important;
+  background-color: #ff3a29 !important;
+  border-color: #ff3a29 !important;
+}
+
+.alert-success {
+  color: #fff !important;
+  background-color: #28a745 !important;
+  border-color: #28a745 !important;
+}
+
+
+
+.alert-dismissible .close {
+  top: -6px !important;
+}
+
+.alert-dismissible .close:hover {
+  color: #ffffff !important;
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 31px;
+  right: 20px;
+  width: 30px;
+}
+
+
+.button-group .btn {
+  padding: .375rem 1rem !important;
+  font-size: 14px;
+}
+
+.bg-darkish {
+  background-color: #FFFFFF !important;
+}
+
+.navbar {
+  background: #FFFFFF 0 0 no-repeat padding-box;
+  /* border-bottom: 1px solid #DDDDDD; */
+}
+
+.navbar .nav-link {
+  color: #959595;
+  font-size: 14px;
+}
+
+
+
+.navbar .form-control {
+  background: #FAFAFA 0 0 no-repeat padding-box !important;
+  border: 1px solid #DDDDDD !important;
+  border-radius: 4px !important;
+  font-size: 14px;
+}
+
+.navbar .form-control:focus {
+  border-color: #707070 !important;
+  box-shadow: none !important;
+}
+
+.list-group.list-group-root {
+  padding: 0;
+  overflow: hidden;
+}
+
+.list-group.list-group-root .list-group {
+  margin-bottom: 0;
+}
+
+.list-group.list-group-root .list-group-item {
+  border-radius: 0;
+  border: none !important;
+  padding: 0 !important;
+  margin-bottom: 5px;
+}
+
+.list-group.list-group-root>.list-group-item:first-child {
+  border-top-width: 0;
+
+}
+
+.list-group.list-group-root>.list-group>.list-group-item {
+  padding-left: 30px;
+  color: #616161;
+}
+
+.list-group.list-group-root > .list-group > .list-group > .list-group-item {
+    padding-left: 45px;
+
+}
+
+.list-group-item .glyphicon {
+  margin-right: 5px;
+}
+
+.breadcrumb-item {
+  font-size: 15px;
+}
+
+.breadcrumb-item.active {
+  color: #707070;
+}
+
+.breadcrumb-item:not(.active) {
+  color: #3B3BFF;
+}
+
+.navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: 0.4rem;
+    padding-left: 0.5rem;
+}
+
+
+.dropdown-item {
+    color: #707070 !important;
+  text-transform: capitalize !important;
+    font-size: 14px !important;
+}
+
+.dropdown-item:active {
+    background-color: #f8f9fa !important;
+}
+
+.list-group-item.active .linkA {
+    color: white !important;
+}
+.list-group-item.active {
+    background-color: #D9534F;
+    color: white !important;
+}
+
+
+@media
+only screen and (max-width : 768px) {
+   .form-inline {
+      padding-left: 3em !important;
+  }
+  .navbar .button-group {
+      padding-left: 3em;
+      margin: 1em 0;
+  }
+}
+
+@media
+only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px)  {
+    .navbar .button-group {
+      padding-left: 3em;
+      margin: 1em 0;
+  }
+}
+
+.btn.rounded-full{
+  border-radius: 20px;
+}
+
+.top-products .loading.h-10 {
+  height: 12px !important;
+}
+.top-products .loading.h-100 {
+  height: 150px !important;
+}
+
+
+.top-products .bg-whiterounded, .products-area .shadow {
+box-shadow: 0px 10px 20px #0000000D;
+border-radius: 5px;
+
+}
+
+.loading.h-20{
+  height: 20px !important;
+}
+.promo-deals .loading.h-100 {
+  height: 270px !important;
+}
+
+.navbar-nav .dropdown-toggle::after {
+    display: none;
+}
+
+
+.form-check-input {
+  width: 10px;
+    height: 10px;
+}
+
+img{
+  object-fit: cover;
+}
+
+.paragraph {
+    font-size: 15px;
+    color: #E4E4E4;
+    font-weight: normal;
+    letter-spacing: .5px;
+}
+
+.line {
+    height: 3px;
+    background-color: white;
+    width: 100px;
+}
+.footer-icon {
+    border: 2px solid white;
+    height: 40px;
+    width: 40px;
+    transition: .4s;
+}
+
+.footer-icon:hover {
+    background-color: white;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15)!important;
+}
+
+.footer-icon:hover svg path:nth-child(2){
+    fill: #dc3545;
+}
+
+.pagination li {
+      padding: 0.3rem 0.6rem;
+    font-size: 12px;
+    font-family: sans-serif;
+  color: black;
+}
+.pagination li a {
+  text-decoration: none !important;
+}
+
+.pagination li a:hover {
+   color: #707070;
+}
+.pagination li.disabled {
+  /*background-color: #70707024;*/
+  cursor: none;
+  color: #707070;
+  pointer-events: none;
+}
+.pagination li.active {
+  background-color: #ff5555;
+  color: white;
+  pointer-events: none;
+}
+.pagination li:hover {
+  background-color: #7070700f;
+   color: #707070;
+  cursor: pointer;
+}
+
+.alert.alert-dismissible.alert-success {
+    background-color: #34ce57 !important;
+}
+/* Make clicks pass-through */
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #ff5555 !important;
+
+  position: fixed;
+  z-index: 1031;
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: none !important;
+  opacity: 1.0;
+
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+      -ms-transform: rotate(3deg) translate(0px, -4px);
+          transform: rotate(3deg) translate(0px, -4px);
+}
+
+/* Remove these to get rid of the spinner */
+#nprogress .spinner {
+  display: block;
+  position: fixed;
+  z-index: 1031;
+  top: 15px;
+  right: 15px;
+}
+
+#nprogress .spinner-icon {
+  width: 18px;
+  height: 18px;
+  box-sizing: border-box;
+
+  border: solid 2px transparent;
+  border-top-color: #ff5555 !important;
+  border-left-color: #ff5555 !important;
+  border-radius: 50%;
+
+  -webkit-animation: nprogress-spinner 400ms linear infinite;
+          animation: nprogress-spinner 400ms linear infinite;
+}
+
+.nprogress-custom-parent {
+  overflow: hidden;
+  position: relative;
+}
+
+.nprogress-custom-parent #nprogress .spinner,
+.nprogress-custom-parent #nprogress .bar {
+  position: absolute;
+}
+
+.dashboard-line {
+    background-color: #c2c2c2;
+    height: 1px;
+    width: 30%;
+    min-width: 100px;
+}
+
+@-webkit-keyframes nprogress-spinner {
+  0%   { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes nprogress-spinner {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.__shadow {
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.07);
+}
+
+table,
+thead,
+tr,
+tbody,
+th,
+td {
+    text-align: center;
+}
+
+.table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.resize-none{
+  resize: none;
+}
+#contact-us-form-message{
+  height: 120px;
+}
+.form-control:focus {
+     box-shadow: none !important;
+}
+
+.dropdown-toggle::after {
+    vertical-align: middle;
+}
+
+.sticky-top{
+  position: "sticky";
+  top: 0;
+  z-index: 999;
+}
+
+.fit{
+  object-fit: fill;
+  object-position: right top;
+}
+
+
+.section-heading {
+    font-size: 23px;
+    color: #667078;
+}

@@ -1,0 +1,40 @@
+	/* now move prev button more to the left */
+    .swiper-button-prev {
+        /* but first hide on small viewports */
+        display: none;
+
+        left: 0;
+        top: 0;
+
+        margin-top: 0;
+
+        /* subtract .swiper-wrapper bottom-margin to vertically center arrow */
+        height: calc(100% - 3em);
+    }
+
+    @media (min-width: 37.5em) {
+        .swiper-button-prev {
+            /* show on larger viewports */
+            display: block;
+        }
+    }
+
+    .swiper-button-next {
+        /* hide on small viewports */
+        display: none;
+
+        right: 0;
+        top: 0;
+
+        margin-top: 0;
+
+        /* subtract .swiper-wrapper bottom-margin to vertically center arrow */
+        height: calc(100% - 3em);
+    }
+
+    @media (min-width: 37.5em) {
+        .swiper-button-next {
+            /* show on larger viewports */
+            display: block;
+        }
+    }
