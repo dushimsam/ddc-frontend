@@ -1,6 +1,3 @@
-
-
-
 export  function checkProperties(obj,expectionArr) {
     if(expectionArr)
     {
