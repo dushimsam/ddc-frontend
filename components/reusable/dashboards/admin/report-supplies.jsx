@@ -34,7 +34,7 @@ const Table = ({rowsData}) => {
                     rowsData?.items?.slice(0, rowsData.showItems)?.map((data2, index) => {
                         return (<tr key={index}>
                             <td className={styles.td}>{index + 1}</td>
-                            <td className={styles.td}>{`${data2.reciever.user.firstName}  ${data2.reciever.user.lastName}`}</td>
+                            <td className={styles.td}>{`${data2.reciever.firstName}  ${data2.reciever.lastName}`}</td>
                             <td className={styles.td}>
                                 <span className={styles.primary} style={{fontSize: "0.87em"}}
                                       onClick={() => handleShowMore(data2)}>{`Recorded a supply of  ${defaultCurrencyMapping(data2.supply_price)}`}</span>
