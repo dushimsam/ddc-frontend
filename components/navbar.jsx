@@ -324,7 +324,7 @@ export default function NavBar() {
                 <div className={`button-group ${styles.nav_btn__group}`}>
                   <button
                     style={{
-                      border: "1px solid #ff5555",
+                      border: "1px solid #F3A35D",
                       fontSize: "13px",
                     }}
                     className={
@@ -342,7 +342,7 @@ export default function NavBar() {
                   </button>
                   <button
                     style={{
-                      border: "1px solid #ff5555",
+                      border: "1px solid #F3A35D",
                       fontSize: "13px",
                     }}
                     className={
