@@ -6,7 +6,7 @@ import Navbar from "../../components/navbar";
 import Footer from "../../components/Footer";
 import {useRouter} from "next/router"
 
-import SparePartService from "../../services/products/products.service"
+import SparePartService from "../../services/products/ProductService"
 
 import {addItemToCart, increment} from "../../store/actions/cart-actions";
 import {showAddToCartModal} from "../../store/actions/add-to-cart-modal-actions";

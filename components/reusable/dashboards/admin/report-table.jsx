@@ -2,7 +2,7 @@ import React from 'react';
 import {useEffect, useState} from 'react';
 import styles from "../../../../styles/pages/table.module.css";
 import GrowableTable from "../../growable-tables-layout"
-import Supplies from "../../../../services/supplies/supplies"
+import Supplies from "../../../../services/supplies/SupplyService"
 import DirectPurchasesService from "../../../../services/orders/direct-purchase";
 import ShipmentService from "../../../../services/shipments/shipment.service"
 import {processDetailedDate} from '../../../../utils/process-date';

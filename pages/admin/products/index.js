@@ -5,7 +5,7 @@ import ActionButtons from "../../../components/tables/ActionButtons"
 import DeleteConfirmation from "../../../components/tables/delete-confirmation-modal"
 import SingleSubModuleLayout from "../../../layouts/admin-layouts/SingleSubModule";
 import {handleDoubleDecryptionPath, sortData} from "../../../utils/functions";
-import SparePartService from "../../../services/products/products.service";
+import SparePartService from "../../../services/products/ProductService";
 import {alertFailer, alertSuccess} from "../../../utils/alerts"
 import ImageModalView from '../../../components/reusable/image-modal-view';
 import {hide_delete_modal, hide_modal_alert, show_modal} from "../../../utils/modal-funs";
@@ -22,6 +22,7 @@ import {useSelector} from "react-redux";
 import Paginator from "../../../components/tables/paginator";
 import $ from "jquery";
 import RouteProtector from "../../../middlewares/RouteProtector";
+import ProductService from "../../../services/products/ProductService";
 
 
 const DenseRows = ({part}) => {
@@ -103,7 +104,7 @@ const Table = ({
 
     const deleteItem = (item) => {
 
-        SparePartService.deleteSparePart(item._id).then((res) => {
+        SparePartService.deleteProduct(item._id).then((res) => {
             alertSuccess(setAlert, "Record is Deleted")
             setLoading(false)
             getInitialData();
@@ -235,27 +236,27 @@ const Table = ({
 
 const SparePartsTable = () => {
 
-    const [spareParts, setSpareParts] = useState([]);
-    const [searchSpareParts, setSearchSpareParts] = useState([]);
+    const [products, setProducts] = useState([]);
+    const [searchProducts, setSearchProducts] = useState([]);
     const [paginator, setPaginator] = useState({page: 1, perPage: 5, total: 0, range: 5});
     const [isSearch, setIsSearch] = useState(false);
     const [searchKey, setSearchKey] = useState('');
 
-    const [totals, setTotals] = useState({spareParts: 0, partsOnMarket: 0});
+    const [totals, setTotals] = useState({products: 0, productsOnMarket: 0});
     const [paginatorLoading, setPaginatorLoading] = useState(true);
 
-    const getSpareParts = (page) => {
-        SparePartService.getPaginatedSpareParts(page).then((res) => {
-            setSpareParts(res.data.docs);
-            setSearchSpareParts(res.data.docs);
+    const getProducts = (page) => {
+        ProductService.getPaginatedProducts(page).then((res) => {
+            setProducts(res.data.docs);
+            setSearchProducts(res.data.docs);
             setPaginatorLoading(false);
 
             setPaginator({...paginator, total: res.data.totalDocs, page: res.data.page});
         }).catch(e => console.log(e))
     }
-    const getSearchSpareParts = (val, page) => {
-        SparePartService.searchPaginatedSpareParts(val, page).then((res) => {
-            setSearchSpareParts(res.data.docs);
+    const getSearchProducts = (val, page) => {
+        ProductService.searchPaginatedProducts(val, page).then((res) => {
+            setSearchProducts(res.data.docs);
             setPaginator({...paginator, total: res.data.totalDocs, page: res.data.page});
             setPaginatorLoading(false);
 
@@ -263,17 +264,16 @@ const SparePartsTable = () => {
     }
 
     const getTotals = async () => {
-        const total = {spareParts: 0, partsOnMarket: 0};
+        const total = {products: 0, productsOnMarket: 0};
         try {
-            const spareParts = await SparePartService.getPaginatedSpareParts();
-            const partsOnMarket = await SparePartService.getPaginatedPartsOnMarket();
-            total.spareParts = spareParts.data.totalDocs;
-            total.partsOnMarket = partsOnMarket.data.totalDocs;
+            const products = await ProductService.getPaginatedProducts();
+            const productsOnMarket = await ProductService.getPaginatedProductsOnMarket();
+            total.products = products.data.totalDocs;
+            total.productsOnMarket = productsOnMarket.data.totalDocs;
             setTotals(total);
         } catch {
             (e) => console.log("SORRY ERROR occcured", e)
         }
-
     }
 
     useEffect(() => {
@@ -282,8 +282,8 @@ const SparePartsTable = () => {
 
     useEffect(() => {
         if (!isSearch)
-            getSpareParts(paginator.page);
-        else getSearchSpareParts(searchKey, paginator.page);
+            getProducts(paginator.page);
+        else getSearchProducts(searchKey, paginator.page);
     }, [paginator.page]);
 
     const getSearchKey = (val) => {
@@ -292,7 +292,7 @@ const SparePartsTable = () => {
             setIsSearch(false);
             getInitialData();
         } else {
-            getSearchSpareParts(val, paginator.page);
+            getSearchProducts(val, paginator.page);
             setIsSearch(true);
         }
     };
@@ -300,20 +300,20 @@ const SparePartsTable = () => {
 
     const panes = [
         {name: 'Products', count: totals.products, route: '/admin/products'},
-        {name: 'ProductsOnMarket', count: totals.partsOnMarket, route: '/admin/products/on-market'}
+        {name: 'ProductsOnMarket', count: totals.productsOnMarket, route: '/admin/products/on-market'}
     ];
 
     const getInitialData = () => {
-        getSpareParts(paginator.page);
+        getProducts(paginator.page);
     }
 
     return (
         <RouteProtector only={[system_users.ADMIN]}>
             <SingleSubModuleLayout
-                Content={<Table spareParts={searchSpareParts} systemUser={system_users.ADMIN}
+                Content={<Table spareParts={searchProducts} systemUser={system_users.ADMIN}
                                 getInitialData={getInitialData}
                                 paginatorLoading={paginatorLoading} setPaginatorLoading={setPaginatorLoading}
-                                setSpareParts={setSearchSpareParts} paginator={paginator}
+                                setSpareParts={setSearchProducts} paginator={paginator}
                                 setPaginator={setPaginator}/>}
                 isArray={true}
                 panes={panes}

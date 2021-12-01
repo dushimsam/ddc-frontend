@@ -4,7 +4,7 @@ import styles from "../../../../styles/pages/table.module.css";
 import ModalLayout from "../../../../components/reusable/modal-layout"
 import React, { useState, useEffect } from "react"
 // import SuppliesDataService from "../../../../services/supplies/supplies"
-import SuppliedPartsDataService from '../../../../services/supplies/supplied-parts';
+import SuppliedPartsDataService from '../../../../services/supplies/SuppliedProductsService';
 
 
 

@@ -1,8 +1,8 @@
 
 import React, { useMemo } from 'react';
 import { useEffect, useState } from 'react';
-import SuppliersDataService from '../../services/supplies/suppliers';
-import SuppliedPartsDataService from '../../services/supplies/supplied-parts';
+import SuppliersDataService from '../../services/supplies/SupplierService';
+import SuppliedPartsDataService from '../../services/supplies/SuppliedProductsService';
 
 import RecordDetails from "../../components/record-details/record-details"
 import UserService from "../../services/users/user.service"

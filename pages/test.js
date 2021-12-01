@@ -2,7 +2,7 @@ import React, {Component, useState} from "react";
 import AsyncSelect from "react-select/async";
 import Select from "react-select";
 import {mainCustomStyles} from "../components/reusable/select-elements";
-import SparePartService from "../services/products/products.service";
+import SparePartService from "../services/products/ProductService";
 
 
 //
@@ -33,7 +33,7 @@ const ReactSelectExample = () => {
     const fetchData = (inputValue, callback) => {
         setTimeout(() => {
             if (inputValue) {
-                SparePartService.searchPaginatedSpareParts(inputValue, 1, 30).then((res) => {
+                SparePartService.searchPaginatedProducts(inputValue, 1, 30).then((res) => {
                     const data = res.data.docs;
                     const tempArray = [];
                     if (data) {

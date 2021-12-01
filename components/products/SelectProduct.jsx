@@ -1,32 +1,31 @@
 import React, {useEffect, useRef, useState} from "react";
-import ProductsService from "../../services/products/products.service";
-import SparePartService from "../../services/products/products.service"
+import ProductsService from "../../services/products/ProductService";
+import ProductService from "../../services/products/ProductService";
 import InputControl from "../reusable/InputControl";
 import {isThisFormValid} from "../../utils/functions";
 import {alertFailer, alertSuccess} from "../../utils/alerts"
 import Alert from "../alert";
 import {hide_modal_alert} from "../../utils/modal-funs";
-import Select from "react-select";
 import {mainCustomStyles} from "../reusable/select-elements";
 import AsyncSelect from "react-select/async";
 
 const fetchData = (inputValue, callback) => {
     setTimeout(() => {
         if (inputValue) {
-            SparePartService.searchPaginatedSpareParts(inputValue.trim(), 1, 30).then((res) => {
+            ProductsService.searchPaginatedProducts(inputValue.trim(), 1, 30).then((res) => {
                 const data = res.data.docs;
                 const tempArray = [];
                 if (data) {
                     if (data.length) {
                         data.forEach((element) => {
                             tempArray.push({
-                                label: `${element.name} , ${element.part_number} , ${element.part_code}`,
+                                label: `${element.name}  , ${element.product_code}`,
                                 value: element
                             });
                         });
                     } else {
                         tempArray.push({
-                            label: `${data.name} , ${data.part_number} , ${data.part_code}`,
+                            label: `${data.name} , ${data.product_code}`,
                             value: data._id,
                         });
                     }
@@ -40,58 +39,46 @@ const fetchData = (inputValue, callback) => {
     }, 1000);
 };
 
-export default function SelectProduct({editSet, flush, appendPartSupply, suppliedParts}) {
-    const [spareParts, setSpareParts] = useState([])
+export default function SelectProduct({editSet, flush, appendProductSupply, suppliedProducts}) {
+    const [products, setProducts] = useState([])
     const [values, setValues] = useState({
-        spare_part: "",
+        product: "",
         quantity: 1,
         unit_price: undefined,
         supply_price: undefined,
+        tax: undefined
     })
-
+    const [valid, setValid] = useState({
+        product: false,
+        quantity: true,
+        unit_price: false,
+        supply_price: false,
+        tax: false
+    })
 
     useEffect(() => {
 
         setValues({
-            spare_part: "",
+            product: "",
             quantity: 1,
             unit_price: 0,
-            supply_price: 0
+            supply_price: 0,
+            tax: 0
         })
 
         setValid({
-            spare_part: true,
+            product: true,
             quantity: true,
             unit_price: false,
-            supply_price: false
+            supply_price: false,
+            tax: false
         })
 
     }, [flush])
     const [isLoading, setIsLoading] = useState(true)
 
-    // useEffect(() => {
-    //     setLoading(false)
-    //     ProductsService.getAllSpareParts()
-    //         .then((res) => {
-    //             setSpareParts(res.data);
-    //             setIsLoading(false);
-    //         })
-    //         .catch((e) => console.log(e));
-    //
-    //     if (editSet) {
-    //         setValues(editSet);
-    //         console.log(editSet)
-    //     }
-    // }, [editSet]);
-
     const [isFormValid, setIsFormValid] = useState(false)
 
-    const [valid, setValid] = useState({
-        spare_part: false,
-        quantity: true,
-        unit_price: false,
-        supply_price: false
-    })
 
     const [not_on_market, setNotMarket] = useState(false);
 
@@ -119,16 +106,16 @@ export default function SelectProduct({editSet, flush, appendPartSupply, supplie
                 alertFailer(setAlert, "Please tell the admin to Increase the unit-price at the market because the unit-supply-price is exceeding");
         } else {
             if (isThisFormValid(valid)) {
-                if (!suppliedParts.some(part => part.spare_part._id === values.spare_part._id)) {
+                if (!suppliedProducts.some(item => item.product._id === values.product._id)) {
                     let temp_values = {...values};
 
                     if (values.quantity) temp_values.quantity = values.quantity
                     else temp_values.quantity = 1;
 
-                    appendPartSupply(temp_values)
-                    alertSuccess(setAlert, values.spare_part.name + " is Added")
+                    appendProductSupply(temp_values)
+                    alertSuccess(setAlert, values.product.name + " is Added")
                 } else {
-                    alertFailer(setAlert, "Spare Part Already Exists on the List");
+                    alertFailer(setAlert, "Product Already Exists on the List");
                 }
             } else {
                 alertFailer(setAlert, "Validation Error");
@@ -143,19 +130,19 @@ export default function SelectProduct({editSet, flush, appendPartSupply, supplie
         selectInputRef.current.select.clearValue();
     };
 
-    const [selectedPart, setSelectedPart] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     const [hideInput, setHideInput] = useState(true);
 
     const handleChangeProduct = newValue => {
         if (newValue) {
             setLoadComponent(true);
-            SparePartService.getSparePartDetails(newValue._id)
+            ProductService.getByProductExists(newValue._id)
                 .then((res) => {
-                    if ('partOnMarket' in res.data) {
+                    if (res.data.exists) {
                         setHideInput(true);
                         setValid(state => ({...state, ["unit_price"]: true}));
-                        setValues(state => ({...state, ["unit_price"]: parseFloat(res.data.partOnMarket.unit_price)}));
+                        setValues(state => ({...state, ["unit_price"]: parseFloat(res.data.unit_price)}));
                     } else {
                         setHideInput(false);
                         setValid(state => ({...state, ["unit_price"]: false}));
@@ -164,9 +151,9 @@ export default function SelectProduct({editSet, flush, appendPartSupply, supplie
                     }
                 }).catch((err) => console.log(err)).finally(() => setLoadComponent(false))
 
-            setValues({...values, ["spare_part"]: newValue});
-            setSelectedPart(newValue)
-            setValid(state => ({...state, ["spare_part"]: true}));
+            setValues({...values, ["product"]: newValue});
+            setSelectedProduct(newValue)
+            setValid(state => ({...state, ["product"]: true}));
         }
 
     };
@@ -174,8 +161,6 @@ export default function SelectProduct({editSet, flush, appendPartSupply, supplie
 
     return (
         <>
-            {/*<h3 className="text-center mb-5">Add a new supplied product</h3>*/}
-            {/*<hr/>*/}
             <div>
                 {alert.show ?
                     <Alert className={"my-3 alert-" + alert.class} message={alert.message} setAlert={setAlert}/> : null
@@ -183,14 +168,12 @@ export default function SelectProduct({editSet, flush, appendPartSupply, supplie
                 <div className="row">
 
                     <div className="col-md-10 col-12">
-                        <label htmlFor="inputI">Search Spare part</label>
+                        <label htmlFor="inputI">Search Product</label>
                         <AsyncSelect
                             ref={selectInputRef}
-
-                            // value={selectedPart}
                             styles={mainCustomStyles}
                             loadOptions={fetchData}
-                            placeholder="Select the Spare part"
+                            placeholder="Select the Product"
                             onChange={(e) => {
                                 handleChangeProduct(e.value);
                             }}
@@ -219,20 +202,28 @@ export default function SelectProduct({editSet, flush, appendPartSupply, supplie
                                     className={"loader"}
                                 /> :
                                 !hideInput ?
-                                    <InputControl label="Unit Price on Market" type="number"
-                                                  validations="required|integer|min:1" id="unitPrice"
-                                                  className="form-control" placeholder="Unit price"
-                                                  handleChangeV2={handleChange("unit_price")}
-                                                  value={values.unit_price}/> : <></>
+                                    <>
+                                        <div><InputControl label="Unit Price on Market" type="number"
+                                                           validations="required|integer|min:1" id="unitPrice"
+                                                           className="form-control" placeholder="Unit price"
+                                                           handleChangeV2={handleChange("unit_price")}
+                                                           value={values.unit_price}/></div>
+                                        <div><InputControl
+                                            label="Customer Tax" type="number"
+                                            validations="required|integer|min:1" id="customerTax"
+                                            className="form-control" placeholder="Tax"
+                                            handleChangeV2={handleChange("tax")}
+                                            value={values.tax}/></div>
+                                    </> : <></>
                         }
-                    </div>
+                    </>
                 </div>
                 <div>
                     <button className="btn btn-danger mt-5" disabled={!isThisFormValid(valid)} onClick={() => {
                         setLoading(true);
                         addNewPartSupply();
                     }}>
-                        {editSet?.spare_part ? "Edit spare part " : "Add spare part"}
+                        {editSet?.product ? "Edit product " : "Add product"}
 
                         {loading ?
                             <img
@@ -240,9 +231,9 @@ export default function SelectProduct({editSet, flush, appendPartSupply, supplie
                                 alt={"Loading"}
                                 className={"loader"}
                             />
-                            : editSet?.spare_part ? "Edit spare part " : "Add spare part"}
+                            : editSet?.product ? "Edit product  " : "Add product"}
                     </button>
-                    <button id="closeModalBtn" className="d-none" data-dismiss="modal" aria-label="Close"></button>
+                    <button id="closeModalBtn" className="d-none" data-dismiss="modal" aria-label="Close"/>
                 </div>
             </div>
         </>

@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import SuppliesDataService from "../../../../services/supplies/supplies"
-import SupplyService from "../../../../services/supplies/supplies"
-import EmployeesDataService from "../../../../services/employees/employees"
-import SuppliersDataService from "../../../../services/supplies/suppliers"
-import SupplierService from "../../../../services/supplies/suppliers"
+import SuppliesDataService from "../../../../services/supplies/SupplyService"
+import SupplyService from "../../../../services/supplies/SupplyService"
+import SuppliersDataService from "../../../../services/supplies/SupplierService"
+import SupplierService from "../../../../services/supplies/SupplierService"
 import SelectProduct from "../../../../components/products/SelectProduct";
-import SuppliedPartsDataService from "../../../../services/supplies/supplied-parts";
-import SparePartService from "../../../../services/products/products.service";
+import SuppliedProductsDataService from "../../../../services/supplies/SuppliedProductsService";
+import ProductService from "../../../../services/products/ProductService";
 import {useSelector} from "react-redux";
 import SelectControl from "../../../../components/reusable/SelectControl";
 import {isThisFormValid} from "../../../../utils/functions";
@@ -15,9 +14,7 @@ import Alert from "../../../../components/alert";
 import {system_users} from '../../../../utils/constants';
 import SingleSubModuleLayoutAdmin from "../../../../layouts/admin-layouts/SingleSubModule";
 import SingleSubModuleLayoutManager from "../../../../layouts/sales-manager-layouts/SingleSubModule";
-import Router from "next/router";
 import {defaultCurrencyMapping} from "../../../../utils/currency-converter";
-import PartAvailabilityService from "../../../../services/products/PartAvailabilityService";
 
 const getTotalProductQuantities = (products) => {
     let total = 0;
@@ -52,7 +49,7 @@ async function UpdatedExistingSuppliedParts(supply, suppliedParts, defaultData) 
             let priceDiff = parseFloat(part.supply_price * part.quantity) - parseFloat(defaultData[index].supply_price);
 
             if (part.quantity != defaultData[index].quantity || part.supply_price != defaultData[index].supply_price) {
-                await SuppliedPartsDataService.update(defaultData[index]._id, {
+                await SuppliedProductsDataService.update(defaultData[index]._id, {
                     quantity: part.quantity !== defaultData[index].quantity ? part.quantity : defaultData[index].quantity,
                     spare_part: suppliedParts[i].spare_part._id,
                     supply_price: part.supply_price != defaultData[index].supply_price ? parseFloat(part.supply_price * part.quantity) : defaultData[index].supply_price,
@@ -64,14 +61,14 @@ async function UpdatedExistingSuppliedParts(supply, suppliedParts, defaultData) 
             }
 
             if (part.quantity != defaultData[index].quantity) {
-                const res_on_market_details = await SparePartService.getSparePartDetails(suppliedParts[i].spare_part._id);
+                const res_on_market_details = await ProductService.getSparePartDetails(suppliedParts[i].spare_part._id);
 
                 let market_quantities = parseInt(res_on_market_details.data.partOnMarket.quantity) + parseInt(diff);
 
                 if (market_quantities < 0) {
                     notifyError(" We can not deduct " + diff + " quantities on " + suppliedParts[i].spare_part.name)
                 } else {
-                    await SparePartService.updatePartOnMarket(res_on_market_details.data.partOnMarket._id, {
+                    await ProductService.updatePartOnMarket(res_on_market_details.data.partOnMarket._id, {
                         part_in_stock: res_on_market_details.data.partInStock._id,
                         unit_price: res_on_market_details.data.partOnMarket.unit_price,
                         quantity: market_quantities
@@ -98,15 +95,15 @@ async function DeleteExistingSuppliedParts(supply, suppliedParts, defaultData) {
         for (let i = 0; i < suppliedParts.length; i++) {
             let part = suppliedParts[i];
 
-            const res_on_market_details = await SparePartService.getSparePartDetails(part.spare_part._id);
+            const res_on_market_details = await ProductService.getSparePartDetails(part.spare_part._id);
             let diff = parseInt(res_on_market_details.data.partOnMarket.quantity) - parseInt(part.quantity);
             var index = defaultData.findIndex(x => x.spare_part._id === suppliedParts[i].spare_part._id);
-            await SuppliedPartsDataService.delete(defaultData[index]._id);
+            await SuppliedProductsDataService.delete(defaultData[index]._id);
 
             if (diff < 0) {
                 notifyError(" We can't deduct " + part.quantity + " quantities of " + part.spare_part.name + " On Market")
             } else {
-                await SparePartService.updatePartOnMarket(res_on_market_details.data.partOnMarket._id, {
+                await ProductService.updatePartOnMarket(res_on_market_details.data.partOnMarket._id, {
                     part_in_stock: res_on_market_details.data.partInStock._id,
                     unit_price: res_on_market_details.data.partOnMarket.unit_price,
                     quantity: diff
@@ -143,43 +140,26 @@ const UpdateSupplier = async (values, itemSupply, quantity_price_obj) => {
 }
 
 
-const CreateSuppliedParts = async (supply, suppliedParts, status) => {
+const CreateSuppliedProducts = async (supply, suppliedProducts, status) => {
 
     let new_quantities = 0;
     let new_prices = 0;
-    for (let i = 0; i < suppliedParts.length; i++) {
+    for (let i = 0; i < suppliedProducts.length; i++) {
 
         try {
-            const supplied_parts_data = await SuppliedPartsDataService.create({
-                part_supply: supply._id,
-                quantity: parseInt(suppliedParts[i].quantity),
-                spare_part: suppliedParts[i].spare_part._id,
-                supply_price: parseFloat(suppliedParts[i].supply_price * suppliedParts[i].quantity)
+            const supplied_parts_data = await SuppliedProductsDataService.create({
+                product_supply: supply._id,
+                quantity: parseInt(suppliedProducts[i].quantity),
+                product: suppliedProducts[i].product._id,
+                supply_price: parseFloat(suppliedProducts[i].supply_price * suppliedProducts[i].quantity)
             })
 
-            const part_in_stock_data = await SparePartService.createSparePartInStock({
-                supplied_part: supplied_parts_data.data._id,
-                quantity: parseInt(suppliedParts[i].quantity),
+            await ProductService.createPartOnMarket({
+                supplied_product: supplied_parts_data.data._id,
+                unit_price: parseFloat(suppliedProducts[i].unit_price),
+                quantity: parseInt(suppliedProducts[i].quantity),
+                tax: parseInt(suppliedProducts[i].tax)
             });
-            const part_on_market_res = await SparePartService.createPartOnMarket({
-                part_in_stock: part_in_stock_data.data._id,
-                unit_price: parseFloat(suppliedParts[i].unit_price),
-                quantity: parseInt(suppliedParts[i].quantity)
-            });
-
-            try {
-                await PartAvailabilityService.unSetActiveByPart(part_on_market_res.data._id);
-            } catch (e) {
-            }
-
-            if (status === "UPDATE") {
-
-                let new_supply_quantity = parseInt(supply.supply_quantity) + parseInt(suppliedParts[i].quantity);
-                let new_supply_price = parseFloat(supply.supply_price) + parseFloat(suppliedParts[i].supply_price * suppliedParts[i].quantity);
-
-                new_quantities += new_supply_quantity;
-                new_prices += new_supply_price;
-            }
 
         } catch (e) {
             notifyError(e.message)
@@ -211,7 +191,7 @@ const TableSummary = ({suppliedParts, removeSupplied, status}) => {
                 <thead>
                 <tr>
                     <th>#</th>
-                    <th>Spare part</th>
+                    <th>Product</th>
                     <th>Quantity</th>
                     <th>Supply</th>
                     <th>Total</th>
@@ -219,18 +199,18 @@ const TableSummary = ({suppliedParts, removeSupplied, status}) => {
                 </tr>
                 </thead>
                 <tbody>
-                {suppliedParts?.map((part, i) => (
+                {suppliedParts?.map((item, i) => (
                     <tr key={i}>
                         <td>{i + 1}</td>
-                        <td> {part.spare_part.name} </td>
-                        <td> {part.quantity} items</td>
-                        <td> {defaultCurrencyMapping(part.supply_price)} </td>
-                        <td> {defaultCurrencyMapping(part.supply_price * part.quantity)}</td>
+                        <td> {item.product.name} </td>
+                        <td> {item.quantity} items</td>
+                        <td> {defaultCurrencyMapping(item.supply_price)} </td>
+                        <td> {defaultCurrencyMapping(item.supply_price * item.quantity)}</td>
 
                         <td>
 
                             <button className="btn btn-sm btn-outline-danger"
-                                    onClick={() => removeSupplied(part.spare_part._id)}>Remove
+                                    onClick={() => removeSupplied(item.product._id)}>Remove
                             </button>
                         </td>
                     </tr>
@@ -244,7 +224,7 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
     const [suppliers, setSuppliers] = useState([]);
     const [openLog, setOpenLog] = useState(false)
 
-    const [suppliedParts, setSuppliedParts] = useState([]);
+    const [suppliedProducts, setSuppliedProducts] = useState([]);
 
 
     const [editSet, setEditSet] = useState({})
@@ -260,10 +240,8 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
 
 
     useEffect(() => {
-        EmployeesDataService.getByUserId(authUser.id)
-            .then((res) => {
-                setValues({...values, reciever: res.data._id})
-            }).catch((e) => console.log(e))
+        if (authUser.id)
+            setValues({...values, reciever: authUser._id})
     }, [authUser])
 
 
@@ -281,15 +259,15 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
     useEffect(() => {
         if (status === "UPDATE" && defaultData.length > 0) {
             for (let i = 0; i < defaultData.length; i++) {
-                SparePartService.getSparePartDetails(defaultData[i].spare_part._id)
-                    .then((res) => {
-                        setSuppliedParts(old => [...old, {
-                            spare_part: defaultData[i].spare_part,
-                            quantity: defaultData[i].quantity,
-                            unit_price: res.data.partOnMarket.unit_price,
-                            supply_price: (defaultData[i].supply_price / defaultData[i].quantity)
-                        }]);
-                    }).catch((err) => console.log(err))
+                // ProductService.getSparePartDetails(defaultData[i].spare_part._id)
+                //     .then((res) => {
+                //         setSuppliedProducts(old => [...old, {
+                //             spare_part: defaultData[i].spare_part,
+                //             quantity: defaultData[i].quantity,
+                //             unit_price: res.data.partOnMarket.unit_price,
+                //             supply_price: (defaultData[i].supply_price / defaultData[i].quantity)
+                //         }]);
+                //     }).catch((err) => console.log(err))
             }
         }
     }, [defaultData])
@@ -312,24 +290,25 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
         setIsFormValid(isThisFormValid(valid))
     }
 
-    const appendSuppliedPart = (value) => {
-        setSuppliedParts(parts => [...parts, value])
+    const appendSuppliedProduct = (value) => {
+        setSuppliedProducts(products => [...products, value])
     }
 
     const removeSupplied = (id) => {
-        setSuppliedParts(parts => parts.filter(part => part.spare_part._id !== id))
+        setSuppliedProducts(products => products.filter(product => product.product._id !== id))
     }
 
 
     const CreateSupply = () => {
-        if (isThisFormValid(valid) && suppliedParts.length > 0) {
+        if (isThisFormValid(valid) && suppliedProducts.length > 0) {
             let new_supplies = Object.assign(values);
-
             new_supplies.supply_date = new Date();
             new_supplies.supply_date.setSeconds(new_supplies.supply_date.getSeconds() - 3);
+            new_supplies.reciever = authUser.id
+            // console.log(new_supplies)
             SuppliesDataService.create(new_supplies)
                 .then((res) => {
-                    CreateSuppliedParts(res.data, suppliedParts, "NEW");
+                    CreateSuppliedProducts(res.data, suppliedProducts, "NEW");
                     notifySuccess("New Supply is created")
                     setLoading(false)
                     // window.setTimeout(() => {
@@ -355,15 +334,15 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
             return !defaultData.some(part => part.spare_part._id === item.spare_part._id)
         }
         const filter_delete_parts = (item) => {
-            return !suppliedParts.some(part => part.spare_part._id === item.spare_part._id)
+            return !suppliedProducts.some(part => part.spare_part._id === item.spare_part._id)
         }
         const filter_changed_parts = (item) => {
             return defaultData.some(part => part.spare_part._id === item.spare_part._id)
         }
 
 
-        let new_parts = suppliedParts.filter(filter_new_parts);
-        let changed_parts = suppliedParts.filter(filter_changed_parts);
+        let new_parts = suppliedProducts.filter(filter_new_parts);
+        let changed_parts = suppliedProducts.filter(filter_changed_parts);
         let delete_parts = defaultData.filter(filter_delete_parts);
 
 
@@ -379,7 +358,7 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
             const {
                 new_supply_quantities,
                 new_supply_price
-            } = await CreateSuppliedParts(shareable_supply, new_parts, "UPDATE");
+            } = await CreateSuppliedProducts(shareable_supply, new_parts, "UPDATE");
 
             quantity_price_obj.total_quantities += new_supply_quantities;
             quantity_price_obj.total_supply_price += new_supply_price;
@@ -449,7 +428,7 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
             </div>
             <hr/>
             <div className={"table-responsive col-12"}>
-                <TableSummary suppliedParts={suppliedParts} removeSupplied={removeSupplied} status={status}/>
+                <TableSummary suppliedParts={suppliedProducts} removeSupplied={removeSupplied} status={status}/>
             </div>
             <div className="form-row mt-5 mb-3">
                 <div className="form-group col-6">
@@ -460,7 +439,7 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
                             setLoading(true);
                             status !== "UPDATE" ? CreateSupply() : UpdateSupply();
                         }}
-                        disabled={!(isThisFormValid(valid) && suppliedParts.length > 0)}
+                        disabled={!(isThisFormValid(valid) && suppliedProducts.length > 0)}
                     >
 
                         {loading ? (
@@ -487,8 +466,8 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
                                 </button>
                             </div>
                             <div className="pt-3 pb-5 pl-5 pr-5">
-                                <SelectProduct editSet={editSet} appendPartSupply={appendSuppliedPart}
-                                               suppliedParts={suppliedParts} flush={flush}/>
+                                <SelectProduct editSet={editSet} appendProductSupply={appendSuppliedProduct}
+                                               suppliedProducts={suppliedProducts} flush={flush}/>
                             </div>
                         </div>
                     </div>

@@ -9,7 +9,7 @@ import Footer from "../../components/Footer";
 import {useDispatch, useSelector} from 'react-redux'
 import {addItemToCart, increment} from '../../store/actions/cart-actions';
 import {showAddToCartModal} from '../../store/actions/add-to-cart-modal-actions';
-import SparePartService from "../../services/products/products.service"
+import SparePartService from "../../services/products/ProductService"
 import globalStyles from "../../styles/global-colors.module.css"
 import {encryptTextSimple} from "../../utils/encryption-decryption";
 import {app_config} from "../../utils/constants";

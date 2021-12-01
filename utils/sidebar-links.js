@@ -197,6 +197,7 @@ export const quickCreateActions = [
 
 ]
 
+
 export const getDashboardLink = (user) => {
     switch (user.category?.name) {
         case system_users.CUSTOMER:

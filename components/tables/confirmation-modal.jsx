@@ -6,9 +6,7 @@ import InputControl from "../reusable/InputControl";
 import {alertFailer, notifyError, notifySuccess} from "../../utils/alerts";
 import $ from "jquery";
 import ShipmentService from "../../services/shipments/shipment.service"
-import OrderService from "../../services/cars/cars-order-purchase-service"
 import Alert from "../alert";
-import BookingService from "../../services/cars/booking-service"
 import LoginToConfirmComponent from "../reusable/login-to-confim";
 import {system_users} from "../../utils/constants";
 import UploadDragAndDrop from "../reusable/upload-drag-drop";
@@ -69,18 +67,18 @@ export const ConfirmBookingModal = ({
             "shipping_amount": shipment_amount,
             "amount_to_pay": booking.car_on_market.selling_price + shipment_amount
         }
-        OrderService.createOrder(order_values)
-            .then((res2) => {
-                notifySuccess("Successfully marked as Available");
-                getInitialData();
-            }).catch((e) => {
-            notifyError(e.message || "Error occurred. Try again latter.");
-        }).finally(() => {
-            setLoading({...loading, success: false});
-            $(function () {
-                $('#confirmationBookingModal').modal('hide');
-            });
-        })
+        // OrderService.createOrder(order_values)
+        //     .then((res2) => {
+        //         notifySuccess("Successfully marked as Available");
+        //         getInitialData();
+        //     }).catch((e) => {
+        //     notifyError(e.message || "Error occurred. Try again latter.");
+        // }).finally(() => {
+        //     setLoading({...loading, success: false});
+        //     $(function () {
+        //         $('#confirmationBookingModal').modal('hide');
+        //     });
+        // })
     }
 
 

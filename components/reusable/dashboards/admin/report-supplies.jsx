@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import styles from "../../../../styles/pages/table.module.css";
 import GrowableTable from "../../growable-tables-layout"
-import Supplies from "../../../../services/supplies/supplies"
+import Supplies from "../../../../services/supplies/SupplyService"
 import {dateFormat, find_date_difference, gotoPath} from "../../../../utils/functions";
 import Router from "next/router";
 import {

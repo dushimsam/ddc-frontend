@@ -1,30 +1,22 @@
-import SparePartService from "../../../services/products/products.service";
+import SparePartService from "../../../services/products/ProductService";
 import React, {useEffect, useRef, useState} from "react";
 import productCategoriesService from "../../../services/product-categories/product-categories.service";
-import ModelsService from "../../../services/product-models/product-models.service"
 import FormLayout from "../../../layouts/form-layout"
 import InputControl from "../../../components/reusable/InputControl"
 import SingleSubModuleLayout from "../../../layouts/admin-layouts/SingleSubModule";
 import {isThisFormValid} from "../../../utils/functions";
 import {alertFailer, alertSuccess, notifyError, notifyInfo, notifySuccess} from "../../../utils/alerts"
-import give_range from "../../../utils/range"
 import {ALERT_EXPIRATION_PERIOD, SPARE_PART_REGISTRATION_TEMP_STORAGE_KEY} from "../../../utils/constants";
-import {hide_modal, hide_modal_alert, show_modal} from "../../../utils/modal-funs";
-import Select from 'react-select';
-import {mainCustomStyles} from "../../../components/reusable/select-elements";
-import Alert from "../../../components/alert";
+import {hide_modal, hide_modal_alert} from "../../../utils/modal-funs";
 import * as XLSX from "xlsx";
-import {ModalDisplay} from "../../../components/modals/productNew";
 import $ from "jquery";
 import {ImagesSuperContainer} from "../../../components/management/products/create";
 import {acceptedFileTypes} from "../../../utils/image-utils";
-import SuppliesDataService from "../../../services/supplies/supplies";
-import {CreateSuppliedParts} from "../../shared/supply/supplies/new";
-import SuppliedPartsDataService from "../../../services/supplies/supplied-parts";
+import SuppliesDataService from "../../../services/supplies/SupplyService";
+import SuppliedPartsDataService from "../../../services/supplies/SuppliedProductsService";
 import {useRouter} from "next/router";
 import RealTimeSaveService from "../../../services/excel-registrations/real-time-save"
-
-
+import SelectControl from "../../../components/reusable/SelectControl";
 
 
 export const FormContent = ({
@@ -55,7 +47,7 @@ export const FormContent = ({
     const [categories, setCategories] = useState([])
 
     useEffect(() => {
-        productCategoriesService.getAllSubCategories()
+        productCategoriesService.getAllProductCategories()
             .then((res) => {
                 setCategories(res.data)
             }).catch(e => console.log(e))
@@ -70,24 +62,22 @@ export const FormContent = ({
                                   label="Product name"
                                   type="text" validations="required|string|min:3"/>
                 </div>
-                <div className="form-group  col-md-6 col-10  pl-md-5">
+                <div className="form-group  col-md-5 col-10">
                     <InputControl handleChangeV2={handleChangeV2("product_code")} value={values.product_code}
-                                  label="Part code" type="text" validations="required|string|min:3"/>
+                                  label="Product code" type="text" validations="required|string|min:3"/>
                 </div>
 
-                <div className="form-group  col-md-6 col-10 pr-md-5">
+                <div className="form-group  col-md-5 col-10">
                     <InputControl handleChangeV2={handleChangeV2("description")}
                                   value={values?.description} label="Description" type="text"
                                   validations="string|min:3"/>
                 </div>
 
-                <div className="pr-md-5  col-md-6 col-10  mb-5">
-                    <div className="col-sm-12 col-md-6 px-0 pr-md-4">
-                        <InputControl label={"Select the weight in Kg"} handleChangeV2={handleChangeV2("weight")}
-                                      value={values.weight} type="number" validations="required|integer|min:1"/>
-                    </div>
+                <div className="form-group col-md-5 col-10">
+                    <InputControl label={"Select the weight in Kg"} handleChangeV2={handleChangeV2("weight")}
+                                  value={values.weight} type="number" validations="required|integer|min:1"/>
                 </div>
-                <div className="form-group  col-md-6 col-10  pl-md-5">
+                <div className="form-group  col-md-5 col-10">
                     <label htmlFor="is_second_hand">Condition</label>
                     <select value={values?.second_hand} name="is_second_hand" id="is_second_hand"
                             className="form-control"
@@ -95,6 +85,18 @@ export const FormContent = ({
                         <option value={false}>NEW</option>
                         <option value={true}>USED</option>
                     </select>
+                </div>
+
+                <div className="form-group  col-md-5 col-10">
+                    <SelectControl label="Brand" handleChangeV2={handleChangeV2("product_category")}
+                                   value={values.product_category} validations="required|string">
+                        <option value="">Select Brand</option>
+                        {categories.map((item) => (
+                            <option value={item._id} key={item._id}>
+                                {item.name}
+                            </option>
+                        ))}
+                    </SelectControl>
                 </div>
             </div>
 
@@ -173,7 +175,7 @@ const Content = ({totals, setTotals}) => {
             temp_values.product_code = temp_values.product_code.trim();
             temp_values.name = temp_values.name.trim();
 
-            SparePartService.createSparePart(temp_values)
+            SparePartService.createProduct(temp_values)
                 .then((res) => {
 
                     if (imgFiles) {
@@ -379,7 +381,7 @@ const Content = ({totals, setTotals}) => {
                         const supply_res = await SuppliesDataService.create(new_supplies);
                         notifySuccess("Supply saved successfully")
 
-                        notifyInfo("Saving spareParts process")
+                        notifyInfo("Saving products process")
 
                         for (let i = 0; i < readItems.length; i++) {
                             try {
@@ -390,7 +392,7 @@ const Content = ({totals, setTotals}) => {
                                     let partValues = {...readItems[i].value};
                                     partValues.part_number = partValues.part_number.trim();
                                     partValues.name = partValues.name.trim();
-                                    res = await SparePartService.createSparePart(partValues);
+                                    res = await SparePartService.createProduct(partValues);
                                     setTotals({...totals, spareParts: totals.spareParts + 1});
                                 }
 
@@ -526,8 +528,8 @@ const Page = () => {
         const totals = {products: 0, productsOnMarket: 0};
 
         try {
-            const products = await SparePartService.getPaginatedSpareParts();
-            const productsOnMarket = await SparePartService.getPaginatedPartsOnMarket();
+            const products = await SparePartService.getPaginatedProducts();
+            const productsOnMarket = await SparePartService.getPaginatedProductsOnMarket();
 
             totals.products = products.data.totalDocs;
 

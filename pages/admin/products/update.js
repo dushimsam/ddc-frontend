@@ -1,4 +1,4 @@
-import SparePartService from "../../../services/products/products.service";
+import SparePartService from "../../../services/products/ProductService";
 import React, {useEffect, useRef, useState} from "react";
 import UpdateFormLayout from "../../../layouts/table-layouts/update-form-layout"
 import {alertFailer, alertSuccess} from "../../../utils/alerts"
@@ -86,7 +86,7 @@ const Content = ({item, getInitialData}) => {
                     let update_values = {...values};
                     update_values.complete_info_status = "COMPLETE";
 
-                    await SparePartService.updateSparePart(item._id, update_values);
+                    await SparePartService.updateProduct(item._id, update_values);
                     alertSuccess(setAlert, "Product Updated");
                     setLoading(false);
                     getInitialData();

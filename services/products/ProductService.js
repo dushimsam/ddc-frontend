@@ -3,24 +3,28 @@ import http from '../http-common'
 const market_model_url = "products-on-market";
 const products_model_url = "products"
 
-class ProductsService {
+class ProductService {
     getAll() {
         return http.get("/products");
     }
 
-    createSparePart(data) {
+    getAllByCategory(id) {
+        return http.get("/products/" + id)
+    }
+
+    createProduct(data) {
         return http.post("/products", data);
     }
 
-    updateSparePart(id, data) {
+    updateProduct(id, data) {
         return http.put("/products/" + id, data);
     }
 
-    getCategorizedSpareParts(sub_category) {
+    getCategorizedProducts(sub_category) {
         return http.get("/products/sub-category/" + sub_category);
     }
 
-    getAllPartsOnMarket() {
+    getAllProductsOnMarket() {
         return http.get("/products-on-market");
     }
 
@@ -28,15 +32,15 @@ class ProductsService {
         return http.get("/products/" + id);
     }
 
-    getPaginatedSpareParts(page = 1) {
+    getPaginatedProducts(page = 1) {
         return http.get("/products/paginated?limit=5&page=" + page);
     }
 
-    searchPaginatedSpareParts(search, page = 1, limit = 5) {
+    searchPaginatedProducts(search, page = 1, limit = 5) {
         return http.get(`/products/search/paginated?name=${search}&limit=${limit}&page=${page}`);
     }
 
-    deleteSparePart(id) {
+    deleteProduct(id) {
         return http.delete("/products/" + id);
     }
 
@@ -94,11 +98,11 @@ class ProductsService {
     }
 
 
-    getPaginatedPartsOnMarket(page = 1) {
+    getPaginatedProductsOnMarket(page = 1) {
         return http.get("/products-on-market/paginated?limit=5&page=" + page);
     }
 
-    getSparePartPaginatedOnMarket(page = 1) {
+    getProductPaginatedOnMarket(page = 1) {
         return http.get("/products-on-market/products/paginated?limit=5&page=" + page);
     }
 
@@ -156,6 +160,15 @@ class ProductsService {
         return http.get(`/products/part-number/exists/${part_number}`)
     }
 
+    getByProduct(id) {
+        return http.get(`/products-on-market/product/${id}`)
+    }
+
+
+    getByProductExists(id) {
+        return http.get(`/products-on-market/product/${id}/exists`)
+    }
+
 
     getSparePartsOnMarketByCompany(id) {
         return http.get("/products-on-market/company/" + id)
@@ -184,4 +197,4 @@ class ProductsService {
     //Supp
 }
 
-export default new ProductsService()
+export default new ProductService()

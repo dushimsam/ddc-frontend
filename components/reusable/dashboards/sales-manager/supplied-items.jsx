@@ -3,12 +3,12 @@ import HeaderTableLayout from "../../header-table-layouts"
 import styles from "../../../../styles/pages/table.module.css";
 import ModalLayout from "../../../../components/reusable/modal-layout"
 import React, { useEffect, useState } from "react";
-import Supplies from "../../../../services/supplies/supplies"
+import Supplies from "../../../../services/supplies/SupplyService"
 import jwt from 'jwt-decode';
 import AuthService from "../../../../services/auth/auth.service"
 import { processDetailedDate } from "../../../../utils/process-date";
 import $ from "jquery";
-import SuppliedPartsDataService from "../../../../services/supplies/supplied-parts";
+import SuppliedPartsDataService from "../../../../services/supplies/SuppliedProductsService";
 import globalStyles from "../../../../styles/global-colors.module.css"
 import ModalContainer from "../../dialogs/supply-order-dialog";
 import Router from "next/router";
