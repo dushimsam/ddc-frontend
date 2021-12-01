@@ -5,8 +5,8 @@ import styles from "../../../../styles/pages/table.module.css";
 import Update from "./update";
 import ActionButtons from "../../../../components/tables/ActionButtons"
 import SingleSubModuleLayout from "../../../../layouts/admin-layouts/SingleSubModule";
-import {handleDoubleDecryptionPath, sortData} from "../../../../utils/functions";
-import SparePartService from "../../../../services/products/products.service";
+import {handleDoubleDecryptionPath} from "../../../../utils/functions";
+import ProductService from "../../../../services/products/ProductService";
 
 // import ToggleButton from "../../../../components/reusable/toggleButton";
 import {alertFailer, alertSuccess} from "../../../../utils/alerts";
@@ -20,11 +20,8 @@ import ReadMoreLayout, {
 } from "../../../../components/layouts/read-more-dialog-layout";
 import {processDetailedDate} from "../../../../utils/process-date";
 import {show_modal} from "../../../../utils/modal-funs";
-import Router, {useRouter} from "next/router";
-import SingleSubModuleLayoutManager from "../../../../layouts/sales-manager-layouts/SingleSubModule";
-import {useSelector} from "react-redux";
+import {useRouter} from "next/router";
 import Paginator from "../../../../components/tables/paginator";
-import RouteProtector from "../../../../middlewares/RouteProtector";
 import {defaultCurrencyMapping} from "../../../../utils/currency-converter";
 
 
@@ -57,6 +54,9 @@ const Table = ({
             href: "/admin/products",
             _id: item.part_in_stock.spare_part?._id
         }, {name: "Unit Price", value: defaultCurrencyMapping(item.unit_price)}, {
+            name: "Tax",
+            value: defaultCurrencyMapping(item?.tax)
+        }, {
             name: "Available Quantity",
             value: item.quantity
         }, {name: "Recently updated On ", value: processDetailedDate(item.updatedAt)}]);
@@ -79,7 +79,7 @@ const Table = ({
     }
     const setShowCase = (item) => {
 
-        SparePartService.toggleShowCaseOnMarket(item._id).then((res) => {
+        ProductService.toggleShowCaseOnMarket(item._id).then((res) => {
             if (res.data.showcase) {
                 alertSuccess(setAlert, "Added on the top products list ");
             } else {
@@ -93,24 +93,7 @@ const Table = ({
     }
 
     const [alert, setAlert] = useState({message: "", class: "", show: false})
-    const [loading, setLoading] = useState(false);
 
-    const [deleteAlert, setDeleteAlert] = useState({message: "", class: "", show: false})
-
-    const deleteItem = (item) => {
-        SparePartService.deletePartOnMarket(item._id).then((res) => {
-            setDeleteAlert({show: true, class: "success", message: "Record is Deleted successfully."});
-            setLoading(false)
-            window.location.reload();
-        }).catch((e) => {
-            alertFailer(setDeleteAlert, e.response ? e.response.data.message : e.message || "Error occurred. Try again latter.")
-            setLoading(false)
-        });
-    }
-
-    const sortBy = (prop, order) => {
-        setSpareParts(sortData(partsOnMarket, prop, order));
-    }
     const [imageUrl, setImageUrl] = useState(null);
 
 
@@ -118,7 +101,7 @@ const Table = ({
 
     useEffect(() => {
         if (router.query.subject) {
-            SparePartService.getPartOnMarketById(handleDoubleDecryptionPath(router.query.subject))
+            ProductService.getPartOnMarketById(handleDoubleDecryptionPath(router.query.subject))
                 .then((res) => {
                     const item = res.data;
                     handleSetFields(item);
@@ -144,11 +127,10 @@ const Table = ({
                         <th scope="col" className={styles.th}>Picture</th>
                         <th scope="col" className={styles.th}>Name</th>
                         <th scope={"col"} className={styles.th}>Status</th>
-                        <th scope="col" className={styles.th}>PartCode</th>
-                        <th scope="col" className={styles.th}>PartNumber</th>
+                        <th scope="col" className={styles.th}>Code</th>
                         <th scope="col" className={styles.th}>Quantity</th>
                         <th scope="col" className={styles.th}>Unit Price</th>
-
+                        <th scope="col" className={styles.th}>Tax</th>
                         {systemUser === "SYSTEM_ADMIN" ? <th scope="col" className={styles.th}>Showcase</th> : <></>}
                         <th scope="col" className={styles.th}>Action</th>
                     </tr>
@@ -177,10 +159,10 @@ const Table = ({
                                     className={(partOnMarket?.complete_info_status === "COMPLETE") ? styles.active : styles.inactive}>
                                             {partOnMarket?.complete_info_status}
                                         </span></td>
-                                <td className={styles.td}>{partOnMarket.part_in_stock.spare_part?.part_code}</td>
-                                <td className={styles.td}>{partOnMarket.part_in_stock.spare_part?.part_number}</td>
+                                <td className={styles.td}>{partOnMarket.part_in_stock.spare_part?.product_code}</td>
                                 <td className={styles.td}>{partOnMarket.quantity}</td>
                                 <td className={styles.td}>{defaultCurrencyMapping(partOnMarket.unit_price)}</td>
+                                <td className={styles.td}>{defaultCurrencyMapping(partOnMarket?.tax)}</td>
 
                                 {systemUser === "SYSTEM_ADMIN" ?
                                     <td className={styles.td}><ToggleButton setItem={setShowCase} item={partOnMarket}
@@ -221,11 +203,11 @@ const PartsOnMarketTable = () => {
     const [isSearch, setIsSearch] = useState(false);
     const [searchKey, setSearchKey] = useState('');
 
-    const [totals, setTotals] = useState({spareParts: 0, partsOnMarket: 0});
+    const [totals, setTotals] = useState({products: 0, productsOnMarket: 0});
     const [paginatorLoading, setPaginatorLoading] = useState(true);
 
     const getPartsOnMarket = (page) => {
-        SparePartService.getPaginatedPartsOnMarket(page).then((res) => {
+        ProductService.getPaginatedProductsOnMarket(page).then((res) => {
             setSpareParts(res.data.docs);
             setSearchPartsOnMarket(res.data.docs);
             setPaginator({...paginator, total: res.data.totalDocs, page: res.data.page});
@@ -236,7 +218,7 @@ const PartsOnMarketTable = () => {
 
 
     const getSearchPartsOnMarket = (val, page) => {
-        SparePartService.searchPaginatedPartsOnMarket(val, page).then((res) => {
+        ProductService.searchPaginatedPartsOnMarket(val, page).then((res) => {
             setSearchPartsOnMarket(res.data.docs);
             setPaginator({...paginator, total: res.data.totalDocs, page: res.data.page});
             setPaginatorLoading(false);
@@ -244,14 +226,13 @@ const PartsOnMarketTable = () => {
         }).catch(e => console.log(e))
     }
     const getTotals = async () => {
-        const totals = {spareParts: 0, partsOnMarket: 0};
+        const totals = {products: 0, productsOnMarket: 0};
 
         try {
-            const spareParts = await SparePartService.getPaginatedSpareParts();
-            const partsOnMarket = await SparePartService.getPaginatedPartsOnMarket();
-            totals.spareParts = spareParts.data.totalDocs;
-            totals.partsOnMarket = partsOnMarket.data.totalDocs;
-
+            const products = await ProductService.getPaginatedProducts();
+            const productsOnMarket = await ProductService.getPaginatedProductsOnMarket();
+            totals.products = products.data.totalDocs;
+            totals.productsOnMarket = productsOnMarket.data.totalDocs;
         } catch {
             (e) => console.log(e)
         }
@@ -282,47 +263,26 @@ const PartsOnMarketTable = () => {
 
 
     const panes = [
-        {name: 'SpareParts', count: totals.products, route: '/admin/products'},
-        {name: 'PartsOnMarket', count: totals.partsOnMarket, route: '/admin/products/on-market'}
+        {name: 'Products', count: totals.products, route: '/admin/products'},
+        {name: 'ProductsOnMarket', count: totals.productsOnMarket, route: '/admin/products/on-market'}
     ];
 
-    const user = useSelector(state => state.authUser);
 
     return (
-        <RouteProtector only={[system_users.ADMIN, system_users.EMPLOYEE]}>
-            {user.category?.name === system_users.ADMIN ?
-                <SingleSubModuleLayout
-                    Content={<Table partsOnMarket={searchPartsOnMarket} systemUser={system_users.ADMIN}
-                                    paginatorLoading={paginatorLoading} setPaginatorLoading={setPaginatorLoading}
-                                    setSpareParts={setSearchPartsOnMarket} getInitialData={getInitialData}
-                                    paginator={paginator} setPaginator={setPaginator}/>}
-                    isArray={true}
-                    panes={panes}
-                    showFilter={false}
-                    hideAction={true}
-                    name={'PartsOnMarket'}
-                    setSearch={getSearchKey}
-                    status="new"
-                    route={"/admin/products/on-market"}
-                    isVerified={true}
-                /> : user.category?.name === system_users.EMPLOYEE ?
-                    <SingleSubModuleLayoutManager
-                        Content={<Table partsOnMarket={searchPartsOnMarket} systemUser={system_users.EMPLOYEE}
-                                        paginatorLoading={paginatorLoading} setPaginatorLoading={setPaginatorLoading}
-                                        systemUser={system_users.EMPLOYEE}
-                                        setSpareParts={setSearchPartsOnMarket} getInitialData={getInitialData}
-                                        paginator={paginator} setPaginator={setPaginator}/>}
-                        isArray={true}
-                        panes={panes}
-                        showFilter={false}
-                        name={'PartsOnMarket'}
-                        setSearch={getSearchKey}
-                        status="new"
-                        route={"/admin/products/on-market"}
-                        hideAction={true}
-                        isVerified={true}
-                    /> : <></>}
-        </RouteProtector>
+        <SingleSubModuleLayout
+            Content={<Table partsOnMarket={searchPartsOnMarket} systemUser={system_users.ADMIN}
+                            paginatorLoading={paginatorLoading} setPaginatorLoading={setPaginatorLoading}
+                            setSpareParts={setSearchPartsOnMarket} getInitialData={getInitialData}
+                            paginator={paginator} setPaginator={setPaginator}/>}
+            isArray={true}
+            panes={panes}
+            showFilter={false}
+            hideAction={true}
+            name={'ProductsOnMarket'}
+            setSearch={getSearchKey}
+            status="new"
+            route={"/admin/products/on-market"}
+        />
     );
 };
 

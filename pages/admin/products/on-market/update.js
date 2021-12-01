@@ -1,4 +1,4 @@
-import SparePartService from "../../../../services/products/products.service";
+import SparePartService from "../../../../services/products/ProductService";
 import React, {useEffect, useState} from "react";
 import UpdateFormLayout from "../../../../layouts/table-layouts/update-form-layout"
 import InputControl from "../../../../components/reusable/InputControl"
@@ -6,8 +6,8 @@ import FormLayout from "../../../../layouts/form-layout"
 import {alertFailer, alertSuccess} from "../../../../utils/alerts"
 import {isThisFormValid} from "../../../../utils/functions";
 import {hide_current_modal, hide_modal_alert} from "../../../../utils/modal-funs";
-import SuppliedPartsDataService from "../../../../services/supplies/supplied-parts";
-import SupplyService from "../../../../services/supplies/supplies"
+import SuppliedPartsDataService from "../../../../services/supplies/SuppliedProductsService";
+import SupplyService from "../../../../services/supplies/SupplyService"
 
 export const FormContent = ({setIsFormValid, setValues, values, status, latest_supply_price, setLatestSupplyPrice}) => {
 

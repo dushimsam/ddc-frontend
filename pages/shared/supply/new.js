@@ -9,11 +9,9 @@ import {useRouter} from 'next/router';
 import {isThisFormValid} from "../../../utils/functions";
 import {ALERT_EXPIRATION_PERIOD, supplierUserTypeId, system_users} from "../../../utils/constants";
 import {useSelector} from "react-redux";
-import SuppliersService from "../../../services/supplies/suppliers";
-import SupplyService from "../../../services/supplies/supplies";
-import CarService from "../../../services/cars/car-service";
-import SelectControl from "../../../components/reusable/SelectControl";
-
+import SuppliersService from "../../../services/supplies/SupplierService";
+import SupplyService from "../../../services/supplies/SupplyService";
+import UserCategoryService from "../../../services/users/UserCategoryService"
 
 export const FormContent = ({setIsFormValid, setValues, values, status}) => {
 
@@ -108,14 +106,6 @@ export const FormContent = ({setIsFormValid, setValues, values, status}) => {
                 </div>
             </div>
 
-            <div className="form-group col-6">
-                <SelectControl className="form-control" label="Supplier Type" value={values.supplier_type}
-                               validations="required|string" handleChangeV2={handleChangeV2("extra.supplier_type")}>
-                    <option>Select region</option>
-                    {["SPARE_PART_SUPPLIER", "CAR_SUPPLIER", "BOTH_SUPPLIER"].map(type => <option
-                        value={type}>{type}</option>)}
-                </SelectControl>
-            </div>
 
             <div className="form-group col-6">
                 <InputControl className="form-control" handleChangeV2={handleChangeV2("password")} label="Password"
@@ -149,9 +139,18 @@ const Content = ({totals, setTotals}) => {
         category: supplierUserTypeId,
         gender: "",
         password: "",
-        extra: {address: "", supplier_type: ""}
+        extra: {address: ""}
     });
 
+
+    useEffect(async () => {
+        try {
+            const {data} = await UserCategoryService.getByName("SUPPLIER");
+            setValues({...values, category: data._id});
+        } catch (e) {
+            console.log(e)
+        }
+    }, [])
 
     const Create = () => {
         userService
@@ -185,27 +184,23 @@ const Content = ({totals, setTotals}) => {
 };
 
 const Page = () => {
-    const [totals, setTotals] = useState({suppliers: 0, supplies: 0, car_supplies: 0});
+    const [totals, setTotals] = useState({suppliers: 0, supplies: 0});
 
 
     const admin_panes = [
         {name: 'Suppliers', count: totals.suppliers, route: '/shared/supply'},
-        {name: 'Part Supplies', count: totals.supplies, route: '/shared/supply/supplies'},
-        {name: 'Car Supplies', count: totals.car_supplies, route: '/admin/cars/supplies'}
+        {name: 'Product Supplies', count: totals.supplies, route: '/shared/supply/supplies'}
     ];
 
 
     const getTotals = async () => {
-        const totals = {suppliers: 0, supplies: 0, car_supplies: 0};
+        const totals = {suppliers: 0, supplies: 0};
 
         try {
             const suppliers = await SuppliersService.getPaginated();
             const supplies = await SupplyService.getPaginated();
-            const car_supplies = await CarService.getAllPaginated();
             totals.suppliers = suppliers.data.totalDocs;
             totals.supplies = supplies.data.totalDocs;
-
-            totals.car_supplies = car_supplies.data.totalDocs;
             setTotals(totals);
         } catch {
             e => console.log(e)

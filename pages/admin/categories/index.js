@@ -7,17 +7,16 @@ import SingleSubModuleLayout from "../../../layouts/admin-layouts/SingleSubModul
 import {getFormattedDate, handleDoubleDecryptionPath, sortData} from "../../../utils/functions";
 import ProductCategoriesService from "../../../services/product-categories/product-categories.service";
 import {Th} from "../../../components/reusable/TableComponents";
-import Pagination from "react-js-pagination";
 import {alertFailer} from '../../../utils/alerts';
 import {hide_delete_modal, hide_modal, hide_modal_alert, show_modal} from "../../../utils/modal-funs";
 import ReadMoreLayout, {ListMapping, MapDetails} from "../../../components/layouts/read-more-dialog-layout";
 import {processDetailedDate} from "../../../utils/process-date";
-import Router, {useRouter} from "next/router";
-import SingleSubModuleLayoutManager from "../../../layouts/sales-manager-layouts/SingleSubModule";
+import {useRouter} from "next/router";
 import {system_users} from '../../../utils/constants';
 import {useSelector} from "react-redux";
 import Paginator from "../../../components/tables/paginator";
 import RouteProtector from "../../../middlewares/RouteProtector";
+import ProductService from "../../../services/products/ProductService";
 
 
 const Table = ({
@@ -77,13 +76,13 @@ const Table = ({
         show_modal('#itemReadMoreModalLayout');
     }
     const handleSetChildFields = (item) => {
-        ProductCategoriesService.getProductSubCategoriesByCategory(item._id)
+        ProductService.getAllByCategory(item._id)
             .then((res) => {
                 setChildFields(res.data.map((resItem, index) => {
                     return {
                         name: (index + 1),
                         value: res.data[index].name,
-                        href: "/admin/categories/sub-categories",
+                        href: "/admin/products",
                         _id: res.data[index]._id
                     }
                 }))

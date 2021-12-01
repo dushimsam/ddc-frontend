@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react';
 import styles from "../../../styles/pages/table.module.css";
 // import Update from "./update";
 import {filterData, getFormattedDate, sortData} from "../../../utils/functions";
-import SupplierService from "../../../services/supplies/suppliers";
-import SuppliersService from "../../../services/supplies/suppliers";
-import SupplyService from "../../../services/supplies/supplies";
+import SupplierService from "../../../services/supplies/SupplierService";
+import SuppliersService from "../../../services/supplies/SupplierService";
+import SupplyService from "../../../services/supplies/SupplyService";
 import {Th} from "../../../components/reusable/TableComponents";
 import SingleSubModuleLayoutAdmin from "../../../layouts/admin-layouts/SingleSubModule";
 import ModalProfileDetails from '../../../components/reusable/app-user-details';
@@ -143,16 +143,15 @@ const SuppliersTable = () => {
 
 
     const getTotals = async () => {
-        const totals = {suppliers: 0, supplies: 0, car_supplies: 0};
+        const totals = {suppliers: 0, supplies: 0};
 
         try {
             const suppliers = await SuppliersService.getPaginated();
             const supplies = await SupplyService.getPaginated();
-            // const car_supplies = await CarService.getAllPaginated();
+
             totals.suppliers = suppliers.data.totalDocs;
             totals.supplies = supplies.data.totalDocs;
 
-            totals.car_supplies = car_supplies.data.totalDocs;
             setTotals(totals);
         } catch {
             e => console.log(e)

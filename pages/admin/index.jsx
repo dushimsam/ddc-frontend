@@ -6,7 +6,7 @@ import LinearChart from "../../components/dashboardsV2/LinearChart";
 import RingChart from "../../components/dashboardsV2/RingChart";
 import FeedbackContainer from "../../components/reusable/dashboards/admin/feedback"
 import Title from "../../components/dashboardsV2/Title"
-import PartsOnMarkertService from "../../services/products/products.service"
+import PartsOnMarkertService from "../../services/products/ProductService"
 import IncomeStatisticsService from "../../services/reporting/income.service"
 import ReportSales from "../../components/reusable/dashboards/admin/report-sales.jsx";
 import ReportSupplies from "../../components/reusable/dashboards/admin/report-supplies";

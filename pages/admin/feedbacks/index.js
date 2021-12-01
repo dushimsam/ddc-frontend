@@ -10,7 +10,7 @@ import CustomerReviewsService from "../../../services/feedbacks/CustomerReviewsS
 import ContactUsService from "../../../services/feedbacks/ContactUsService";
 import Paginator from "../../../components/tables/paginator";
 import ToggleButton from "../../../components/tables/toggle-button";
-import SparePartService from "../../../services/products/products.service";
+import SparePartService from "../../../services/products/ProductService";
 import {alertFailer, alertSuccess} from "../../../utils/alerts";
 import Alert from "../../../components/alert";
 import $ from "jquery";

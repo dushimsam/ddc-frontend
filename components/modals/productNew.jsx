@@ -8,9 +8,9 @@ import {hide_modal, show_modal} from "../../utils/modal-funs";
 import {alertFailer, notifyError} from "../../utils/alerts";
 import ConfirmationModal from "../tables/confirmation-modal";
 import $ from "jquery";
-import SparePartService from "../../services/products/products.service";
+import SparePartService from "../../services/products/ProductService";
 import styles from "../../styles/pages/table.module.css";
-import SuppliersDataService from "../../services/supplies/suppliers";
+import SuppliersDataService from "../../services/supplies/SupplierService";
 import EmployeeService from "../../services/employees/employees"
 import SelectControl from "../reusable/SelectControl";
 import {isThisFormValid} from "../../utils/functions";

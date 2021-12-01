@@ -4,9 +4,9 @@ import styles from "../../../../styles/pages/table.module.css";
 import ActionButtons from "../../../../components/tables/ActionButtons"
 import DeleteConfirmation from "../../../../components/tables/delete-confirmation-modal"
 import {dateFormat, filterData, gotoPath, handleDoubleDecryptionPath, sortData} from "../../../../utils/functions";
-import SuppliersService from "../../../../services/supplies/suppliers";
-import SupplyService from "../../../../services/supplies/supplies";
-import SuppliedPartsDataService from "../../../../services/supplies/supplied-parts";
+import SuppliersService from "../../../../services/supplies/SupplierService";
+import SupplyService from "../../../../services/supplies/SupplyService";
+import SuppliedPartsDataService from "../../../../services/supplies/SuppliedProductsService";
 import {Th} from "../../../../components/reusable/TableComponents";
 
 import {system_users} from '../../../../utils/constants';
@@ -17,7 +17,7 @@ import {notifyError, notifySuccess} from "../../../../utils/alerts";
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import Paginator from "../../../../components/tables/paginator";
-import SparePartService from "../../../../services/products/products.service";
+import SparePartService from "../../../../services/products/ProductService";
 import {hide_modal, show_modal} from "../../../../utils/modal-funs";
 import ConfirmModal from "../../../../components/modals/reusable-confirmation-modal";
 
@@ -165,7 +165,7 @@ const Table = ({
                                     className="text-uppercase">{index + 1}</span>
                                 </th>
                                 <td className={styles.td}>{supply.supplier.user.username}</td>
-                                <td className={styles.td}>{supply.reciever.user.firstName + ' ' + supply.reciever.user.lastName}</td>
+                                <td className={styles.td}>{supply.reciever.firstName + ' ' + supply.reciever.lastName}</td>
                                 <td className={styles.td}>{supply.supply_price || '0'}</td>
                                 <td className={styles.td}>{dateFormat(supply.supply_date).fromNow() + " - " + dateFormat(supply.supply_date).onlyDate()}</td>
                                 <td className={styles.td}><ActionButtons handleSetItem={handleSetItem} item={supply}
@@ -297,7 +297,7 @@ const SuppliesTable = () => {
             name={'Supplies'}
             setSearch={getSearchKey}
             status={"new"}
-            hideAction={true}
+            hideAction={false}
             route={"/shared/supply/supplies"}
 
         />

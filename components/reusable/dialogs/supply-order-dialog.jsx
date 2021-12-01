@@ -2,35 +2,32 @@ import React, {useEffect, useState} from "react"
 import styles from "../../../styles/components/productsDetailsDialog.module.css"
 import ImageModalView from "../image-modal-view";
 import {gotoPath} from "../../../utils/functions";
-import SparePartService from "../../../services/products/products.service";
+import ProductService from "../../../services/products/ProductService";
 import $ from "jquery";
 import Router from "next/router";
-import {
-    currencyMapping,
-    customCurrencyMapping,
-    defaultCurrencyMapping,
-    rwandanCurrency
-} from "../../../utils/currency-converter";
+import {customCurrencyMapping, defaultCurrencyMapping} from "../../../utils/currency-converter";
 import {useSelector} from "react-redux";
 
 
 // SHARABLE TABLE DESIGN
 
-const SingleTdDetails = ({sparePart, quantity, price, status, item, currency, user}) => {
+const SingleTdDetails = ({product, quantity, price, currency, user}) => {
     const [imageUrl, setImageUrl] = useState(null);
     const [onMarketInfo, setOnMarketInfo] = useState(null);
 
     useEffect(() => {
-        SparePartService.getSparePartDetails(sparePart._id)
+        ProductService.getByProductExists(product._id)
             .then((res) => {
-                setOnMarketInfo(res.data)
+                if (res.data.exists)
+                    setOnMarketInfo(res.data.object)
             }).catch(e => console.log(e))
-    }, [sparePart])
+    }, [product])
+
     return (
         <React.Fragment>
             <td>
                 <img className="img-thumbnail rounded"
-                     src={sparePart.imageUrls[0]}
+                     src={product.imageUrls[0]}
 
                      onError={(e) => {
                          e.target.onerror = null;
@@ -38,8 +35,8 @@ const SingleTdDetails = ({sparePart, quantity, price, status, item, currency, us
                      }}
                      height={80}
                      width={80}
-                     alt={sparePart?.name}
-                     onClick={() => setImageUrl(sparePart?.imageUrls[0] ? sparePart.imageUrls[0] : "/img/default-spare-part.png")}
+                     alt={product?.name}
+                     onClick={() => setImageUrl(product?.imageUrls[0] ? product.imageUrls[0] : "/img/default-spare-part.png")}
                 />
             </td>
             <td>
@@ -47,23 +44,19 @@ const SingleTdDetails = ({sparePart, quantity, price, status, item, currency, us
                     <h5 className={"font-weight-bold text-primary cursor-pointer " + styles.mainInfoTitle}
                         onClick={() => Router.push(gotoPath(
                             "/admin/products/on-market",
-                            onMarketInfo.partOnMarket._id
-                        ))}>{`${sparePart?.name}`}</h5>
+                            onMarketInfo._id
+                        ))}>{`${product?.name}`}</h5>
+
+                       <span
+                        className={"font-weight-bold " + styles.generalColor + " " + styles.mainInfoMeta}>Product Code</span>
                     <span
-                        className={"font-weight-bold " + styles.generalColor + " " + styles.mainInfoMeta}>Part number</span>
-                    <span
-                        className={"font-weight-light " + styles.generalColor + " " + styles.mainInfoMetaValue}>:{`${sparePart?.part_number}`}</span>
-                    <br/>
-                    <span
-                        className={"font-weight-bold " + styles.generalColor + " " + styles.mainInfoMeta}>Part Code</span>
-                    <span
-                        className={"font-weight-light " + styles.generalColor + " " + styles.mainInfoMetaValue}>:{`${sparePart?.part_code}`}</span>
+                        className={"font-weight-light " + styles.generalColor + " " + styles.mainInfoMetaValue}>:{`${product?.product_code}`}</span>
                     <br/>
 
                     <span
-                        className={"font-weight-bold " + styles.generalColor + " " + styles.mainInfoMeta}>FitNote</span>
+                        className={"font-weight-bold " + styles.generalColor + " " + styles.mainInfoMeta}>Description</span>
                     <span
-                        className={"font-weight-light " + styles.generalColor + " " + styles.mainInfoMetaValue}>: {`${sparePart?.description?.fit_note}`}</span>
+                        className={"font-weight-light " + styles.generalColor + " " + styles.mainInfoMetaValue}>: {`${product?.description}`}</span>
                 </div>
             </td>
 
@@ -75,31 +68,20 @@ const SingleTdDetails = ({sparePart, quantity, price, status, item, currency, us
                 {`${customCurrencyMapping(currency, user, (price / quantity))} `}
             </td>
 
-            {
-                status === "direct_purchase" ?
-                    <td> {customCurrencyMapping(currency, user, item.discounted_price)}</td>
-                    : <></>
-            }
             <td>
                 {`${customCurrencyMapping(currency, user, price)}`}
             </td>
-            {
-                status === "direct_purchase" ?
-                    <td>
-                        {`${customCurrencyMapping(currency, user, price - item.discounted_price)}`}
-                    </td> : <></>
-            }
 
 
             {
-                imageUrl && <ImageModalView imgUrl={sparePart?.imageUrls}/>
+                imageUrl && <ImageModalView imgUrl={product?.imageUrls}/>
             }
         </React.Fragment>
     )
 }
 
 const TotalSumUp = ({totalQuantities, totalAmount, data, status, currency, user}) => {
-    console.log("Total amount ",defaultCurrencyMapping(totalAmount))
+    // console.log("Total amount ", defaultCurrencyMapping(totalAmount))
     return (
         <React.Fragment>
             <td/>
@@ -130,8 +112,8 @@ const TableContainer = ({data, totalQuantities, totalPrice, status, itemObj, cur
         <table className={"border  table " + styles.tableContainer}>
             <thead>
             <th className={styles.tableHead}/>
-            <th className={styles.tableHead}><h6 className={"font-weight-bold " + " " + styles.generalColor}>SPARE
-                PART</h6></th>
+            <th className={styles.tableHead}><h6
+                className={"font-weight-bold " + " " + styles.generalColor}>PRODUCT</h6></th>
             <th className={styles.tableHead}><h6
                 className={"font-weight-bold " + styles.tableHead + " " + styles.generalColor}>QUANTITY</h6></th>
             <th className={styles.tableHead}><h6
@@ -157,7 +139,7 @@ const TableContainer = ({data, totalQuantities, totalPrice, status, itemObj, cur
                 data.length > 0 ? data.map((item) => {
                     return (<tr className={styles.td} key={item._id}><SingleTdDetails key={item}
                                                                                       item={item}
-                                                                                      sparePart={status === "supply" ? item.spare_part : item.product.part_in_stock.spare_part}
+                                                                                      product={item.product}
                                                                                       quantity={item.quantity}
                                                                                       status={status}
                                                                                       currency={currency}
