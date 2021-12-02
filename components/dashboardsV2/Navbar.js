@@ -4,6 +4,7 @@ import {getDashboardLink} from "../../utils/sidebar-links";
 import React from "react";
 import Router from "next/router";
 import {app_config} from "../../utils/constants";
+import globalStyles from "../../styles/global-colors.module.css"
 
 export default function Navbar({navList}) {
     const authUser = useSelector(state => state.authUser)
@@ -16,7 +17,7 @@ export default function Navbar({navList}) {
             </div>
             <Link href={getDashboardLink(authUser)} passHref>
                 <div
-                    className={!((Router.pathname === "/customer") || (Router.pathname === "/shipper")) ? "border border-secondary cursor-pointer px-3 py-1 my-2 my-md-0 rounded-sm mr-4 d-flex align-items-center __nav-link" : "btn btn-danger shadow px-3 py-1 my-2 my-md-0  mr-4 __active-nav-link"}>
+                    className={!((Router.pathname === "/customer") || (Router.pathname === "/shipper")) ? "border border-secondary cursor-pointer px-3 py-1 my-2 my-md-0 rounded-sm mr-4 d-flex align-items-center __nav-link" : "btn text-white  shadow px-3 py-1 my-2 my-md-0  mr-4 __active-nav-link " + globalStyles.globalBackColor}>
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                         <path fill="none" d="M0 0h24v24H0z"/>
                         <path d="M3 13h8V3H3v10zm0 8h8v-6H3v6zm10 0h8V11h-8v10zm0-18v6h8V3h-8z"
@@ -29,7 +30,7 @@ export default function Navbar({navList}) {
                 navList.map((list, i) => (
                     <Link href={list.href} passHref key={i}>
                         <div key={i}
-                             className={!Router.pathname.includes(list.href, 0) ? "border border-secondary cursor-pointer px-3 py-1 my-2 my-md-0 rounded-sm mr-4 d-flex align-items-center __nav-link" : "btn btn-danger shadow px-3 py-1 my-2 my-md-0  mr-4 __active-nav-link"}>
+                             className={!Router.pathname.includes(list.href, 0) ? "border border-secondary cursor-pointer px-3 py-1 my-2 my-md-0 rounded-sm mr-4 d-flex align-items-center __nav-link" : "btn  shadow px-3 py-1 my-2 my-md-0  mr-4 __active-nav-link text-white " + globalStyles.globalBackColor}>
                             {list.icon}
                             <span className="px-3">{list.name}</span>
                         </div>

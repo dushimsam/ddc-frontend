@@ -6,15 +6,14 @@ import Link from "next/link";
 import findTotalPrice from "../../../utils/shopping-cart";
 import OrderService from "../../../services/orders/orders"
 import RouteProtector from "../../../middlewares/RouteProtector";
-import {app_config, DEFAULT_CURRENCY, system_users} from "../../../utils/constants";
+import {app_config, system_users} from "../../../utils/constants";
 import Modal from "react-bootstrap/Modal";
 import Router, {useRouter} from "next/router";
-import {dateFormat, gotoPath, gotoPathDirect, handleDoubleDecryptionPath} from "../../../utils/functions";
+import {dateFormat, gotoPathDirect, handleDoubleDecryptionPath} from "../../../utils/functions";
 import Footer from "../../../components/Footer";
 import globalStyles from "../../../styles/global-colors.module.css"
-import {alertFailer, alertSuccess, notifyError, notifyInfo, notifySuccess} from "../../../utils/alerts";
-import CustomerDashboard from "../../../layouts/dashboardsV2/CustomerDashboard";
-import {currencyMapping, defaultCurrencyMapping} from "../../../utils/currency-converter";
+import {alertSuccess, notifyError, notifyInfo, notifySuccess} from "../../../utils/alerts";
+import {currencyMapping} from "../../../utils/currency-converter";
 import AppliedDiscountService from "../../../services/discount/AppliedDiscountService";
 import DiscountService from "../../../services/discount/DiscountService"
 import CustomerService from "../../../services/customers/customer.service"
@@ -129,17 +128,17 @@ const DisplayProducts = ({order, product, quantity, handleRemoveProduct, currenc
                 <img
                     width={150}
                     src={
-                        product.part_in_stock?.spare_part?.imageUrls[0]
+                        product.product?.imageUrls[0]
                     }
                     onError={(e) => {
                         e.target.onerror = null;
-                        e.target.src = "/img/default-spare-part.png";
+                        e.target.src = "/img/default.png";
                     }}
-                    alt={product?.part_in_stock?.spare_part?.name}
+                    alt={product?.product?.name}
                 />
             </td>
-            <td>{product?.part_in_stock?.spare_part?.name}</td>
-            <td>{product?.part_in_stock?.spare_part?.part_number}</td>
+            <td>{product?.product?.name}</td>
+            <td>{product?.product?.product_code}</td>
 
             <td>                <span className="font-weight-bold">
                                                     {quantity}
@@ -147,14 +146,14 @@ const DisplayProducts = ({order, product, quantity, handleRemoveProduct, currenc
             </td>
 
             <td><span
-                className="font-weight-bold">{product.part_in_stock.spare_part.weight}</span>
+                className="font-weight-bold">{product.product.weight}</span>
             </td>
             <td><span
                 className="font-weight-bold">{currencyMapping(currency, order?.delivery_zone.delivery_price)}</span>
             </td>
             <td>
                 <span
-                    className="font-weight-bold h5"><b>{currencyMapping(currency, product.part_in_stock.spare_part.weight * order?.delivery_zone.delivery_price * quantity)}</b></span>
+                    className="font-weight-bold h5"><b>{currencyMapping(currency, product.product.weight * order?.delivery_zone.delivery_price * quantity)}</b></span>
             </td>
             <td>
                                              <span className="font-weight-bold">
@@ -169,7 +168,7 @@ const DisplayProducts = ({order, product, quantity, handleRemoveProduct, currenc
             </td>
             <td>
                                             <span className="font-weight-bold h4">
-                                                <b>{currencyMapping(currency, (product.part_in_stock.spare_part.weight * order.delivery_zone.delivery_price * quantity) + (quantity * product.unit_price))}</b>
+                                                <b>{currencyMapping(currency, (product.product.weight * order.delivery_zone.delivery_price * quantity) + (quantity * product.unit_price))}</b>
                                             </span>
             </td>
 
@@ -225,7 +224,7 @@ export default function ReviewOrder() {
             quantity: item.orderedQuantity,
         }));
 
-        OrderService.addOrderedParts({
+        OrderService.addOrderedProducts({
             order: order._id,
             products: products,
         })
@@ -281,7 +280,7 @@ export default function ReviewOrder() {
                     }
 
                     const available_discounts_res = await AppliedDiscountService.getAllAvailableByOrder(res.data._id);
-                    console.log(available_discounts_res.data)
+
                     if (available_discounts_res.data.available) {
                         let total_discount = available_discounts_res.data.object.map(item => item.order_discount.discount).reduce((prev, next) => prev + next);
                         if (res.data.status === "INITIATED")
@@ -296,7 +295,7 @@ export default function ReviewOrder() {
                     }
 
                     if (res.data.status === "PAYING") {
-                        OrderService.orderParts(res.data._id).then((res) => {
+                        OrderService.orderProducts(res.data._id).then((res) => {
                             setOrderProducts(res.data)
                         }).catch(e => console.log(e))
                     }
@@ -540,7 +539,7 @@ export default function ReviewOrder() {
                                     <tr>
                                         <th>Product image</th>
                                         <th>Name</th>
-                                        <th>Part number</th>
+                                        <th>Product Code</th>
                                         <th>Quantity</th>
                                         <th>Weight</th>
                                         <th>Shipping per kg in your location</th>

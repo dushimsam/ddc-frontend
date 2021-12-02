@@ -3,32 +3,27 @@ import styles from "../../../../styles/pages/table.module.css";
 import GrowableTable from "../../growable-tables-layout"
 import customerService from "../../../../services/customers/customer.service"
 import ordersService from "../../../../services/orders/orders"
-import OrderDetails from '../../../order/order-details-modal';
+// import OrderDetails from '../../../order/order-details-modal';
 import AuthService from "../../../../services/auth/auth.service"
 import jwt from 'jwt-decode';
 import {processDetailedDate} from "../../../../utils/process-date";
-import {
-    currencyMapping,
-    customCurrencyMapping,
-    defaultCurrencyMapping,
-    rwandanCurrency
-} from "../../../../utils/currency-converter";
+import {defaultCurrencyMapping} from "../../../../utils/currency-converter";
 
 const Table = ({rowsData}) => {
     console.log(rowsData)
     const changeStatus = (order) => {
-        ShipmentService.getOrderShipment(order._id)
-            .then((res) => {
-                ShipmentService.changeShipmentStatus(res.data[0]._id, "DELIVERED")
-                    .then((res2) => {
-                        alertSuccess(setAlert, "Action Done Successfully");
-                        window.location.reload();
-                    }).catch(e => {
-                    alertFailer(setAlert, e.response ? e.response.data.message : e.message || "Error occurred. Try again latter.");
-                })
-            }).catch(e => {
-            alertFailer(setAlert, e.response ? e.response.data.message : e.message || "Error occurred. Try again latter.");
-        })
+        // ShipmentService.getOrderShipment(order._id)
+        //     .then((res) => {
+        //         ShipmentService.changeShipmentStatus(res.data[0]._id, "DELIVERED")
+        //             .then((res2) => {
+        //                 alertSuccess(setAlert, "Action Done Successfully");
+        //                 window.location.reload();
+        //             }).catch(e => {
+        //             alertFailer(setAlert, e.response ? e.response.data.message : e.message || "Error occurred. Try again latter.");
+        //         })
+        //     }).catch(e => {
+        //     alertFailer(setAlert, e.response ? e.response.data.message : e.message || "Error occurred. Try again latter.");
+        // })
     }
 
 
@@ -70,10 +65,6 @@ const Table = ({rowsData}) => {
                     })
                 }
                 </tbody>
-                {
-                    selectedOrder ?
-                        <OrderDetails order={selectedOrder} status={null} payment={null} isCustomer={true}/> : <></>
-                }
             </table>
         </div>
     )

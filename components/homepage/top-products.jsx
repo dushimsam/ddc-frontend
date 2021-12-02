@@ -7,7 +7,6 @@ import {Cursors} from "../reusable/scrollor-cursors";
 
 
 const Products = ({loading, setCurrentSlide, breakPoints, jumpToSlide, currentSlide, products}) => {
-    console.log(products)
     return (
         <div
             className={`p-0  mt-3 products-area pb-5  ${styles.products}`}
@@ -40,7 +39,7 @@ const Products = ({loading, setCurrentSlide, breakPoints, jumpToSlide, currentSl
                 >
                     {products.map((item) => (
                         <SwiperSlide>
-                            <Product product={item.product}
+                            <Product product={item}
                                      productOnMarketId={item?._id}
                                      image={item.product?.imageUrls[0]}
                                      price={item?.unit_price}/>
@@ -80,7 +79,6 @@ const Products = ({loading, setCurrentSlide, breakPoints, jumpToSlide, currentSl
 }
 
 
-
 const TopProducts = () => {
 
     const [currentSlide, setCurrentSlide] = useState(0);
@@ -88,7 +86,7 @@ const TopProducts = () => {
 
     const breakPoints = {
         200: {
-            slidesPerView: 2,
+            slidesPerView: 1.25,
         },
         800: {
             slidesPerView: 3,
@@ -116,19 +114,21 @@ const TopProducts = () => {
     }, [])
 
     return (
-        <div className={"container"}>
+        <div className={"container pt-5"}>
             <div className={"row justify-content-between"}>
                 <div className={"col-5"}>
-                    <h3>Top products</h3>
+                    <h5>Top products</h5>
                     <Cursors currentSlide={currentSlide} jumpToSlide={jumpToSlide}/>
                 </div>
-                <div className={"col-3"}>
-                    <h4>Skin care</h4>
-                </div>
+                {/*<div className={"col-3"}>*/}
+                {/*    <h6>Skin care</h6>*/}
+                {/*</div>*/}
             </div>
-            <div className={"row"}>
-                <Products loading={loading} setCurrentSlide={setCurrentSlide} breakPoints={breakPoints}
-                          currentSlide={currentSlide} jumpToSlide={jumpToSlide} products={products}/>
+            <div className={"row justify-content-center"}>
+                <div className={"col-12"}>
+                    <Products loading={loading} setCurrentSlide={setCurrentSlide} breakPoints={breakPoints}
+                              currentSlide={currentSlide} jumpToSlide={jumpToSlide} products={products}/>
+                </div>
             </div>
         </div>
     )

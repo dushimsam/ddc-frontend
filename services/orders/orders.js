@@ -27,18 +27,18 @@ class OrderService {
     }
 
 
-// PART ORDERS
+// products ORDERS
 
-    getAllParts() {
-        return http.get('/part-orders');
+    getAllProducts() {
+        return http.get('/product-orders');
     }
 
-    orderParts(order_id) {
-        return http.get(`/part-orders/order/${order_id}`)
+    orderProducts(order_id) {
+        return http.get(`/product-orders/order/${order_id}`)
     }
 
     getPart() {
-        return http.get(`/part-orders/${id}`)
+        return http.get(`/product-orders/${id}`)
     }
 
     getPaginated(page = 1) {
@@ -51,11 +51,11 @@ class OrderService {
 
 
     createPart(data) {
-        return http.post("/part-orders", data)
+        return http.post("/product-orders", data)
     }
 
-    addOrderedParts(data) {
-        return http.post(`/part-orders`, data)
+    addOrderedProducts(data) {
+        return http.post(`/product-orders`, data)
     }
 
     payMoMo(data) {

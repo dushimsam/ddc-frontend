@@ -2,10 +2,12 @@ import globalStyles from "../../styles/global-colors.module.css"
 import {PlayIcon} from "../../icons";
 import styles from "../../styles/components/welcomePage.module.css";
 import {Swiper, SwiperSlide} from "swiper/react";
-import Product from "../reusable/Product";
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import ProductService from "../../services/products/ProductService";
 import {Cursors} from "../reusable/scrollor-cursors";
+import {items} from "../../utils/constants";
+import productStyles from "../../styles/components/spare-part.module.css"
+import Product from "../reusable/Product";
 
 export const Products = ({loading, setCurrentSlide, breakPoints, products}) => {
     return (
@@ -40,7 +42,9 @@ export const Products = ({loading, setCurrentSlide, breakPoints, products}) => {
                 >
                     {products.map((item) => (
                         <SwiperSlide>
-                            <Product product={item.product}
+                            <Product product={item}
+                                     hideBtn={true}
+                                     containerStyle={productStyles.container2}
                                      productOnMarketId={item?._id}
                                      image={item.product?.imageUrls[0]}
                                      price={item?.unit_price}/>
@@ -61,13 +65,13 @@ const WelcomingProducts = () => {
 
     const breakPoints = {
         200: {
-            slidesPerView: 2,
+            slidesPerView: 1.5,
         },
         800: {
             slidesPerView: 3,
         },
         900: {
-            slidesPerView: 4,
+            slidesPerView: 3.1,
         },
         1300: {
             slidesPerView: 5.2,
@@ -79,37 +83,42 @@ const WelcomingProducts = () => {
         swiper.slideTo(slideNumber, 1000, false);
     };
 
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState(items);
 
     useEffect(() => {
+        // setProducts(items)
+
         ProductService.getAllProductsOnMarket()
             .then((res) => {
-                setProducts(res.data)
+                // setProducts(res.data)
+                setProducts(items)
             }).catch(e => console.log(e))
     }, [])
 
     return (
         <div className={"container"}>
-            <div className={"row justify-content-between"}>
-                <div className={"col-5"}>
+            <div className={"row justify-content-sm-between justify-content-center"}>
+                <div className={"col-sm-5 pt-3 col-11 "}>
                     <h4>Find the best cosmetic products for yourself and friend!</h4>
                     <p className={"mt-2"}>Lorem ipsum dolor sit amet, consectetur adipiscing elit
                         sed do eiusmod tempor incididunt ut labore et dolore ma
                         gna aliqua. Ut enim ad minim veniam..</p>
                     <div className={"d-flex"}>
                         <button className={"btn py-2 px-4 " + globalStyles.globalBackColor}>Order Now</button>
-                        <button className={"btn mx-4"}>Watch our story</button>
-                        <PlayIcon height={30} width={30}/>
+                        <>
+                            <button className={"btn mx-4"}>Watch our story</button>
+                            <PlayIcon height={40} width={40}/>
+                        </>
                     </div>
                 </div>
-                <div className={"col-7"}>
+                <div className={"col-sm-7 col-12"}>
                     <div className={"container"}>
                         <div className={"row"}>
                             <Products loading={loading} setCurrentSlide={setCurrentSlide} breakPoints={breakPoints}
                                       currentSlide={currentSlide} jumpToSlide={jumpToSlide} products={products}/>
                         </div>
-                        <div className={"row justify-content-center"}>
-                            <Cursors currentSlide={currentSlide} jumpToSlide={jumpToSlide}/>
+                        <div className={"row justify-content-center mt-n4"}>
+                            <Cursors currentSlide={currentSlide} jumpToSlide={jumpToSlide} width={30} height={30}/>
                         </div>
                     </div>
 
@@ -120,3 +129,21 @@ const WelcomingProducts = () => {
 }
 
 export default WelcomingProducts;
+
+
+const moreStyles = {
+    div_category: {
+        background: "rgba(112,112,112,0.13)",
+        color: "rgba(112,112,112,0.98)",
+        fontSize: "0.7em",
+        width: "7em"
+    },
+    button: {
+        background: "#E652DC",
+        color: "white"
+    },
+    text: {
+        display: "block", maxWidth: "8em", whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis",
+        fontSize: "0.8em"
+    }
+}

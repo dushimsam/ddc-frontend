@@ -4,9 +4,10 @@ import {useEffect, useState} from "react";
 import Product from "../reusable/Product";
 import ProductService from "../../services/products/ProductService";
 import {Cursors} from "../reusable/scrollor-cursors";
+import {items} from "../../utils/constants";
 
 
-export const Products = ({loading, setCurrentSlide, breakPoints,  products}) => {
+export const Products = ({loading, setCurrentSlide, breakPoints, products}) => {
     return (
         <div
             className={`p-0  mt-3 products-area pb-5  ${styles.products}`}
@@ -39,7 +40,7 @@ export const Products = ({loading, setCurrentSlide, breakPoints,  products}) => 
                 >
                     {products.map((item) => (
                         <SwiperSlide>
-                            <Product product={item.product}
+                            <Product product={item}
                                      productOnMarketId={item?._id}
                                      image={item.product?.imageUrls[0]}
                                      price={item?.unit_price}/>
@@ -59,7 +60,7 @@ const Recommendations = () => {
 
     const breakPoints = {
         200: {
-            slidesPerView: 2,
+            slidesPerView: 1.25,
         },
         800: {
             slidesPerView: 3,
@@ -77,12 +78,13 @@ const Recommendations = () => {
         swiper.slideTo(slideNumber, 1000, false);
     };
 
-    const [products, setProducts] = useState([]);
+    const [products, setProducts] = useState(items);
 
     useEffect(() => {
         ProductService.getAllProductsOnMarket()
             .then((res) => {
-                setProducts(res.data)
+                console.log(res.data)
+                setProducts(items)
             }).catch(e => console.log(e))
     }, [])
 
@@ -90,16 +92,18 @@ const Recommendations = () => {
         <div className={"container pt-3"}>
             <div className={"row justify-content-between"}>
                 <div className={"col-5"}>
-                    <h3>Recommendations</h3>
+                    <h5>Recommendations</h5>
                     <Cursors currentSlide={currentSlide} jumpToSlide={jumpToSlide}/>
                 </div>
-                <div className={"col-3"}>
-                    <h4>Skin care</h4>
-                </div>
+                {/*<div className={"col-3"}>*/}
+                {/*    <h4>Skin care</h4>*/}
+                {/*</div>*/}
             </div>
-            <div className={"row"}>
-                <Products loading={loading} setCurrentSlide={setCurrentSlide} breakPoints={breakPoints}
-                          currentSlide={currentSlide} jumpToSlide={jumpToSlide} products={products}/>
+            <div className={"row justify-content-center"}>
+                <div className={"col-12"}>
+                    <Products loading={loading} setCurrentSlide={setCurrentSlide} breakPoints={breakPoints}
+                              currentSlide={currentSlide} jumpToSlide={jumpToSlide} products={products}/>
+                </div>
             </div>
         </div>
     )

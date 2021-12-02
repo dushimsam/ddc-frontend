@@ -1,28 +1,23 @@
 import React, {useEffect, useState} from "react";
-import OrderService from "../../../../services/orders/orders"
-import customerService from "../../../../services/customers/customer.service"
-import {filterData, gotoPath, handleDoubleDecryptionPath, sortData} from "../../../../utils/functions";
-import ShipmentService from '../../../../services/shipments/shipment.service';
+import OrderService from "../../../services/orders/orders"
+import customerService from "../../../services/customers/customer.service"
+import {filterData, gotoPath, handleDoubleDecryptionPath, sortData} from "../../../utils/functions";
+import ShipmentService from '../../../services/shipments/shipment.service';
 
-import {notifyError, notifySuccess} from "../../../../utils/alerts"
-import ActionButtons from "../../../../components/tables/ActionButtons";
-import {Th} from "../../../../components/reusable/TableComponents";
-import svgStyles from '../../../../styles/components/Breadcrumb.module.css';
-import styles from "../../../../styles/pages/table.module.css";
-import AuthService from "../../../../services/auth/auth.service"
+import {notifyError, notifySuccess} from "../../../utils/alerts"
+import ActionButtons from "../../../components/tables/ActionButtons";
+import {Th} from "../../../components/reusable/TableComponents";
+import svgStyles from '../../../styles/components/Breadcrumb.module.css';
+import styles from "../../../styles/pages/table.module.css";
 import $ from "jquery"
-import SingleSubModuleLayout from "../../../../layouts/customer-layouts/SingleSubModule"
-import jwt from 'jwt-decode';
-import {processDetailedDate} from "../../../../utils/process-date";
-import ModalContainer from "../../../../components/reusable/dialogs/supply-order-dialog";
-import OrderPaymentModal from "../../../../components/reusable/order-payments-modal";
-import ConfirmationModal from "../../../../components/tables/confirmation-modal";
+import SingleSubModuleLayout from "../../../layouts/customer-layouts/SingleSubModule"
+import {processDetailedDate} from "../../../utils/process-date";
+import ModalContainer from "../../../components/reusable/dialogs/supply-order-dialog";
+import OrderPaymentModal from "../../../components/reusable/order-payments-modal";
+import ConfirmationModal from "../../../components/tables/confirmation-modal";
 import Router, {useRouter} from "next/router";
-import {decryptText, encryptText} from "../../../../utils/encryption-decryption";
-import {show_modal} from "../../../../utils/modal-funs";
-import Paginator from "../../../../components/tables/paginator";
-import CarOrderService from "../../../../services/cars/cars-order-purchase-service";
-import BookingService from "../../../../services/cars/booking-service";
+import {show_modal} from "../../../utils/modal-funs";
+import Paginator from "../../../components/tables/paginator";
 import {useSelector} from "react-redux";
 
 
@@ -170,7 +165,7 @@ const Table = ({orders, setOrders, paginator, paginatorLoading, setPaginatorLoad
 
                                         <span className={svgStyles.svgViewHover + " ml-5"}
                                               onClick={() => {
-                                                  order.status !== "INITIATED"  ? handlePaymentReadMore(order) : null
+                                                  order.status !== "INITIATED" ? handlePaymentReadMore(order) : null
                                               }}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18"
                                                      height="18"><path fill="none"
@@ -203,7 +198,8 @@ const Table = ({orders, setOrders, paginator, paginatorLoading, setPaginatorLoad
 
             {
                 selectedOrder &&
-                <ModalContainer data={orderData} itemObj={selectedOrder} status="order" title={"Order Information : "+selectedOrder?.code}
+                <ModalContainer data={orderData} itemObj={selectedOrder} status="order"
+                                title={"Order Information : " + selectedOrder?.code}
                                 date={processDetailedDate(selectedOrder.createdAt)}/>
             }
             {
@@ -219,14 +215,13 @@ const Page = () => {
 
     const [orders, setOrders] = useState([]);
     const [searchOrders, setSearchOrders] = useState([]);
-    const [total, setTotal] = useState(0);
     const [paginator, setPaginator] = useState({page: 1, perPage: 5, total: 0, range: 5});
     const [isSearch, setIsSearch] = useState(false);
     const [searchKey, setSearchKey] = useState('');
     let all = [];
     const [paginatorLoading, setPaginatorLoading] = useState(true);
     const [customer, setCustomer] = useState(null);
-    const [totals, setTotals] = useState({part_orders: 0, car_orders: 0});
+    const [total, setTotal] = useState(0);
 
     const user = useSelector(state => state.authUser);
 
@@ -235,6 +230,8 @@ const Page = () => {
         if (user.id) {
             customerService.getCustomer(user.id)
                 .then((result) => {
+                    console.log("Current user ", result)
+
                     setCustomer(result.data)
                 }).catch(e => console.log(e))
         }
@@ -246,6 +243,7 @@ const Page = () => {
             setOrders(res.data);
             setSearchOrders(res.data.docs);
             setPaginatorLoading(false);
+            setTotal(res.data.totalDocs)
             setPaginator({...paginator, total: res.data.length, page: res.data.page});
         }).catch(e => console.log(e))
     }
@@ -257,17 +255,13 @@ const Page = () => {
     }, [paginator.page, customer]);
 
 
-    useEffect(() => {
-        if (customer)
-            getTotals();
-    }, [customer])
     const getSearchKey = (val) => {
         setSearchKey(val);
         if (val === '' || val === ' ' || !val.replace(/\s/g, '').length) {
             setSearchOrders(orders);
             setIsSearch(false);
         } else {
-            getSearchOrders(val, paginator.page);
+            // getSearchOrders(val, paginator.page);
             setIsSearch(true);
         }
     };
@@ -275,26 +269,6 @@ const Page = () => {
     const getFilterKey = (key) => {
         setSearchOrders(filterData(orders, 'status', key));
     }
-
-
-    const getTotals = async () => {
-        const totals = {part_orders: 0, car_orders: 0};
-
-        try {
-            const part_orders = await OrderService.getOrderForACustomerPaginated(customer._id);
-            const car_orders = await CarOrderService.getOrderForACustomerPaginated(customer._id);
-            totals.part_orders = part_orders.data.totalDocs;
-            totals.car_orders = car_orders.data.totalDocs;
-            setTotals(totals);
-        } catch {
-            e => console.log(e)
-        }
-    }
-
-    const panes = [
-        {name: 'Part Orders', count: totals.part_orders, route: '/customer/my-orders/part-orders'},
-        {name: 'Car Orders', count: totals.car_orders, route: '/customer/my-orders/car-orders'}
-    ];
 
 
     const filters = [
@@ -321,8 +295,7 @@ const Page = () => {
             showFilter={true}
             isOrder={true}
             hideSearch={true}
-            isArray={true}
-            panes={panes}
+            isArray={false}
             filters={filters}
             setSearch={getSearchKey}
             hideAction={true}

@@ -3,6 +3,11 @@
     box-shadow: 0 10px 20px #0000000D;
 }
 
+.container2 {
+    width: 200px;
+    box-shadow: 0 10px 20px #0000000D;
+}
+
 .button:hover {
     background-color: #D9534F;
 }
