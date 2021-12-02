@@ -104,7 +104,7 @@ export default function Login() {
                                     src={app_config.APP_LOGO}
                                     alt=""
                                     width={120}
-                                    height={60}
+                                    height={120}
                                 />
                             </div>
                         </Link>

@@ -84,6 +84,7 @@ export default function NavBar() {
     dispatch(setAppCurrency(curr));
   };
 
+
   useEffect(() => {
     console.log("Here currency ", currency);
   }, [currency]);
