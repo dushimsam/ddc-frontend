@@ -35,7 +35,6 @@
 }
 
 
-
 /* .sellDiv{
  padding-left:3em;
  padding-right:0em;
@@ -102,7 +101,7 @@
     box-shadow: 0 3px 6px #00000029;
     border-radius: 2px;
     padding: 10px 7px 10px 2px;
-    background: #ff5555;
+    background: #F3A35D;
     color: #FAFAFA
 }
 
@@ -237,7 +236,7 @@
 
 .sidebarActiveLink {
     cursor: pointer;
-    background-color: rgb(255, 85, 85);
+    background-color: #F3A35D;
     color: white !important;
 }
 

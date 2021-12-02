@@ -170,24 +170,3 @@ const Sidebar = ({ lists }) => {
   );
 };
 
-const Sell = () => {
-  return (
-    <button className={"btn " + styles.sellDiv}>
-      <span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          width="18"
-          height="18"
-        >
-          <path fill="none" d="M0 0h24v24H0z" />
-          <path
-            d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"
-            fill="rgba(203,46,37,1)"
-          />
-        </svg>{" "}
-      </span>
-      <span className={styles.sellText + " " + styles.common}> Sell Here</span>
-    </button>
-  );
-};

@@ -14,12 +14,12 @@ const Products = ({loading, setCurrentSlide, breakPoints, jumpToSlide, currentSl
             {loading ? (
                 <div
                     className="row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6">
-                    {[1, 2, 3].map((item) => (
+                    {[1, 2, 3, 4, 5, 6].map((item) => (
                         <div key={item} className="col p-2 top-products">
                             <div className="rounded py-0 bg-whiterounded">
                                 <div className="loading h-100 rounded-top my-0 p-0"/>
                                 <div className="prod-desc py-2 px-3">
-                                    <p className="h-10 loading col-10"/>
+                                    <p className="h-10 loading col-12"/>
                                     <p className="loading h-10 mt-0 col-8"/>
                                 </div>
                             </div>
@@ -43,32 +43,6 @@ const Products = ({loading, setCurrentSlide, breakPoints, jumpToSlide, currentSl
                                      productOnMarketId={item?._id}
                                      image={item.product?.imageUrls[0]}
                                      price={item?.unit_price}/>
-
-                            {/*<div*/}
-                            {/*    className={*/}
-                            {/*        "card border-0 pt-3 pb-2 col " + styles.container*/}
-                            {/*    }*/}
-                            {/*    key={item}*/}
-                            {/*>*/}
-                            {/*    <img*/}
-                            {/*        src="images/perfume.jpg"*/}
-                            {/*        alt="perfume"*/}
-                            {/*        className={`rounded ${styles.right_top_prod_img}`}*/}
-                            {/*    />*/}
-                            {/*    <h>Body spray</h>*/}
-                            {/*    <button*/}
-                            {/*        style={{*/}
-                            {/*            border: "none",*/}
-                            {/*            fontSize: "13px",*/}
-                            {/*            backgroundColor: "#EBEBEB",*/}
-                            {/*            color: "#898888 !important",*/}
-                            {/*        }}*/}
-                            {/*        className={"btn text-white border-none "}*/}
-                            {/*        onClick={() => Router.push("/auth/register")}*/}
-                            {/*    >*/}
-                            {/*        Body care*/}
-                            {/*    </button>*/}
-                            {/*</div>*/}
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -107,9 +81,11 @@ const TopProducts = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
-        ProductService.getAllProductsOnMarket()
+        setLoading(true)
+        ProductService.getTopProducts()
             .then((res) => {
                 setProducts(res.data)
+                setLoading(false)
             }).catch(e => console.log(e))
     }, [])
 
@@ -120,9 +96,6 @@ const TopProducts = () => {
                     <h5>Top products</h5>
                     <Cursors currentSlide={currentSlide} jumpToSlide={jumpToSlide}/>
                 </div>
-                {/*<div className={"col-3"}>*/}
-                {/*    <h6>Skin care</h6>*/}
-                {/*</div>*/}
             </div>
             <div className={"row justify-content-center"}>
                 <div className={"col-12"}>

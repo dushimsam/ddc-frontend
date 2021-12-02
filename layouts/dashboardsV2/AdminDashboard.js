@@ -2,7 +2,7 @@ import Sidebar from "../../components/dashboardsV2/Sidebar";
 import AdminNavbar from "../../components/dashboardsV2/AdminNavbar";
 import {adminLinks, quickCreateActions} from "../../utils/sidebar-links";
 import RouteProtector from "../../middlewares/RouteProtector";
-import {system_users} from "../../utils/constants";
+import {global_color, system_users} from "../../utils/constants";
 import React, {useEffect, useState} from "react";
 import Link from "next/link"
 import Footer from "../../components/dashboardsV2/Footer"
@@ -75,13 +75,13 @@ const QuickActions = () => {
         <div className="dropdown">
             <button className="btn btn-sm d-none d-sm-block pr-3" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{
-                color: '#ff5555',
-                borderColor: '#ff5555'
+                color: global_color,
+                borderColor: global_color
             }}>
                 <div className="d-flex">
                     <div className="d-inline-block" style={{marginTop: -1}}>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="17"
-                             height="17" fill={'rgb(255, 85, 85)'}>
+                             height="17" fill={global_color}>
                             <path fill="none" d="M0 0h24v24H0z"/>
                             <path d="M11 11V5h2v6h6v2h-6v6h-2v-6H5v-2z"/>
                         </svg>

@@ -12,17 +12,17 @@ import Product from "../reusable/Product";
 export const Products = ({loading, setCurrentSlide, breakPoints, products}) => {
     return (
         <div
-            className={`p-0  mt-3 products-area pb-5  ${styles.products}`}
+            className={`p-0  mt-3 welcoming-products-area pb-5  ${styles.products}`}
         >
             {loading ? (
                 <div
                     className="row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-6">
-                    {[1, 2, 3].map((item) => (
-                        <div key={item} className="col p-2 top-products">
+                    {[1, 2, 3, 4].map((item) => (
+                        <div key={item} className="col p-2 welcoming-products">
                             <div className="rounded py-0 bg-whiterounded">
                                 <div className="loading h-100 rounded-top my-0 p-0"/>
                                 <div className="prod-desc py-2 px-3">
-                                    <p className="h-10 loading col-10"/>
+                                    <p className="h-10 loading col-12"/>
                                     <p className="loading h-10 mt-0 col-8"/>
                                 </div>
                             </div>
@@ -31,7 +31,7 @@ export const Products = ({loading, setCurrentSlide, breakPoints, products}) => {
                 </div>
             ) : (
                 <Swiper
-                    className={"recommended-products-swiper"}
+                    className={"welcoming-products-swiper"}
                     slidesPerView={1}
                     breakpoints={breakPoints}
                     onSlideChange={(swiper) =>
@@ -79,7 +79,7 @@ const WelcomingProducts = () => {
     };
 
     const jumpToSlide = (slideNumber) => {
-        const swiper = document.querySelector(".recommended-products-swiper").swiper;
+        const swiper = document.querySelector(".welcoming-products-swiper").swiper;
         swiper.slideTo(slideNumber, 1000, false);
     };
 
@@ -88,10 +88,11 @@ const WelcomingProducts = () => {
     useEffect(() => {
         // setProducts(items)
 
+        setLoading(true)
         ProductService.getAllProductsOnMarket()
             .then((res) => {
-                // setProducts(res.data)
-                setProducts(items)
+                setProducts(res.data)
+                setLoading(false)
             }).catch(e => console.log(e))
     }, [])
 

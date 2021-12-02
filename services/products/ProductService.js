@@ -174,7 +174,7 @@ class ProductService {
         return http.get("/products-on-market/company/" + id)
     }
 
-    getTopProducts(page = 1) {
+    getTopProducts() {
         return http.get(`/products-on-market/top-products`)
     }
 
@@ -182,8 +182,8 @@ class ProductService {
         return http.put(`/products-on-market/toogle/showcase/${id}`)
     }
 
-    getJustForYouProducts(page = 1, limit = 20) {
-        return http.get(`/products-on-market/just-for-you?limit=${limit}&page=${page}`)
+    getJustForYouProducts(page = 1, limit = 40) {
+        return http.get(`/products-on-market/recommendation?limit=${limit}&page=${page}`)
     }
 
     getOnMarketDetails(id) {
