@@ -1,26 +1,9 @@
-.left {
-  width: 50%;
-  margin: 72px 111px auto 87px;
-}
-
-.right {
-  width: 50%;
-}
-
 .products {
   display: flex;
   align-items: center;
   transform: translateX(0);
   transition: all 1s ease-in-out;
   width: 100% !important;
-}
-
-.right_top__product {
-  border: 1px solid red;
-  width: 247px;
-  margin-right: 41px !important;
-  position: relative;
-  padding: 5px;
 }
 
 .right_top_prod_img {

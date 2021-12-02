@@ -100,10 +100,3 @@
 .nav_search_form {
   width: 20% !important;
 }
-
-.nav_btn__group {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 15vw;
-}

@@ -1,15 +1,18 @@
+.globalTextColor {
+  color: #f3a35d;
+}
+.globalHoverBackColor:hover {
+  background-color: #f3a35d;
+  transition: all 0.4s ease-in-out;
+}
 
-.globalTextColor{
-    color:#F3A35D;
+.globalHoverTextColor:hover {
+  color: white;
 }
-.globalHoverBackColor:hover{
-    background-color:#F3A35D;
-    transition: all 0.4s ease-in-out;
+.globalBackColor {
+  background-color: #f3a35d;
 }
 
-.globalHoverTextColor:hover{
-       color:white;
-}
-.globalBackColor{
-    background-color:#F3A35D;
+.globalDeepOrange {
+  background-color: #ff570c;
 }

@@ -5,6 +5,8 @@ import Footer from "../components/Footer";
 import Navbar from "../components/navbar";
 import { app_config } from "../utils/constants";
 import styles from "../styles/components/welcomePage.module.css";
+import AboutUsPart from "../components/homepage/aboutUs.jsx";
+import CarouselPart from "../components/homepage/carousel";
 
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -49,16 +51,18 @@ export default function Home() {
       <div className={"container-fluid m-0 p-0"}>
         <Navbar />
         <div className={`bg-darkish`}>
-          <div className={`d-flex justify-content-between`}>
+          <div className={`d-flex justify-content-between mt-5 mb-5`}>
             <div
-              className={`d-flex align-items-start flex-column ${styles.left}`}
+              className={`d-flex align-items-start flex-column col-12 col-sm-6`}
               style={{ border: "1px solid red" }}
             >
-              <h4>Find the best cosmetic products for yourself and friend!</h4>
+              <h4 className={"col-9 col-sm-7 text-justify"}>
+                Find the best cosmetic products for yourself and friend!
+              </h4>
               <p>DDC Cosmetics is an E-Commerce </p>
             </div>
             <div
-              className={`d-flex align-items-end flex-column ${styles.right}`}
+              className={`d-flex flex-column col-12 col-sm-6`}
               style={{ border: "1px solid red" }}
             >
               <div
@@ -93,14 +97,15 @@ export default function Home() {
                       <SwiperSlide>
                         <div
                           className={
-                            "card border-0 pt-3 pb-2 col " + styles.container
+                            "card border-0 pt-3 pb-2 col " +
+                            styles.right_top__product
                           }
                           key={item}
                         >
                           <img
                             src="images/perfume.jpg"
                             alt="perfume"
-                            className={`rounded ${styles.right_top_prod_img}`}
+                            className={`rounded `}
                           />
                           <h>Body spray</h>
                           <button
@@ -108,7 +113,7 @@ export default function Home() {
                               border: "none",
                               fontSize: "13px",
                               backgroundColor: "#EBEBEB",
-                              color: "#898888 !important",
+                              color: "#898888",
                             }}
                             className={"btn text-white border-none "}
                             onClick={() => Router.push("/auth/register")}
@@ -155,6 +160,8 @@ export default function Home() {
               </div>
             </div>
           </div>
+          <CarouselPart />
+          <AboutUsPart />
         </div>
         {/*<ReachUsOnWhatsapp/>*/}
         <Footer />

@@ -340,19 +340,6 @@ export default function NavBar() {
                   >
                     Sign in
                   </button>
-                  <button
-                    style={{
-                      border: "1px solid #F3A35D",
-                      fontSize: "13px",
-                    }}
-                    className={
-                      "btn text-white border-none " +
-                      globalStyles.globalBackColor
-                    }
-                    onClick={() => Router.push("/auth/register")}
-                  >
-                    Register
-                  </button>
                 </div>
               )}
             </div>
