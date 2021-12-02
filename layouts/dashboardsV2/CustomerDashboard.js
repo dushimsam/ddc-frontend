@@ -16,7 +16,7 @@ export default function CustomerDashboard({children}) {
                     <Navbar navList={customerLinks}/>
                     <div className="main container py-5">{children}</div>
                 </div>
-                <ReachUsOnWhatsapp/>
+                {/*<ReachUsOnWhatsapp/>*/}
                 <Footer/>
             </div>
         </RouteProtector>

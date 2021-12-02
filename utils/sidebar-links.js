@@ -13,7 +13,7 @@ export const customerLinks = [
             </svg>
         ),
         name: "Orders",
-        href: "/customer/my-orders/part-orders"
+        href: "/customer/my-orders"
     },
 
     {

@@ -1,5 +1,10 @@
 .container {
-    min-width: 145px;
+    max-width: 230px;
+    box-shadow: 0 10px 20px #0000000D;
+}
+
+.container2 {
+    width: 200px;
     box-shadow: 0 10px 20px #0000000D;
 }
 
@@ -10,11 +15,8 @@
 .button:hover svg path:nth-child(2) {
     fill: white;
 }
-.image {
-    height: 160px;
-    width: auto;
-    max-width: 160px;
-}
+
+
 
 .addToCartButton {
     border: 1.5px solid #ff5555;
@@ -25,8 +27,9 @@
 
     background-color: #ff5555;
 }
-.addToCartButton:hover svg{
-        transition: all 0.2s ease-in;
+
+.addToCartButton:hover svg {
+    transition: all 0.2s ease-in;
 
 
     fill: white !important;

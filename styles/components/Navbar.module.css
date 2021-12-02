@@ -76,7 +76,8 @@
   font-size: 0.5rem;
   font-family: sans-serif;
   vertical-align: text-bottom;
-  background-color: rgb(255, 85, 85);
+  background-color:#F3A35D;
+
 }
 
 .userDropdown::after {
@@ -98,5 +99,6 @@
 }
 
 .nav_search_form {
-  width: 20% !important;
+  width: 70% !important;
+  border-radius: 5em;
 }

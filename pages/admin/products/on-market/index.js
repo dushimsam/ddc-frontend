@@ -48,18 +48,22 @@ const Table = ({
     }
 
     const handleSetFields = (item) => {
-        setItemFields([{
-            name: "Product",
-            value: "Name: " + item.product.name + " , Code: " + item.product.product_code,
-            href: "/admin/products",
-            _id: item.part_in_stock.spare_part?._id
-        }, {name: "Unit Price", value: defaultCurrencyMapping(item.unit_price)}, {
-            name: "Tax",
-            value: defaultCurrencyMapping(item?.tax)
-        }, {
-            name: "Available Quantity",
-            value: item.quantity
-        }, {name: "Recently updated On ", value: processDetailedDate(item.updatedAt)}]);
+        setItemFields([
+            {
+                name: "Product",
+                value: "Name: " + item.product.name + " , Code: " + item.product.product_code,
+                href: "/admin/products",
+                _id: item.product?._id
+            }
+            , {name: "Unit Price", value: defaultCurrencyMapping(item.unit_price)}, {
+                name: "Tax",
+                value: defaultCurrencyMapping(item?.tax)
+            }, {
+                name: "Available Quantity",
+                value: item.quantity
+            }, {name: "Recently updated On ", value: processDetailedDate(item.updatedAt)}
+
+        ]);
         show_modal('#itemReadMoreModalLayout');
     }
 
@@ -145,7 +149,7 @@ const Table = ({
                                 <td className={styles.td}>
                                     <svg xmlns="http://www.w3.org/2000/svg" data-toggle="modal"
                                          data-target="#imagePopModal"
-                                         onClick={() => setImageUrl(partOnMarket?.part_in_stock.spare_part.imageUrls)}
+                                         onClick={() => setImageUrl(partOnMarket?.product.imageUrls)}
                                          style={{verticalAlign: 'super', fill: '#707070'}} viewBox="0 0 24 24"
                                          width="20" height="20">
                                         <path fill="none" d="M0 0h24v24H0z"/>
@@ -153,13 +157,13 @@ const Table = ({
                                             d="M2 3.993A1 1 0 0 1 2.992 3h18.016c.548 0 .992.445.992.993v16.014a1 1 0 0 1-.992.993H2.992A.993.993 0 0 1 2 20.007V3.993zM4 5v14h16V5H4zm8 10a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm0 2a5 5 0 1 1 0-10 5 5 0 0 1 0 10zm5-11h2v2h-2V6z"/>
                                     </svg>
                                 </td>
-                                <td className={styles.td}>{partOnMarket.part_in_stock.spare_part?.name}</td>
+                                <td className={styles.td}>{partOnMarket.product.name}</td>
 
                                 <td className={styles.td}>      <span
                                     className={(partOnMarket?.complete_info_status === "COMPLETE") ? styles.active : styles.inactive}>
                                             {partOnMarket?.complete_info_status}
                                         </span></td>
-                                <td className={styles.td}>{partOnMarket.part_in_stock.spare_part?.product_code}</td>
+                                <td className={styles.td}>{partOnMarket.product?.product_code}</td>
                                 <td className={styles.td}>{partOnMarket.quantity}</td>
                                 <td className={styles.td}>{defaultCurrencyMapping(partOnMarket.unit_price)}</td>
                                 <td className={styles.td}>{defaultCurrencyMapping(partOnMarket?.tax)}</td>
@@ -184,12 +188,13 @@ const Table = ({
 
             {imageUrl && <ImageModalView imgUrl={imageUrl}/>}
             {item && <Update item={item} getInitialData={getInitialData}/>}
-            {itemFields && <ReadMoreLayout parentContentTitle={"SPARE PART ON MARKET INFORMATION"}
+
+            {itemFields && <ReadMoreLayout parentContentTitle={"PRODUCT ON MARKET INFORMATION"}
                                            ParentContent={<MapDetails fields={itemFields}/>}
                                            ChildContent={childFields ? <ListMapping fields={childFields ?? []}/> : null}
                                            hasImage={true} ImageContent={item &&
-            <ImageContainer imgs={item.part_in_stock.spare_part?.imageUrls}
-                            mainTitle={item.part_in_stock.spare_part?.name}
+            <ImageContainer imgs={item.product?.imageUrls}
+                            mainTitle={item.product?.name}
                             moreDetail={processDetailedDate(item.createdAt)}/>}/>}
         </React.Fragment>
     );

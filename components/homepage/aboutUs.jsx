@@ -9,7 +9,7 @@ const ImagesContainer = () => {
       <div className="row justify-content-between">
         <div className="col pt-5">
           <img
-            src={"images/perfume.jpg"}
+            src={"images/aboutus2.jpg"}
             alt="Product"
             className={"rounded img-responsive"}
             style={{ height: "249px", width: "200px" }}
@@ -17,7 +17,7 @@ const ImagesContainer = () => {
         </div>
         <div className="col pb-4 mb-5">
           <img
-            src={"images/perfume.jpg"}
+            src={"images/aboutus.jpg"}
             alt="Product"
             className={"rounded img-responsive"}
             style={{ height: "264px", width: "200px" }}
@@ -27,7 +27,7 @@ const ImagesContainer = () => {
       <div className="row">
         <div className="col pt-2">
           <img
-            src={"images/perfume.jpg"}
+            src={"images/aboutus1.jpg"}
             alt="Product"
             className={"rounded img-responsive"}
             style={{ height: "127px", width: "200px" }}
@@ -35,7 +35,7 @@ const ImagesContainer = () => {
         </div>
         <div className="col mt-n5">
           <img
-            src={"images/perfume.jpg"}
+            src={"images/aboutus2.jpg"}
             alt="Product"
             className={"rounded img-responsive"}
             style={{ height: "186px", width: "200px" }}

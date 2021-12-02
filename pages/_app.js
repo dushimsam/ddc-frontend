@@ -25,6 +25,7 @@ import Snack from "../components/reusable/snackbar"
 import {details} from "../utils/site-traffic";
 import SiteTrafficService from "../services/site-traffic";
 import {app_config, DEVICE_DETAILS_LOCAL_STORAGE_KEY} from "../utils/constants";
+import AddToCartModel from "../components/products/addToCartModel";
 
 NProgress.configure({showSpinner: false});
 //Binding events.
@@ -117,7 +118,7 @@ function MyApp({Component, pageProps}) {
                 <Snack/>
                 <AppMeta/>
                 <Component {...pageProps} />
-                {/*<AddToCartModel/>*/}
+                <AddToCartModel/>
             </div>
         </Provider>
     )

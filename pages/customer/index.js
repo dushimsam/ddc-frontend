@@ -1,7 +1,7 @@
 import CustomerDashboard from "../../layouts/dashboardsV2/CustomerDashboard";
 import Title from "../../components/dashboardsV2/Title";
 import Card from "../../components/dashboardsV2/Card";
-import PromotionDeals from "../../components/homepage/promo-deals";
+// import PromotionDeals from "../../components/homepage/promo-deals";
 import {useSelector} from "react-redux";
 import {useEffect, useState} from "react";
 import statisticsService from "../../services/statistics/statistics.service";
@@ -105,10 +105,10 @@ export default function CustomerPage() {
                     <PendingOrdersTable/>
                 </div>
             </div>
-            <div>
-                <Title>App updates</Title>
-                <PromotionDeals/>
-            </div>
+            {/*<div>*/}
+            {/*    <Title>App updates</Title>*/}
+            {/*    <PromotionDeals/>*/}
+            {/*</div>*/}
         </CustomerDashboard>
     )
 }

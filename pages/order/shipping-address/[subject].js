@@ -14,10 +14,7 @@ import Link from "next/link";
 import globalStyles from "../../../styles/global-colors.module.css"
 import Footer from "../../../components/Footer";
 import {notifyInfo, notifySuccess} from "../../../utils/alerts";
-import {encryptText} from "../../../utils/encryption-decryption";
-import {gotoPath, handleDoubleDecryptionPath} from "../../../utils/functions";
-import CustomerDashboard from "../../../layouts/dashboardsV2/CustomerDashboard";
-import {gotoPathDirect} from "../../../utils/functions";
+import {gotoPathDirect, handleDoubleDecryptionPath} from "../../../utils/functions";
 
 export default function PayOrder() {
     const dispatch = useDispatch();
@@ -197,10 +194,6 @@ export default function PayOrder() {
     }
 
     const CreateOrder = async (customer) => {
-        const totalToPay = findTotalPrice(
-            cart,
-            zones.find((zone) => zone._id === selectedDelivery.zone)
-        );
 
         OrderService.createOrder({
             customer: customer._id,
@@ -221,6 +214,7 @@ export default function PayOrder() {
                 dispatch(add_delivery(delivery));
                 notifySuccess("Successfully initiated order");
                 notifyInfo("Two processes remaining")
+
                 window.setTimeout(() => {
                     Router.push(gotoPathDirect("/order/review", order.data._id))
                 }, 4000);

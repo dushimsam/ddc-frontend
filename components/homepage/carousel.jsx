@@ -42,26 +42,26 @@ export default function CarouselPart() {
           />
         </svg>
       </div>
-      <Carousel
-        className={"mt-5 mb-5"}
-        style={{ height: "50vh", overflow: "hidden" }}
-      >
+      <Carousel className={"row mt-5 mb-5"} style={{ height: "50vh" }}>
         <Carousel.Item>
           <img
-            className={"img-resposive"}
+            className={"img-fluid"}
+            style={{ width: "100%", height: "50vh" }}
             src="images/cosmeticbg.jpg"
             alt="First slide"
           />
           <Carousel.Caption className={"col-10 mx-auto mt-n20"}>
-            <h3>Get 50% OFF your next order!</h3>
-            <p>
+            <h3 className={"col-10 text-center"}>
+              Get 50% OFF your next order!
+            </h3>
+            <p className={"col-10 text-center"}>
               We've now put discount on all products. So, do order quick before
               it ends
             </p>
-            <div className="slider-button">
+            <div className={"row justify-content-center"}>
               <button
                 onClick={() => Router.push("/products")}
-                className={`${globalStyles.globalDeepOrange}`}
+                className={`btn text-white border-none pl-4 pr-4 ${globalStyles.globalDeepOrange}`}
               >
                 Order Now
               </button>
@@ -70,21 +70,21 @@ export default function CarouselPart() {
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className="img-resposive"
+            className={"img-fluid"}
+            style={{ width: "100%", height: "50vh" }}
             src="images/cosmeticbg.jpg"
-            alt="Second slide"
+            alt="First slide"
           />
-
-          <Carousel.Caption className="slider-item-content">
-            <h3>Get 50% OFF your next order!</h3>
+          <Carousel.Caption className={"col-10 mx-auto mt-n20"}>
+            <h3 className={"col-10"}>Get 50% OFF your next order!</h3>
             <p>
               We've now put discount on all products. So, do order quick before
               it ends
             </p>
-            <div className="slider-button">
+            <div className={"row justify-content-center"}>
               <button
                 onClick={() => Router.push("/products")}
-                className={`${globalStyles.globalDeepOrange}`}
+                className={`btn text-white border-none ${globalStyles.globalDeepOrange}`}
               >
                 Order Now
               </button>
@@ -93,21 +93,21 @@ export default function CarouselPart() {
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className="img-resposive"
+            className={"img-fluid"}
+            style={{ width: "100%", height: "50vh" }}
             src="images/cosmeticbg.jpg"
-            alt="Third slide"
+            alt="First slide"
           />
-
-          <Carousel.Caption className="slider-item-content">
-            <h3>Get 50% OFF your next order!</h3>
+          <Carousel.Caption className={"col-10 mx-auto mt-n20"}>
+            <h3 className={"col-10"}>Get 50% OFF your next order!</h3>
             <p>
               We've now put discount on all products. So, do order quick before
               it ends
             </p>
-            <div className="slider-button">
+            <div className={"row justify-content-center"}>
               <button
                 onClick={() => Router.push("/products")}
-                className={`${globalStyles.globalDeepOrange}`}
+                className={`btn text-white border-none ${globalStyles.globalDeepOrange}`}
               >
                 Order Now
               </button>

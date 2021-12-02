@@ -7,7 +7,6 @@ import { useEffect, useState } from "react";
 import globalStyles from "../styles/global-colors.module.css";
 import { app_config } from "../utils/constants";
 import AuthService from "../services/auth/auth.service";
-import { gotoPath } from "../utils/functions";
 import { setAppCurrency } from "../store/actions/currency-action";
 import {
   dollarCurrency,
@@ -146,27 +145,12 @@ export default function NavBar() {
                       Home
                     </a>
                   </Link>
-                  <Link href="/about-us">
-                    <a className="nav-link text-black pr-5" href="#">
-                      About Us
-                    </a>
-                  </Link>
-                  <Link href="/top-products">
-                    <a className="nav-link text-black pr-5" href="#">
-                      Top products
-                    </a>
-                  </Link>
-                  <Link href="/recommendations">
-                    <a className="nav-link text-black pr-5" href="#">
-                      Recommendations
-                    </a>
-                  </Link>
                 </ul>
               </div>
               <form
-                className={`d-inline-block w-75 mr-5 ${styles.nav_search_form}`}
+                className={`d-inline-block w-100 mr-5 ${styles.nav_search_form}`}
               >
-                <div className="form-control d-flex w-100 h-100 px-2">
+                <div className="form-control d-flex w-100 h-100 px-2 ">
                   <input
                     onKeyDown={handleKeyDown}
                     onChange={(event) => setSearch(event.target.value)}
@@ -339,6 +323,19 @@ export default function NavBar() {
                     onClick={() => Router.push("/auth/login")}
                   >
                     Sign in
+                  </button>
+                  <button
+                    style={{
+                      border: "1px solid #F3A35D",
+                      fontSize: "13px",
+                    }}
+                    className={
+                      "btn text-white border-none " +
+                      globalStyles.globalBackColor
+                    }
+                    onClick={() => Router.push("/auth/register")}
+                  >
+                    Register
                   </button>
                 </div>
               )}

@@ -62,8 +62,8 @@ const Content = ({item, getInitialData}) => {
 
 
     const [values, setValues] = useState({
-        part_in_stock: "",
         unit_price: 1,
+        tax: 0,
         quantity: 1,
     });
 
@@ -72,17 +72,17 @@ const Content = ({item, getInitialData}) => {
         SparePartService.getPartOnMarketById(item._id)
             .then((res) => {
                 setValues({
-                    part_in_stock: res.data.part_in_stock._id,
+                    tax: res.data.tax,
                     unit_price: res.data.unit_price,
                     quantity: res.data.quantity
                 })
             }).catch(err => console.log(err))
 
-        const lastItem = item.part_in_stock.supplies[item.part_in_stock.supplies.length - 1].supplied_part;
+        const lastItem = item.supplies[item.supplies.length - 1].supplied_product;
         setSuppliedPartDetails(lastItem);
         setLatestSupplyPrice(lastItem.supply_price / lastItem.quantity)
 
-        SupplyService.get(lastItem.part_supply)
+        SupplyService.get(lastItem.product_supply)
             .then((res) => {
                 setSupplyDetails(res.data)
                 console.log("Supply details ", res.data)

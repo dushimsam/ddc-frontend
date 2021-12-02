@@ -47,7 +47,7 @@ const SingleTdDetails = ({product, quantity, price, currency, user}) => {
                             onMarketInfo._id
                         ))}>{`${product?.name}`}</h5>
 
-                       <span
+                    <span
                         className={"font-weight-bold " + styles.generalColor + " " + styles.mainInfoMeta}>Product Code</span>
                     <span
                         className={"font-weight-light " + styles.generalColor + " " + styles.mainInfoMetaValue}>:{`${product?.product_code}`}</span>
@@ -139,7 +139,7 @@ const TableContainer = ({data, totalQuantities, totalPrice, status, itemObj, cur
                 data.length > 0 ? data.map((item) => {
                     return (<tr className={styles.td} key={item._id}><SingleTdDetails key={item}
                                                                                       item={item}
-                                                                                      product={item.product}
+                                                                                      product={status === "supply" ? item.product : item.product.product}
                                                                                       quantity={item.quantity}
                                                                                       status={status}
                                                                                       currency={currency}
@@ -183,7 +183,7 @@ export const UserContainer = ({userTitle, UserObj, status}) => {
                     {
                         status !== "SUPPLIER" ?
                             <img className={"rounded-circle " + styles.profileImg}
-                                 src={UserObj.imageUrl}
+                                 src={UserObj?.imageUrl}
                                  onError={(e) => {
                                      e.target.onerror = null;
                                      e.target.src =
@@ -244,7 +244,7 @@ export const SupplyInfo = ({itemObj, status}) => {
 
                 <div className="col-md-5 col-10 mt-2 mt-md-0">
                     <UserContainer userTitle={"Receiver Information"}
-                                   UserObj={status === "cars" ? itemObj.receiver : itemObj.reciever.user}/>
+                                   UserObj={status === "cars" ? itemObj.receiver : itemObj.reciever}/>
                 </div>
             </div>
         </div>

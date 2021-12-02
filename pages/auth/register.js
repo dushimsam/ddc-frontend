@@ -11,6 +11,7 @@ import {userTypes} from "../../utils/user-types";
 import globalStyles from "../../styles/global-colors.module.css"
 import {app_config} from "../../utils/constants";
 import ForbiddenPage from "../../layouts/ForbiddenPage";
+import UserCategoryService from "../../services/users/UserCategoryService";
 
 
 export default function Register() {
@@ -61,7 +62,11 @@ export default function Register() {
         form.extra = {};
 
         try {
-            await UserService.create(form);
+            const {data} = await UserCategoryService.getByName("CUSTOMER");
+            let new_form = {...form}
+            new_form.category = data._id;
+
+            await UserService.create(new_form);
             setAlertData({alert: true, message: 'Account Created Successfully', class: 'alert-success'});
             setTimeout(() => {
                 setAlertData({alert: false, message: '', class: ''});

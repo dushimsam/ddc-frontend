@@ -11,9 +11,7 @@ import SelectControl from "../../../../components/reusable/SelectControl";
 import {isThisFormValid} from "../../../../utils/functions";
 import {notifyError, notifySuccess} from "../../../../utils/alerts"
 import Alert from "../../../../components/alert";
-import {system_users} from '../../../../utils/constants';
 import SingleSubModuleLayoutAdmin from "../../../../layouts/admin-layouts/SingleSubModule";
-import SingleSubModuleLayoutManager from "../../../../layouts/sales-manager-layouts/SingleSubModule";
 import {defaultCurrencyMapping} from "../../../../utils/currency-converter";
 
 const getTotalProductQuantities = (products) => {
@@ -520,30 +518,17 @@ const Page = () => {
 
 
     return (
-        user.category?.name === system_users.ADMIN
-            ?
-            <SingleSubModuleLayoutAdmin
-                Content={<Content getTotals={getTotals} UpdateSupply={UpdateSupply}/>}
-                isArray={true}
-                panes={panes}
-                showFilter={null}
-                setFilter={null}
-                name={'Supplies'}
-                setSearch={null}
-                status="all"
-                route={"/shared/supply/supplies"}
-            /> :
-            <SingleSubModuleLayoutManager
-                Content={<Content/>}
-                isArray={true}
-                panes={panes}
-                showFilter={null}
-                setFilter={null}
-                name={'Supplies'}
-                setSearch={null}
-                status="all"
-                route={"/shared/supply/supplies"}
-            />
+        <SingleSubModuleLayoutAdmin
+            Content={<Content getTotals={getTotals} UpdateSupply={UpdateSupply}/>}
+            isArray={true}
+            panes={panes}
+            showFilter={null}
+            setFilter={null}
+            name={'Supplies'}
+            setSearch={null}
+            status="all"
+            route={"/shared/supply/supplies"}
+        />
     )
 };
 

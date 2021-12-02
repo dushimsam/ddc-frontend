@@ -85,7 +85,7 @@ export default function SelectProduct({editSet, flush, appendProductSupply, supp
     const handleChange = (prop) => ({value, valid: validProp}) => {
         if (prop === "quantity")
             setValues({...values, [prop]: parseInt(value)});
-        else if (prop === "unit_price" || prop === "supply_price")
+        else if (prop === "unit_price" || prop === "supply_price" || prop === "tax")
             setValues({...values, [prop]: parseFloat(value)});
 
         setValid(state => ({...state, [prop]: validProp}));
@@ -216,7 +216,7 @@ export default function SelectProduct({editSet, flush, appendProductSupply, supp
                                             value={values.tax}/></div>
                                     </> : <></>
                         }
-                    </>
+                    </div>
                 </div>
                 <div>
                     <button className="btn btn-danger mt-5" disabled={!isThisFormValid(valid)} onClick={() => {

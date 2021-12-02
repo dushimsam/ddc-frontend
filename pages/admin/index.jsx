@@ -1,22 +1,16 @@
 import AdminDashboard from "../../layouts/dashboardsV2/AdminDashboard";
 import Card from "../../components/dashboardsV2/Card";
-import React, {useEffect, useRef, useState} from "react";
+import React, {useEffect, useState} from "react";
 import statisticsService from "../../services/statistics/statistics.service"
 import LinearChart from "../../components/dashboardsV2/LinearChart";
 import RingChart from "../../components/dashboardsV2/RingChart";
 import FeedbackContainer from "../../components/reusable/dashboards/admin/feedback"
 import Title from "../../components/dashboardsV2/Title"
-import PartsOnMarkertService from "../../services/products/ProductService"
 import IncomeStatisticsService from "../../services/reporting/income.service"
-import ReportSales from "../../components/reusable/dashboards/admin/report-sales.jsx";
 import ReportSupplies from "../../components/reusable/dashboards/admin/report-supplies";
 import ReportOrders from "../../components/reusable/dashboards/admin/report-orders";
 import {defaultCurrencyMapping} from "../../utils/currency-converter";
-import {EditIcon} from "../../utils/validations/other-constants";
-import {show_modal} from "../../utils/modal-funs";
 // import {ProductAvailability} from "../../components/modals/part-availability.";
-import VanishingItemsStyles from "../../styles/pages/vanishing-items.module.css"
-import {dateFormat} from "../../utils/functions";
 
 const UsersCard = ({linearGradient, label, value}) => {
     return (
@@ -574,10 +568,11 @@ export default function AdminDashboardPage() {
                         <FeedbackContainer/>
                     </div>
                 </div>
+
                 <div className="my-5">
-                    <Title>Weekly Sales Report</Title>
+                    <Title>Weekly Received Orders Report</Title>
                     <div className="card card-body px-0">
-                        <ReportSales/>
+                        <ReportOrders/>
                     </div>
                 </div>
                 <div className="my-5">
@@ -586,18 +581,8 @@ export default function AdminDashboardPage() {
                         <ReportSupplies/>
                     </div>
                 </div>
-                <div className="my-5">
-                    <Title>Weekly Received Orders Report</Title>
-                    <div className="card card-body px-0">
-                        <ReportOrders/>
-                    </div>
-                </div>
-                {/*<div className="my-5">*/}
-                {/*    <Title>Weekly Shipments Report</Title>*/}
-                {/*    <div className="card card-body px-0">*/}
-                {/*        <ReportShipments/>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+
+
             </div>
         </AdminDashboard>
     );

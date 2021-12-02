@@ -69,7 +69,7 @@ const Table = ({
 
     const handleReadMore = (order) => {
         setSelectedOrder(order)
-        OrderService.orderParts(order._id).then((res) => {
+        OrderService.orderProducts(order._id).then((res) => {
             setOrderData(res.data)
         }).catch(e => console.log(e))
             .finally(() => {

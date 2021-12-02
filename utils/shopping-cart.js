@@ -27,11 +27,11 @@ const calculateTotalShipping = (deliveryFrancs, cartItems, status) => {
 
     if (status === "ORDER") {
         for (const item of cartItems) {
-            total += (item.product.part_in_stock.spare_part.weight * deliveryFrancs * item.quantity)
+            total += (item.product.product.weight * deliveryFrancs * item.quantity)
         }
     } else {
         for (const item of cartItems) {
-            total += (item.part_in_stock.spare_part.weight * deliveryFrancs * item.orderedQuantity)
+            total += (item.product.weight * deliveryFrancs * item.orderedQuantity)
         }
     }
 

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from 'react';
 import globalStyles from "../../styles/global-colors.module.css"
+import {global_color} from "../../utils/constants";
 
 export default function AdminTableTitle({name, route, status, setFilter, isSalesManager}) {
     return (
@@ -12,7 +13,8 @@ export default function AdminTableTitle({name, route, status, setFilter, isSales
                     (
                         <div className="ml-auto mr-0 text-right" style={{paddingRight: 0}}>
                             <Link href={`${route}/new`}>
-                                <button style={styles.button} className={"btn shadow btn-sm px-3 "+globalStyles.globalBackColor}
+                                <button style={styles.button}
+                                        className={"btn shadow btn-sm px-3 " + globalStyles.globalBackColor}
                                 >
                                     <svg style={styles.svgAdd} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
                                          width="20" height="20" fill={'white'}>
@@ -26,10 +28,12 @@ export default function AdminTableTitle({name, route, status, setFilter, isSales
                     )
                     : (<div className="ml-auto" style={{paddingRight: 0}}>
                         <Link href={`${route}`}>
-                            <button className={"btn shadow btn-sm px-3 text-white "+ globalStyles.globalBackColor} style={styles.buttonShow}
+                            <button className={"btn shadow btn-sm px-3 text-white " + globalStyles.globalBackColor}
+                                    style={styles.buttonShow}
                             >
 
-                                <svg xmlns="http://www.w3.org/2000/svg" width="15" style={{marginRight: '0.4rem', marginTop: '-1px'}} height="15" viewBox="0 0 24 24"
+                                <svg xmlns="http://www.w3.org/2000/svg" width="15"
+                                     style={{marginRight: '0.4rem', marginTop: '-1px'}} height="15" viewBox="0 0 24 24"
                                      fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                      stroke-linejoin="round" className="feather feather-book-open">
                                     <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
@@ -64,15 +68,15 @@ export default function AdminTableTitle({name, route, status, setFilter, isSales
 
 const styles = {
     button: {
-        backgroundColor: '#ff5555',
+        backgroundColor: global_color,
         border: 'none',
         fontSize: '14px',
         color: 'white',
         padding: '0.4rem 1rem'
     },
     buttonShow: {
-                padding: '0.4rem 1rem',
-                fontSize: '14px',
+        padding: '0.4rem 1rem',
+        fontSize: '14px',
         border: 'none'
 
     },
