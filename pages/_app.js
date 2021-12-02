@@ -70,16 +70,16 @@ function AppMeta() {
     return (
         <div>
             <Head>
-                <title>{app_config.APP_NAME}</title>
+                <title>{app_config.APP_DISCRIPTO}</title>
                 <meta name={"description"}
-                      content={"You can book , order , shop or buy Korean Cars and their Spare parts on a reasonable price."}/>
+                      content={"You can book , order , shop , buy cosmetic products on a reasonable price."}/>
                 <meta property={"og:title"} content={"Online Shopping"}/>
                 <link rel="icon" href="/favicon_io/favicon.ico"/>
-                <meta name="keywords" content="e-commerce,online-store,korean-cars,spare-parts,book,buy"/>
-                <meta name="application-name" content="KoreaAutoParts And Cars"/>
+                <meta name="keywords" content="e-commerce,cosmetic-products,book,buy"/>
+                <meta name="application-name" content={app_config.APP_NAME}/>
                 <meta name="author" content="Grapes Team"/>
                 <meta property="og:description"
-                      content={"You can book , order , shop or buy Korean Cars and their Spare parts on a reasonable price."}/>
+                      content={app_config.APP_DISCRIPTO}/>
             </Head>
         </div>
     );
