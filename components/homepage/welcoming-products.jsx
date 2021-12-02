@@ -104,7 +104,10 @@ const WelcomingProducts = () => {
                         sed do eiusmod tempor incididunt ut labore et dolore ma
                         gna aliqua. Ut enim ad minim veniam..</p>
                     <div className={"d-flex"}>
-                        <button className={"btn py-2 px-4 " + globalStyles.globalBackColor}>Order Now</button>
+                        <button
+                            className={"btn py-2 px-4 text-white font-weight-bold " + globalStyles.globalBackColor}>Order
+                            Now
+                        </button>
                         <>
                             <button className={"btn mx-4"}>Watch our story</button>
                             <PlayIcon height={40} width={40}/>

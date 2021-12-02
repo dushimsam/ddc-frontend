@@ -17,6 +17,8 @@ import {currencyMapping} from "../../../utils/currency-converter";
 import AppliedDiscountService from "../../../services/discount/AppliedDiscountService";
 import DiscountService from "../../../services/discount/DiscountService"
 import CustomerService from "../../../services/customers/customer.service"
+import {destroyCart} from "../../../store/actions/cart-actions";
+import {destroyOrder} from "../../../store/actions/order-actions";
 
 const ApplyDiscount = ({customer, order, setAvailableDiscounts, subTotal, setTotalDiscount}) => {
 
@@ -231,6 +233,8 @@ export default function ReviewOrder() {
             .then((res) => {
                 notifySuccess("Successfully Added  Products")
                 notifyInfo("Continue with Payment Process")
+                dispatch(destroyCart())
+                dispatch(destroyOrder())
                 window.setTimeout(() => {
                     Router.push(gotoPathDirect("/order/payment-method", order._id)
                     ).then(r => console.log(r))

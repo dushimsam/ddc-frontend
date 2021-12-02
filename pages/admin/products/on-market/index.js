@@ -48,18 +48,22 @@ const Table = ({
     }
 
     const handleSetFields = (item) => {
-        setItemFields([{
-            name: "Product",
-            value: "Name: " + item.product.name + " , Code: " + item.product.product_code,
-            href: "/admin/products",
-            _id: item.product?._id
-        }, {name: "Unit Price", value: defaultCurrencyMapping(item.unit_price)}, {
-            name: "Tax",
-            value: defaultCurrencyMapping(item?.tax)
-        }, {
-            name: "Available Quantity",
-            value: item.quantity
-        }, {name: "Recently updated On ", value: processDetailedDate(item.updatedAt)}]);
+        setItemFields([
+            {
+                name: "Product",
+                value: "Name: " + item.product.name + " , Code: " + item.product.product_code,
+                href: "/admin/products",
+                _id: item.product?._id
+            }
+            , {name: "Unit Price", value: defaultCurrencyMapping(item.unit_price)}, {
+                name: "Tax",
+                value: defaultCurrencyMapping(item?.tax)
+            }, {
+                name: "Available Quantity",
+                value: item.quantity
+            }, {name: "Recently updated On ", value: processDetailedDate(item.updatedAt)}
+
+        ]);
         show_modal('#itemReadMoreModalLayout');
     }
 
@@ -184,6 +188,7 @@ const Table = ({
 
             {imageUrl && <ImageModalView imgUrl={imageUrl}/>}
             {item && <Update item={item} getInitialData={getInitialData}/>}
+
             {itemFields && <ReadMoreLayout parentContentTitle={"PRODUCT ON MARKET INFORMATION"}
                                            ParentContent={<MapDetails fields={itemFields}/>}
                                            ChildContent={childFields ? <ListMapping fields={childFields ?? []}/> : null}

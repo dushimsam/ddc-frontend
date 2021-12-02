@@ -12,13 +12,13 @@ import styles from "../../../styles/pages/table.module.css";
 import $ from "jquery"
 import SingleSubModuleLayout from "../../../layouts/customer-layouts/SingleSubModule"
 import {processDetailedDate} from "../../../utils/process-date";
-import ModalContainer from "../../../components/reusable/dialogs/supply-order-dialog";
 import OrderPaymentModal from "../../../components/reusable/order-payments-modal";
 import ConfirmationModal from "../../../components/tables/confirmation-modal";
 import Router, {useRouter} from "next/router";
 import {show_modal} from "../../../utils/modal-funs";
 import Paginator from "../../../components/tables/paginator";
 import {useSelector} from "react-redux";
+import ModalContainer from "../../../components/reusable/dialogs/supply-order-dialog";
 
 
 const Table = ({orders, setOrders, paginator, paginatorLoading, setPaginatorLoading, setPaginator, getInitialData}) => {
@@ -92,12 +92,13 @@ const Table = ({orders, setOrders, paginator, paginatorLoading, setPaginatorLoad
     const [orderData, setOrderData] = useState(null)
 
     const readMore = (order) => {
-        Router.push(gotoPath("/customer/my-orders/part-orders", order._id))
+        Router.push(gotoPath("/customer/my-orders", order._id))
     }
 
     const handleReadMore = (order) => {
         setSelectedOrder(order)
-        OrderService.orderParts(order._id).then((res) => {
+        OrderService.orderProducts(order._id).then((res) => {
+            console.log(res.data)
             setOrderData(res.data)
         }).catch(e => console.log(e))
             .finally(() => {

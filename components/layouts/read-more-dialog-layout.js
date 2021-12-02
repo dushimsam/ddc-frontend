@@ -72,7 +72,7 @@ export const ListMapping = ({fields}) => {
 
 export const ImageContainer = ({imgs, multiple, mainTitle, moreDetail, itemName, largeProperty}) => {
     const [imageUrl, setImageUrl] = useState(null);
- console.log("images ",imgs)
+
     return (
         <div className={"col-4 mt-3 " + styles.cardBody}>
             <div className="d-flex flex-column">
