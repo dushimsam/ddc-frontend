@@ -23,3 +23,12 @@
 .greyLikeColor {
   color: #a0a0a0;
 }
+
+.globalFooterColor {
+  background-color: #fafafa;
+  color: #6b6a6a !important;
+}
+
+.globalCopyrightColor {
+  background-color: #ebebeb;
+}
