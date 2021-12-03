@@ -38,10 +38,10 @@ export default function PaymentMethod() {
     })
 
     const changePaymentMethod = (option) => {
-        setPaymentMethod(option)
-        if (option === "others" && order && totalToPay?.total > 0) {
-            document.getElementById("subtmitAfripayBtn").click()
-        }
+        // setPaymentMethod(option)
+        // if (option === "others" && order && totalToPay?.total > 0) {
+        //     document.getElementById("subtmitAfripayBtn").click()
+        // }
     }
     const handleChange = (prop) => (event) => {
         setValues({...values, [prop]: event.target.value});
