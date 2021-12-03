@@ -8,6 +8,7 @@ import Alert from "../alert";
 import {hide_modal_alert} from "../../utils/modal-funs";
 import {mainCustomStyles} from "../reusable/select-elements";
 import AsyncSelect from "react-select/async";
+import globalStyles from "../../styles/global-colors.module.css"
 
 const fetchData = (inputValue, callback) => {
     setTimeout(() => {
@@ -99,6 +100,7 @@ export default function SelectProduct({editSet, flush, appendProductSupply, supp
 
     const addNewPartSupply = () => {
 
+        console.log("VALUES ", values)
         if (values.unit_price < values.supply_price) {
             if (not_on_market)
                 alertFailer(setAlert, "Sorry the unit Supply price can not be greater than the unit-price at the market");
@@ -140,24 +142,52 @@ export default function SelectProduct({editSet, flush, appendProductSupply, supp
             ProductService.getByProductExists(newValue._id)
                 .then((res) => {
                     if (res.data.exists) {
+                        let existingValid = Object.assign({}, valid);
+                        existingValid.tax = true;
+                        existingValid.unit_price = true;
+                        existingValid.product = true;
+
+                        setValid(existingValid);
                         setHideInput(true);
-                        setValid(state => ({...state, ["unit_price"]: true}));
-                        setValues(state => ({...state, ["unit_price"]: parseFloat(res.data.unit_price)}));
+
+                        console.log("unit price tax", {
+                            unit_price: parseFloat(res.data.object.unit_price),
+                            tax: parseFloat(res.data?.object.tax)
+                        })
+                        let existingValues = Object.assign({}, values);
+                        existingValues.product = newValue;
+                        existingValues.unit_price = parseFloat(res.data.object.unit_price);
+                        existingValues.tax = parseFloat(res.data?.object.tax);
+
+                        console.log(" New existing ", existingValues)
+                        setValues(existingValues)
                     } else {
                         setHideInput(false);
-                        setValid(state => ({...state, ["unit_price"]: false}));
-                        setValues(state => ({...state, ["unit_price"]: ""}));
+                        let existingValid = Object.assign({}, valid);
+                        existingValid.product = true;
+                        existingValid.tax = false;
+                        existingValid.unit_price = false;
+                        setValid(existingValid);
+
+
+                        let existingValues = Object.assign({}, values);
+                        existingValues.unit_price = "";
+                        existingValues.tax = "";
+                        existingValues.product = newValue;
+
+                        setValues(existingValues);
                         setNotMarket(true)
                     }
                 }).catch((err) => console.log(err)).finally(() => setLoadComponent(false))
-
-            setValues({...values, ["product"]: newValue});
-            setSelectedProduct(newValue)
-            setValid(state => ({...state, ["product"]: true}));
+            setSelectedProduct(newValue);
         }
 
     };
 
+
+    useEffect(() => {
+        console.log(valid)
+    }, [valid])
 
     return (
         <>
@@ -219,10 +249,12 @@ export default function SelectProduct({editSet, flush, appendProductSupply, supp
                     </div>
                 </div>
                 <div>
-                    <button className="btn btn-danger mt-5" disabled={!isThisFormValid(valid)} onClick={() => {
-                        setLoading(true);
-                        addNewPartSupply();
-                    }}>
+                    <button className={"btn  mt-5 text-white " + globalStyles.globalBackColor}
+                            disabled={!isThisFormValid(valid)}
+                            onClick={() => {
+                                setLoading(true);
+                                addNewPartSupply();
+                            }}>
                         {editSet?.product ? "Edit product " : "Add product"}
 
                         {loading ?

@@ -455,7 +455,7 @@ export default function AdminDashboardPage() {
                             <div className="d-flex justify-content-between px-2">
                                 <div>
                                     <h5 className="font-weight-bold text-danger">
-                                        Part in stock
+                                        Products in stock
                                     </h5>
                                     <h1>{statistics?.products?.partsOnMarket.toLocaleString()}</h1>
                                 </div>

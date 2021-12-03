@@ -13,7 +13,7 @@ import {app_config, system_users} from "../../../utils/constants";
 import Link from "next/link";
 import globalStyles from "../../../styles/global-colors.module.css"
 import Footer from "../../../components/Footer";
-import {notifyInfo, notifySuccess} from "../../../utils/alerts";
+import {notifySuccess} from "../../../utils/alerts";
 import {gotoPathDirect, handleDoubleDecryptionPath} from "../../../utils/functions";
 
 export default function PayOrder() {
@@ -108,10 +108,8 @@ export default function PayOrder() {
 
     useEffect(() => {
 
-
         if (regions.length > 0 && zones.length > 0 && router.query.subject) {
             const router_order = handleDoubleDecryptionPath(router.query.subject);
-
 
             if (router_order === "INITIAL") {
                 if (cart.length < 1 && isEmpty(local_order)) {
@@ -195,10 +193,10 @@ export default function PayOrder() {
 
     const CreateOrder = async (customer) => {
 
+
         OrderService.createOrder({
             customer: customer._id,
-            delivery_zone: selectedDelivery.zone,
-            total_order_price: findTotalPrice,
+            delivery_zone: selectedDelivery.zone
         })
             .then((order) => {
                 const delivery = {

@@ -13,6 +13,8 @@ import {notifyError, notifySuccess} from "../../../../utils/alerts"
 import Alert from "../../../../components/alert";
 import SingleSubModuleLayoutAdmin from "../../../../layouts/admin-layouts/SingleSubModule";
 import {defaultCurrencyMapping} from "../../../../utils/currency-converter";
+import globalStyles from "../../../../styles/global-colors.module.css";
+import Router from "next/router";
 
 const getTotalProductQuantities = (products) => {
     let total = 0;
@@ -145,6 +147,11 @@ const CreateSuppliedProducts = async (supply, suppliedProducts, status) => {
     for (let i = 0; i < suppliedProducts.length; i++) {
 
         try {
+            console.log("on market ", {
+                unit_price: parseFloat(suppliedProducts[i].unit_price),
+                quantity: parseInt(suppliedProducts[i].quantity),
+                tax: parseInt(suppliedProducts[i].tax)
+            })
             const supplied_parts_data = await SuppliedProductsDataService.create({
                 product_supply: supply._id,
                 quantity: parseInt(suppliedProducts[i].quantity),
@@ -156,7 +163,7 @@ const CreateSuppliedProducts = async (supply, suppliedProducts, status) => {
                 supplied_product: supplied_parts_data.data._id,
                 unit_price: parseFloat(suppliedProducts[i].unit_price),
                 quantity: parseInt(suppliedProducts[i].quantity),
-                tax: parseInt(suppliedProducts[i].tax)
+                tax: parseFloat(suppliedProducts[i].tax)
             });
 
         } catch (e) {
@@ -309,9 +316,9 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
                     CreateSuppliedProducts(res.data, suppliedProducts, "NEW");
                     notifySuccess("New Supply is created")
                     setLoading(false)
-                    // window.setTimeout(() => {
-                    //     Router.push("/shared/supply/supplies");
-                    // }, 4000)
+                    window.setTimeout(() => {
+                        Router.push("/shared/supply/supplies");
+                    }, 4000)
                 })
                 .catch((e) => {
                     notifyError(e.message || "Error occurred. Try again latter.");
@@ -432,7 +439,7 @@ const Form = ({status, itemSupply, setSupply, defaultData}) => {
                 <div className="form-group col-6">
                     <button
                         type="button"
-                        className="btn bg-danger rounded pt-1 pl-5 pr-5 text-white font-weight-light"
+                        className={"btn  rounded pt-1 pl-5 pr-5 text-white font-weight-light " + globalStyles.globalBackColor}
                         onClick={() => {
                             setLoading(true);
                             status !== "UPDATE" ? CreateSupply() : UpdateSupply();

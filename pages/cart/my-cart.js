@@ -124,7 +124,7 @@ const SingleProduct = ({item, handleSetAlert, currency}) => {
 };
 
 
-const SumUp = ({order, cart}) => {
+const SumUp = ({order, cart, cartLength}) => {
     const [totalPrice, setTotalPrice] = useState(0);
 
     useEffect(() => {
@@ -142,7 +142,7 @@ const SumUp = ({order, cart}) => {
             </div>
             <div>
                 <span className={"font-weight-bolder"}>Total Items :</span><span
-                className={"font-weight-light"}>16</span>
+                className={"font-weight-light"}>{cartLength}</span>
             </div>
 
             <div className={"mt-3"}>
@@ -153,7 +153,7 @@ const SumUp = ({order, cart}) => {
         </div>
     )
 }
-const Container = ({order, cart}) => {
+const Container = ({order, cart, cartLength}) => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [alert, setAlert] = useState({message: "", state: false, class: ""})
 
@@ -210,10 +210,10 @@ export const Cart = () => {
                 </div>
                 <div className={"row justify-content-sm-between justify-content-center"}>
                     <div className={"col-11 col-sm-9"}>
-                        <Container order={order} cart={cart}/>
+                        <Container order={order} cart={cart} cartLength={cartLength}/>
                     </div>
                     <div className={"col-6 col-sm-3"}>
-                        <SumUp order={order} cart={cart}/>
+                        <SumUp order={order} cart={cart} cartLength={cartLength}/>
                     </div>
                 </div>
             </div>
