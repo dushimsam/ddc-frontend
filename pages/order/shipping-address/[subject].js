@@ -13,7 +13,7 @@ import {app_config, system_users} from "../../../utils/constants";
 import Link from "next/link";
 import globalStyles from "../../../styles/global-colors.module.css"
 import Footer from "../../../components/Footer";
-import {notifySuccess} from "../../../utils/alerts";
+import {notifyInfo, notifySuccess} from "../../../utils/alerts";
 import {gotoPathDirect, handleDoubleDecryptionPath} from "../../../utils/functions";
 
 export default function PayOrder() {
