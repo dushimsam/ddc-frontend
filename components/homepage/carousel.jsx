@@ -84,7 +84,7 @@ export default function CarouselPart() {
             <div className={"row justify-content-center"}>
               <button
                 onClick={() => Router.push("/products")}
-                className={`btn text-white border-none ${globalStyles.globalDeepOrange}`}
+                className={`btn text-white border-none pl-4 pr-4 ${globalStyles.globalDeepOrange}`}
               >
                 Order Now
               </button>
@@ -107,7 +107,7 @@ export default function CarouselPart() {
             <div className={"row justify-content-center"}>
               <button
                 onClick={() => Router.push("/products")}
-                className={`btn text-white border-none ${globalStyles.globalDeepOrange}`}
+                className={`btn text-white border-none pl-4 pr-4 ${globalStyles.globalDeepOrange}`}
               >
                 Order Now
               </button>
