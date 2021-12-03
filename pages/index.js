@@ -7,6 +7,7 @@ import CarouselPart from "../components/homepage/carousel";
 import TopProducts from "../components/homepage/top-products";
 import Recommendations from "../components/homepage/recommendations";
 import WelcomingProducts from "../components/homepage/welcoming-products";
+import CustomerReviews from "../components/homepage/customer-reviews";
 
 export default function Home() {
   return (
@@ -21,6 +22,7 @@ export default function Home() {
       <TopProducts />
       <AboutUsPart />
       <Recommendations />
+      <CustomerReviews />
       <Footer />
     </div>
   );

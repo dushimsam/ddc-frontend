@@ -12,7 +12,7 @@ const ImagesContainer = () => {
             src={"images/aboutus2.jpg"}
             alt="Product"
             className={"rounded img-responsive"}
-            style={{ height: "249px", width: "200px" }}
+            style={{ height: "249px", width: "85%" }}
           />
         </div>
         <div className="col pb-4 mb-5">
@@ -20,7 +20,7 @@ const ImagesContainer = () => {
             src={"images/aboutus.jpg"}
             alt="Product"
             className={"rounded img-responsive"}
-            style={{ height: "264px", width: "200px" }}
+            style={{ height: "264px", width: "85%" }}
           />
         </div>
       </div>
@@ -30,7 +30,7 @@ const ImagesContainer = () => {
             src={"images/aboutus1.jpg"}
             alt="Product"
             className={"rounded img-responsive"}
-            style={{ height: "127px", width: "200px" }}
+            style={{ height: "127px", width: "85%" }}
           />
         </div>
         <div className="col mt-n5">
@@ -38,7 +38,7 @@ const ImagesContainer = () => {
             src={"images/aboutus2.jpg"}
             alt="Product"
             className={"rounded img-responsive"}
-            style={{ height: "186px", width: "200px" }}
+            style={{ height: "186px", width: "85%" }}
           />
         </div>
       </div>

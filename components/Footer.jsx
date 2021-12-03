@@ -82,9 +82,9 @@ export default function Footer() {
         <div className={"row justify-content-around"}>
           <div className={"col-12 col-sm-4 mb-2"}>
             <p className={"text-justify"}>
-              Lorem ipsum dolor sit amet, consectetur adipi scing elitsed do
-              eiusmod tempor incididunt utlab ore et dolore magna aliqua. Ut
-              enim ad.
+              DDC Cosmetics is a company operating in Rwanda which sells all
+              cosmetic products you may need in your daily life. Lets
+              collaborate.
             </p>
             <div className={"row col-6 justify-content-around"}>
               <svg
