@@ -97,36 +97,36 @@ export default function PaymentMethod() {
 
 
     const handleNext = () => {
-        setLoading(true)
-        const info = {
-            order: order._id,
-            msisdn: "250" + values.phone,
-            shipping_amount: totalToPay?.delivery,
-            amountPaid: totalToPay?.total_with_discount,
-            channel: "WEB"
-        };
-
-        dispatch(addProcessedDara(info));
-        OrderService.payMoMo(info)
-            .then(res => {
-                dispatch(destroyCart())
-                dispatch(destroyOrder())
-                notifySuccess("Successfully completed the order process 👏👏👏")
-
-                window.setTimeout(() => {
-                    notifySuccess("Your order in process of delivery 🚢🚢🚢 ")
-                }, 5000)
-
-                window.setTimeout(() => {
-                    Router.push(gotoPath("/order/invoice", res.data._id, "ORDER_FROM_PAYMENT"))
-                }, 5000)
-            })
-            .catch(e => {
-                notifyError(e.response ? e.response.data.message : e.message || "Error occurred. Try again latter.")
-            })
-            .finally(() => {
-                setLoading(false);
-            })
+        // setLoading(true)
+        // const info = {
+        //     order: order._id,
+        //     msisdn: "250" + values.phone,
+        //     shipping_amount: totalToPay?.delivery,
+        //     amountPaid: totalToPay?.total_with_discount,
+        //     channel: "WEB"
+        // };
+        //
+        // dispatch(addProcessedDara(info));
+        // OrderService.payMoMo(info)
+        //     .then(res => {
+        //         dispatch(destroyCart())
+        //         dispatch(destroyOrder())
+        //         notifySuccess("Successfully completed the order process 👏👏👏")
+        //
+        //         window.setTimeout(() => {
+        //             notifySuccess("Your order in process of delivery 🚢🚢🚢 ")
+        //         }, 5000)
+        //
+        //         window.setTimeout(() => {
+        //             Router.push(gotoPath("/order/invoice", res.data._id, "ORDER_FROM_PAYMENT"))
+        //         }, 5000)
+        //     })
+        //     .catch(e => {
+        //         notifyError(e.response ? e.response.data.message : e.message || "Error occurred. Try again latter.")
+        //     })
+        //     .finally(() => {
+        //         setLoading(false);
+        //     })
     }
 
     const otherImgWidth = 150

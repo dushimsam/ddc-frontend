@@ -100,7 +100,7 @@ const WelcomingProducts = () => {
 
   return (
     <div className={"container"}>
-      <div className={"row justify-content-sm-between justify-content-center"}>
+      <div className={"row justify-content-sm-between justify-content-center mt-5"}>
         <div className={"col-sm-5 pt-3 col-11 "}>
           <h4>Find the best cosmetic products for yourself and friend!</h4>
           <p className={"mt-2"}>
