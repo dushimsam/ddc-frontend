@@ -51,14 +51,14 @@ export default function CarouselPart() {
             alt="First slide"
           />
           <Carousel.Caption className={"col-10 mx-auto mt-n20"}>
-            <h3 className={"col-10 text-center"}>
+            <h3 className={"col-12 col-sm-10 text-center"}>
               Get 50% OFF your next order!
             </h3>
-            <p className={"col-10 text-center"}>
+            <p className={"col-12 col-sm-10 text-center"}>
               We've now put discount on all products. So, do order quick before
               it ends
             </p>
-            <div className={"row justify-content-center"}>
+            <div className={"col-10"}>
               <button
                 onClick={() => Router.push("/products")}
                 className={`btn text-white border-none pl-4 pr-4 ${globalStyles.globalDeepOrange}`}
@@ -76,12 +76,12 @@ export default function CarouselPart() {
             alt="First slide"
           />
           <Carousel.Caption className={"col-10 mx-auto mt-n20"}>
-            <h3 className={"col-10"}>Get 50% OFF your next order!</h3>
-            <p>
+            <h3 className={"col-12 col-sm-10"}>Get 50% OFF your next order!</h3>
+            <p className={"col-12 col-sm-10 text-center"}>
               We've now put discount on all products. So, do order quick before
               it ends
             </p>
-            <div className={"row justify-content-center"}>
+            <div className={"col-10"}>
               <button
                 onClick={() => Router.push("/products")}
                 className={`btn text-white border-none pl-4 pr-4 ${globalStyles.globalDeepOrange}`}
@@ -99,12 +99,12 @@ export default function CarouselPart() {
             alt="First slide"
           />
           <Carousel.Caption className={"col-10 mx-auto mt-n20"}>
-            <h3 className={"col-10"}>Get 50% OFF your next order!</h3>
-            <p>
+            <h3 className={"col-12 col-sm-10"}>Get 50% OFF your next order!</h3>
+            <p className={"col-12 col-sm-10 text-center"}>
               We've now put discount on all products. So, do order quick before
               it ends
             </p>
-            <div className={"row justify-content-center"}>
+            <div className={"col-10"}>
               <button
                 onClick={() => Router.push("/products")}
                 className={`btn text-white border-none pl-4 pr-4 ${globalStyles.globalDeepOrange}`}
