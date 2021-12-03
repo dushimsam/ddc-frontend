@@ -1,9 +1,10 @@
 import styles from "../../styles/components/welcomePage.module.css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useEffect, useState } from "react";
-import CustomerReviews from "../reusable/CustomerReviews";
+import CustomerReview from "../reusable/CustomerReview";
 import ProductService from "../../services/products/ProductService";
 import { Cursors } from "../reusable/scrollor-cursors";
+import {Carousel} from "react-bootstrap";
 
 const Products = ({
   loading,
@@ -40,7 +41,7 @@ const Products = ({
         >
           {products.map((item) => (
             <SwiperSlide>
-              <CustomerReviews
+              <CustomerReview
                 product={item}
                 productOnMarketId={item?._id}
                 image={item.product?.imageUrls[0]}

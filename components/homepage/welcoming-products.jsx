@@ -104,9 +104,7 @@ const WelcomingProducts = () => {
         <div className={"col-sm-5 pt-3 col-11 "}>
           <h4>Find the best cosmetic products for yourself and friend!</h4>
           <p className={"mt-2"}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do
-            eiusmod tempor incididunt ut labore et dolore ma gna aliqua. Ut enim
-            ad minim veniam..
+            DDC only picks products with immediate effect: „THE WOW EFFECT “, combining natural and luxurious ingredients with aroma packaged into unique designs.
           </p>
           <div className={"d-flex"}>
             <button
