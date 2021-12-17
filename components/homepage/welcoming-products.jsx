@@ -112,7 +112,7 @@ const WelcomingProducts = () => {
       <div
         className={"row justify-content-sm-between justify-content-center mt-5"}
       >
-        <div className={`col-sm-4 pt-3 col-11 ${styles.wlcm_txt}`}>
+        <div className={`col-sm-5 pt-3 col-11 ${styles.wlcm_txt}`}>
           <h4>Find the best cosmetic products for yourself and friend!</h4>
           <p className={"mt-2"}>
             DDC only picks products with immediate effect: „THE WOW EFFECT “,
