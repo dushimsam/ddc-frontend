@@ -10,3 +10,9 @@
   min-width: 200px;
   height: 150px;
 }
+
+@media (min-width: 600px) {
+  .wlcm_txt {
+    padding-left: 5rem;
+  }
+}

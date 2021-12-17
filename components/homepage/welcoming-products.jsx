@@ -66,16 +66,25 @@ const WelcomingProducts = () => {
 
   const breakPoints = {
     200: {
+      slidesPerView: 1.2,
+    },
+    360: {
       slidesPerView: 1.5,
     },
+    540: {
+      slidesPerView: 2.1,
+    },
+    768: {
+      slidesPerView: 1.6,
+    },
     800: {
-      slidesPerView: 3,
+      slidesPerView: 2.1,
     },
     900: {
-      slidesPerView: 3.1,
+      slidesPerView: 2.1,
     },
     1300: {
-      slidesPerView: 3.1,
+      slidesPerView: 2.5,
     },
   };
 
@@ -99,12 +108,16 @@ const WelcomingProducts = () => {
   }, []);
 
   return (
-    <div className={"container"}>
-      <div className={"row justify-content-sm-between justify-content-center mt-5"}>
-        <div className={"col-sm-5 pt-3 col-11 "}>
+    <div className={"container-fluid"}>
+      <div
+        className={"row justify-content-sm-between justify-content-center mt-5"}
+      >
+        <div className={`col-sm-4 pt-3 col-11 ${styles.wlcm_txt}`}>
           <h4>Find the best cosmetic products for yourself and friend!</h4>
           <p className={"mt-2"}>
-            DDC only picks products with immediate effect: „THE WOW EFFECT “, combining natural and luxurious ingredients with aroma packaged into unique designs.
+            DDC only picks products with immediate effect: „THE WOW EFFECT “,
+            combining natural and luxurious ingredients with aroma packaged into
+            unique designs.
           </p>
           <div className={"d-flex"}>
             <button
@@ -121,7 +134,7 @@ const WelcomingProducts = () => {
             </>
           </div>
         </div>
-        <div className={"col-sm-7 col-12"}>
+        <div className={"col-sm-6 col-12"}>
           <div className={"container"}>
             <div className={"row"}>
               <Products

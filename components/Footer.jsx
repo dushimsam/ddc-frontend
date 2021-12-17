@@ -9,6 +9,7 @@ import {
   USER_EMAIL_ID,
 } from "../utils/constants";
 import emailjs from "emailjs-com";
+import { FbIcon, IgIcon, TwitterIcon } from "../icons";
 
 export default function Footer() {
   const [loading, setLoading] = useState(false);
@@ -84,56 +85,9 @@ export default function Footer() {
               collaborate.
             </p>
             <div className={"row col-6 justify-content-around"}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="29.973"
-                height="25.249"
-                viewBox="0 0 29.973 25.249"
-              >
-                <path
-                  id="Icon_feather-twitter"
-                  data-name="Icon feather-twitter"
-                  d="M28.473,4.5a13.364,13.364,0,0,1-3.85,1.876,5.493,5.493,0,0,0-9.637,3.678v1.226A13.07,13.07,0,0,1,3.952,5.723s-4.9,11.034,6.13,15.939A14.271,14.271,0,0,1,1.5,24.114c11.034,6.13,24.521,0,24.521-14.1A5.517,5.517,0,0,0,25.923,9a9.465,9.465,0,0,0,2.55-4.5Z"
-                  transform="translate(0 -2.885)"
-                  fill="none"
-                  stroke="#f3a35d"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="3"
-                />
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15.1"
-                height="25"
-                viewBox="0 0 15.1 25"
-              >
-                <path
-                  id="Icon_feather-facebook"
-                  data-name="Icon feather-facebook"
-                  d="M22.6,3H19.3a5.5,5.5,0,0,0-5.5,5.5v3.3H10.5v4.4h3.3V25h4.4V16.2h3.3l1.1-4.4H18.2V8.5a1.1,1.1,0,0,1,1.1-1.1h3.3Z"
-                  transform="translate(-9 -1.5)"
-                  fill="none"
-                  stroke="#f3a35d"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="3"
-                />
-              </svg>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="22.005"
-                height="22"
-                viewBox="0 0 22.005 22"
-              >
-                <path
-                  id="Icon_awesome-instagram"
-                  data-name="Icon awesome-instagram"
-                  d="M11,7.6a5.641,5.641,0,1,0,5.641,5.641A5.632,5.632,0,0,0,11,7.6ZM11,16.9a3.667,3.667,0,1,1,3.667-3.667A3.674,3.674,0,0,1,11,16.9Zm7.187-9.538a1.316,1.316,0,1,1-1.316-1.316A1.313,1.313,0,0,1,18.187,7.366ZM21.922,8.7a6.511,6.511,0,0,0-1.777-4.61,6.554,6.554,0,0,0-4.61-1.777c-1.816-.1-7.261-.1-9.077,0a6.544,6.544,0,0,0-4.61,1.772A6.532,6.532,0,0,0,.072,8.7c-.1,1.816-.1,7.261,0,9.077a6.511,6.511,0,0,0,1.777,4.61,6.562,6.562,0,0,0,4.61,1.777c1.816.1,7.261.1,9.077,0a6.511,6.511,0,0,0,4.61-1.777,6.554,6.554,0,0,0,1.777-4.61c.1-1.816.1-7.256,0-9.072ZM19.576,19.723a3.713,3.713,0,0,1-2.091,2.091c-1.448.574-4.885.442-6.485.442s-5.042.128-6.485-.442a3.713,3.713,0,0,1-2.091-2.091c-.574-1.448-.442-4.885-.442-6.485S1.854,8.2,2.423,6.753A3.713,3.713,0,0,1,4.515,4.662C5.963,4.087,9.4,4.22,11,4.22s5.042-.128,6.485.442a3.713,3.713,0,0,1,2.091,2.091c.574,1.448.442,4.885.442,6.485S20.15,18.279,19.576,19.723Z"
-                  transform="translate(0.005 -2.238)"
-                  fill="#f3a35d"
-                />
-              </svg>
+              <TwitterIcon height={28} width={28} />
+              <FbIcon height={25} width={25} />
+              <IgIcon height={25} width={25} />
             </div>
           </div>
           <div className={"col-12 col-sm-5 mb-2"}>
