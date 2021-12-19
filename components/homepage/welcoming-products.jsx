@@ -84,7 +84,7 @@ const WelcomingProducts = () => {
       slidesPerView: 2.1,
     },
     1300: {
-      slidesPerView: 2.5,
+      slidesPerView: 2.9,
     },
   };
 
