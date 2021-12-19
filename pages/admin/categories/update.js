@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import ProductCategoriesService from "../../../services/product-categories/product-categories.service"
+import ProductCategoriesService from "../../../services/product-categories/ProductCategoryService"
 import UpdateFormLayout from "../../../layouts/table-layouts/update-form-layout"
 import {FormContent} from "./new"
 import FormLayout from "../../../layouts/form-layout"

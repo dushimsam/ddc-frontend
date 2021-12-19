@@ -159,11 +159,11 @@ const CreateSuppliedProducts = async (supply, suppliedProducts, status) => {
                 supply_price: parseFloat(suppliedProducts[i].supply_price * suppliedProducts[i].quantity)
             })
 
-            await ProductService.createPartOnMarket({
+            await ProductService.createProductOnMarket({
                 supplied_product: supplied_parts_data.data._id,
                 unit_price: parseFloat(suppliedProducts[i].unit_price),
                 quantity: parseInt(suppliedProducts[i].quantity),
-                tax: parseFloat(suppliedProducts[i].tax)
+                tax: 0
             });
 
         } catch (e) {

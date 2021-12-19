@@ -37,7 +37,7 @@ const Content = ({item, getInitialData}) => {
 
     useEffect(() => {
         setImgFiles(null)
-        SparePartService.getSparePart(item._id)
+        SparePartService.getProduct(item._id)
             .then((res) => {
                 setValues({
                     name: res.data.name,

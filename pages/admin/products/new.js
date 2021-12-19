@@ -1,15 +1,14 @@
 import SparePartService from "../../../services/products/ProductService";
+import ProductService from "../../../services/products/ProductService";
 import React, {useEffect, useRef, useState} from "react";
-import productCategoriesService from "../../../services/product-categories/product-categories.service";
+import productCategoriesService from "../../../services/product-categories/ProductCategoryService";
 import FormLayout from "../../../layouts/form-layout"
 import InputControl from "../../../components/reusable/InputControl"
 import SingleSubModuleLayout from "../../../layouts/admin-layouts/SingleSubModule";
 import {isThisFormValid} from "../../../utils/functions";
 import {alertFailer, alertSuccess, notifyError, notifyInfo, notifySuccess} from "../../../utils/alerts"
-import {ALERT_EXPIRATION_PERIOD, SPARE_PART_REGISTRATION_TEMP_STORAGE_KEY} from "../../../utils/constants";
+import {ALERT_EXPIRATION_PERIOD, PRODUCT_REGISTRATION_TEMP_STORAGE_KEY} from "../../../utils/constants";
 import {hide_modal, hide_modal_alert} from "../../../utils/modal-funs";
-import * as XLSX from "xlsx";
-import $ from "jquery";
 import {ImagesSuperContainer} from "../../../components/management/products/create";
 import {acceptedFileTypes} from "../../../utils/image-utils";
 import SuppliesDataService from "../../../services/supplies/SupplyService";
@@ -17,6 +16,9 @@ import SuppliedPartsDataService from "../../../services/supplies/SuppliedProduct
 import {useRouter} from "next/router";
 import RealTimeSaveService from "../../../services/excel-registrations/real-time-save"
 import SelectControl from "../../../components/reusable/SelectControl";
+import ModalDisplay from "../../../components/modals/excel-uploads/product-categories/modal-display";
+import {readProductsExcel} from "../../../utils/excel-functions";
+import ReadFile from "../../../components/modals/excel-uploads/read-file";
 
 
 export const FormContent = ({
@@ -148,6 +150,7 @@ export const FormContent = ({
     );
 };
 
+
 const Content = ({totals, setTotals}) => {
         const [alert, setAlert] = useState({message: "", class: "", show: false})
         const [values, setValues] = useState({
@@ -227,137 +230,12 @@ const Content = ({totals, setTotals}) => {
 
 
         useEffect(() => {
-            let existing_data = RealTimeSaveService.getDecData(SPARE_PART_REGISTRATION_TEMP_STORAGE_KEY);
+            let existing_data = RealTimeSaveService.getDecData(PRODUCT_REGISTRATION_TEMP_STORAGE_KEY);
             if (existing_data.length > 0) {
                 setIsExisting(true)
                 setReadItems(existing_data);
             }
         }, [])
-
-
-        const readExcel = (file) => {
-
-            const promise = new Promise((resolve, reject) => {
-                const fileReader = new FileReader();
-                fileReader.readAsArrayBuffer(file);
-
-                fileReader.onload = (e) => {
-                    const bufferArray = e.target.result;
-
-                    const wb = XLSX.read(bufferArray, {type: "buffer"});
-
-                    const wsname = wb.SheetNames[0];
-
-                    const ws = wb.Sheets[wsname];
-
-                    const data = XLSX.utils.sheet_to_json(ws);
-
-                    resolve(data);
-                };
-
-                fileReader.onerror = (error) => {
-                    reject(error);
-                };
-            });
-
-            promise.then((d) => {
-
-                let _id = 4500;
-                let all_items = []
-                // console.log(d)
-                d.map((item) => {
-                    let value =
-                        {
-                            value: {
-                                complete_info_status: "INCOMPLETE",
-                                name: item.PART_NAME?.toString().trim(),
-                                part_code: "0001",
-                                part_number: (item.PART_NUMBER)?.toString().trim(),
-                                // weight: typeof item.WEIGHT === 'undefined' || item.WEIGHT === null ? 1 : parseFloat(item.WEIGHT),
-                                weight: 5,
-                                categories: [{
-                                    sub_category: "6139ce77bff567d16f577287",
-                                    model: "61388c6b1868e046039a2f95",
-                                    release_years: [2001, 2002, 2003, 2004, 2005]
-                                }],
-                                second_hand: false
-                            },
-                            id: _id,
-                            quantity: typeof item.QUANTITY === 'undefined' || item.QUANTITY === null ? 0 : parseInt(item.QUANTITY),
-                            // supply_price: typeof item.SUPPLY_PRICE === 'undefined' || item.SUPPLY_PRICE === null ? 1 : parseFloat(item.SUPPLY_PRICE),
-                            supply_price: 80000,
-                            existsObj: "",
-                            vehicle: item.VEHICLE,
-                            imgUrls: [],
-                            status: "OK"
-                        }
-                    all_items = [...all_items, value]
-                    _id += 230;
-                })
-
-                all_items.map(async (par_item, index) => {
-
-                    let item_value;
-
-                    if (par_item.value.part_number) {
-
-                        try {
-                            const res = await SparePartService.partNumberExists(par_item.value.part_number);
-                            if (res.data.exists) {
-
-                                let new_value = all_items[index]
-                                new_value.status = "EXISTS"
-                                new_value.complete_info_status = "COMPLETE";
-                                new_value.id = res.data.object._id;
-                                const partExists_res = await SparePartService.getSparePartDetails(res.data.object._id);
-
-                                if ('partOnMarket' in partExists_res.data) {
-                                    new_value.unit_price = parseFloat(partExists_res.data.partOnMarket.unit_price);
-                                    let supplies = partExists_res.data.partInStock.supplies;
-                                    let supplied_part_res = await SuppliedPartsDataService.get(supplies[supplies.length - 1].supplied_part);
-                                    new_value.supply_price = parseFloat(supplied_part_res.data.supply_price / supplied_part_res.data.quantity);
-                                }
-
-                                all_items[index] = new_value;
-                            }
-
-                            let duplicates = all_items.filter((item) => item.value.part_number === par_item.value.part_number)
-                            if (duplicates.length > 1) {
-
-                                let total_quantity = duplicates.map(item => item.quantity).reduce((prev, next) => prev + next);
-                                let new_value = all_items[index];
-                                new_value.quantity = total_quantity;
-
-                                duplicates.map((duplicate, dup_index) => {
-                                    if (dup_index > 0) {
-                                        let duplicate_index = all_items.indexOf(duplicate);
-                                        if (duplicate_index > -1) {
-                                            all_items.splice(duplicate_index, 1);
-                                        }
-                                    }
-                                })
-
-                                all_items[index] = new_value;
-                            }
-
-                            if (all_items[index]) {
-                                setReadItems(old => [...old, all_items[index]]);
-                            } else {
-                                console.log("err ", all_items[index])
-                            }
-                        } catch (e) {
-                            console.log("Fell in error ", par_item)
-                            console.log(e)
-                        }
-                    }
-                });
-
-                $(function () {
-                    $("#uploadedModal").modal({backdrop: 'static', keyboard: false});
-                });
-
-            });
-        };
 
 
         const [saveAllLoading, setSaveAllLoading] = useState(false);
@@ -368,8 +246,8 @@ const Content = ({totals, setTotals}) => {
             try {
                 if (readItems.filter((item) => item.status === "INCOMPLETE" || item.status === "DUPLICATE").length === 0) {
 
-                    if (supplyValues.reciever === "" || supplyValues.supplier === "") {
-                        notifyError("Complete the supply values");
+                    if (supplyValues.supplier === "") {
+                        notifyError("Specify the supplier please");
                     } else {
                         setSaveAllLoading(true)
 
@@ -387,38 +265,29 @@ const Content = ({totals, setTotals}) => {
                             try {
                                 let res;
                                 if (readItems[i].status === "EXISTS") {
-                                    res = await SparePartService.getSparePart(readItems[i].id);
+                                    res = await ProductService.getProduct(readItems[i].id);
                                 } else {
-                                    let partValues = {...readItems[i].value};
-                                    partValues.part_number = partValues.part_number.trim();
-                                    partValues.name = partValues.name.trim();
-                                    res = await SparePartService.createProduct(partValues);
-                                    setTotals({...totals, spareParts: totals.spareParts + 1});
+                                    let productValues = {...readItems[i].value};
+                                    productValues.product_category = productValues.product_category.trim();
+                                    productValues.name = productValues.name.trim();
+                                    res = await ProductService.createProduct(productValues);
+                                    setTotals({...totals, products: totals.products + 1});
                                 }
 
-                                const supplied_parts_data = await SuppliedPartsDataService.create({
-                                    part_supply: supply_res.data._id,
+                                const supplied_products_data = await SuppliedPartsDataService.create({
+                                    product_supply: supply_res.data._id,
                                     quantity: parseInt(readItems[i].quantity),
-                                    spare_part: res.data._id,
-                                    supply_price: parseFloat(readItems[i].supply_price * readItems[i].quantity)
+                                    product: res.data._id,
+                                    supply_price: parseFloat(readItems[i].supply_price)
                                 })
 
-                                const part_in_stock_data = await SparePartService.createSparePartInStock({
-                                    supplied_part: supplied_parts_data.data._id,
-                                    quantity: parseInt(readItems[i].quantity),
-                                });
 
-                                let unit_price = parseFloat(parseFloat(parseFloat(readItems[i].supply_price) * (80 / 100)) + parseFloat(readItems[i].supply_price));
-
-                                if (readItems[i].status === "EXISTS") {
-                                    unit_price = readItems[i].unit_price;
-                                }
-
-                                const part_on_market_data = await SparePartService.createPartOnMarket({
-                                    part_in_stock: part_in_stock_data.data._id,
-                                    unit_price: unit_price,
+                                await ProductService.createProductOnMarket({
+                                    supplied_product: supplied_products_data.data._id,
+                                    unit_price: parseFloat(readItems[i].price),
                                     complete_info_status: readItems[i].value.complete_info_status,
-                                    quantity: parseInt(readItems[i].quantity)
+                                    quantity: parseInt(readItems[i].quantity),
+                                    tax: 0
                                 });
 
                                 if (readItems[i].status === "EXISTS") {
@@ -434,7 +303,7 @@ const Content = ({totals, setTotals}) => {
                         notifySuccess("WOW CONGRATULATIONS 🎉🎉🎉");
                         notifySuccess("👏👏👏 ALL PARTS ARE SAVED SUCCESSFULLY");
                         setReadItems([]);
-                        RealTimeSaveService.removeData(SPARE_PART_REGISTRATION_TEMP_STORAGE_KEY);
+                        RealTimeSaveService.removeData(PRODUCT_REGISTRATION_TEMP_STORAGE_KEY);
                         window.setTimeout(() => {
                             hide_modal('#uploadedModal')
                         }, 3000);
@@ -453,40 +322,14 @@ const Content = ({totals, setTotals}) => {
 
         useEffect(() => {
             if (readItems.length > 0) {
-                RealTimeSaveService.setData(readItems, SPARE_PART_REGISTRATION_TEMP_STORAGE_KEY);
+                RealTimeSaveService.setData(readItems, PRODUCT_REGISTRATION_TEMP_STORAGE_KEY);
             }
         }, [readItems])
         return (
             <>
                 <div className="col-12 align-self-center">
-                    {/*<div>*/}
-                    {/*    <button className={"btn mt-md-n5"} onClick={() => {*/}
-                    {/*        readItems.length > 0 ? show_modal("#uploadedModal", true) : document.getElementById("xcelUpload").click();*/}
-                    {/*    }}>*/}
-                    {/*        {*/}
-                    {/*            readItems.length > 0 ? <ContinueIcon/> :*/}
-                    {/*                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="42" height="42">*/}
-                    {/*                    <path fill="none" d="M0 0h24v24H0z"/>*/}
-                    {/*                    <path*/}
-                    {/*                        d="M16 2l5 5v14.008a.993.993 0 0 1-.993.992H3.993A1 1 0 0 1 3 21.008V2.992C3 2.444 3.445 2 3.993 2H16zm-3 10h3l-4-4-4 4h3v4h2v-4z"*/}
-                    {/*                        fill="rgba(231,76,60,1)"/>*/}
-                    {/*                </svg>*/}
-                    {/*        }*/}
-                    {/*    </button>*/}
-                    {/*    <input*/}
-                    {/*        type="file"*/}
-                    {/*        id={"xcelUpload"}*/}
-                    {/*        hidden={true}*/}
-                    {/*        accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"*/}
-                    {/*        onChange={(e) => {*/}
-                    {/*            readExcel(e.target.files[0]);*/}
-                    {/*            e.target.value = "";*/}
-                    {/*        }}*/}
-                    {/*        onClick={(event) => {*/}
-                    {/*            event.target.value = null*/}
-                    {/*        }}*/}
-                    {/*    />*/}
-                    {/*</div>*/}
+
+                    <ReadFile readItems={readItems} readExcel={readProductsExcel} setReadItems={setReadItems}/>
                 </div>
 
                 <FormLayout
@@ -509,9 +352,9 @@ const Content = ({totals, setTotals}) => {
                     loading={loading}
                     setLoading={setLoading}/>
                 <div className={"col-12"}>
-                    {/*<ModalDisplay items={readItems} setItems={setReadItems} save={SaveAll}*/}
-                    {/*              saveAllLoading={saveAllLoading}*/}
-                    {/*              supplyValues={supplyValues} setSupplyValues={setSupplyValues}/>*/}
+                    <ModalDisplay items={readItems} setItems={setReadItems} save={SaveAll}
+                                  saveAllLoading={saveAllLoading}
+                                  supplyValues={supplyValues} setSupplyValues={setSupplyValues}/>
                 </div>
             </>
         );

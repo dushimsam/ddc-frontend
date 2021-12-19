@@ -1,4 +1,4 @@
-import {SPARE_PART_REGISTRATION_TEMP_STORAGE_KEY} from "../../utils/constants";
+import {PRODUCT_REGISTRATION_TEMP_STORAGE_KEY} from "../../utils/constants";
 import {decryptObj, encryptObj} from "../../utils/encryption-decryption";
 
 class RealTimeSaveService {

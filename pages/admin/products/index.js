@@ -149,7 +149,7 @@ const Table = ({
 
     useEffect(() => {
         if (router.query.subject) {
-            SparePartService.getSparePart(handleDoubleDecryptionPath(router.query.subject))
+            SparePartService.getProduct(handleDoubleDecryptionPath(router.query.subject))
                 .then((res) => {
                     const item = res.data;
                     handleSetFields(item);

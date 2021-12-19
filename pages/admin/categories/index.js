@@ -5,7 +5,7 @@ import ActionButtons from "../../../components/tables/ActionButtons"
 import DeleteConfirmation from "../../../components/tables/delete-confirmation-modal"
 import SingleSubModuleLayout from "../../../layouts/admin-layouts/SingleSubModule";
 import {getFormattedDate, handleDoubleDecryptionPath, sortData} from "../../../utils/functions";
-import ProductCategoriesService from "../../../services/product-categories/product-categories.service";
+import ProductCategoriesService from "../../../services/product-categories/ProductCategoryService";
 import {Th} from "../../../components/reusable/TableComponents";
 import {alertFailer} from '../../../utils/alerts';
 import {hide_delete_modal, hide_modal, hide_modal_alert, show_modal} from "../../../utils/modal-funs";

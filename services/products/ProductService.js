@@ -28,7 +28,7 @@ class ProductService {
         return http.get("/products-on-market");
     }
 
-    getSparePart(id) {
+    getProduct(id) {
         return http.get("/products/" + id);
     }
 
@@ -88,7 +88,7 @@ class ProductService {
         return http.get(`/products-on-market/${id}`);
     }
 
-    createPartOnMarket(data) {
+    createProductOnMarket(data) {
         return http.post("/products-on-market", data);
     }
 
@@ -156,8 +156,8 @@ class ProductService {
         return http.get(`/products/${id}/details`)
     }
 
-    partNumberExists(part_number) {
-        return http.get(`/products/part-number/exists/${part_number}`)
+    productNameExists(product_name) {
+        return http.get(`/products/product-name/exists/${product_name}`)
     }
 
     getByProduct(id) {

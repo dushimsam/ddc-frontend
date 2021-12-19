@@ -1,8 +1,10 @@
 import http from "../http-common";
 
-class ProductCategoriesService {
+class ProductCategoryService {
 
-
+    productCategoryNameExists(category_name) {
+        return http.get(`/product-categories/category-name/exists/${category_name}`)
+    }
 
     // Product Categories
     getProductCategories(page = 1) {
@@ -46,4 +48,4 @@ class ProductCategoriesService {
 
 }
 
-export default new ProductCategoriesService();
+export default new ProductCategoryService();
