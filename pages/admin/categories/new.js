@@ -9,7 +9,7 @@ import {hide_modal, hide_modal_alert} from "../../../utils/modal-funs";
 import ReadFile from "../../../components/modals/excel-uploads/read-file";
 import {readProductCategoriesExcel} from "../../../utils/excel-functions";
 import RealTimeSaveService from "../../../services/excel-registrations/real-time-save";
-import {PRODUCT_REGISTRATION_TEMP_STORAGE_KEY} from "../../../utils/constants";
+import {PRODUCT_CATEGORY_REGISTRATION_TEMP_STORAGE_KEY} from "../../../utils/constants";
 import ModalDisplay from "../../../components/modals/excel-uploads/product-categories/modal-display";
 
 
@@ -56,6 +56,14 @@ const Content = ({total, setTotal}) => {
         const [readItems, setReadItems] = useState([]);
         const [loading, setLoading] = useState(false);
 
+
+        useEffect(() => {
+            let existing_data = RealTimeSaveService.getDecData(PRODUCT_CATEGORY_REGISTRATION_TEMP_STORAGE_KEY);
+            if (existing_data.length > 0) {
+                setReadItems(existing_data);
+            }
+        }, [])
+
         const Create = () => {
             ProductCategoriesService.createProductCategory(values)
                 .then((res) => {
@@ -85,7 +93,11 @@ const Content = ({total, setTotal}) => {
 
                     for (let i = 0; i < readItems.length; i++) {
                         try {
-                            const res = await ProductCategoriesService.createProductCategory(values);
+                            let value = {
+                                name: readItems[i].value.name,
+                                description: readItems[i].value.description
+                            }
+                            const res = await ProductCategoriesService.createProductCategory(value);
                             notifySuccess(res.data.name + " is saved successfully");
                             setTotal(total + 1)
                         } catch (e) {
@@ -96,7 +108,7 @@ const Content = ({total, setTotal}) => {
                     notifySuccess("WOW CONGRATULATIONS 🎉🎉🎉");
                     notifySuccess("👏👏👏 ALL PARTS ARE SAVED SUCCESSFULLY");
                     setReadItems([]);
-                    RealTimeSaveService.removeData(PRODUCT_REGISTRATION_TEMP_STORAGE_KEY);
+                    RealTimeSaveService.removeData(PRODUCT_CATEGORY_REGISTRATION_TEMP_STORAGE_KEY);
                     window.setTimeout(() => {
                         hide_modal('#uploadedModal')
                     }, 3000);
@@ -151,7 +163,7 @@ const Page = () => {
 
     return (
         <SingleSubModuleLayout
-            Content={<Content total={total} setTotals={setTotal}/>}
+            Content={<Content total={total} setTotal={setTotal}/>}
             isArray={false}
             total={total}
             showFilter={false}

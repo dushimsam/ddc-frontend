@@ -16,9 +16,9 @@ import SuppliedPartsDataService from "../../../services/supplies/SuppliedProduct
 import {useRouter} from "next/router";
 import RealTimeSaveService from "../../../services/excel-registrations/real-time-save"
 import SelectControl from "../../../components/reusable/SelectControl";
-import ModalDisplay from "../../../components/modals/excel-uploads/product-categories/modal-display";
 import {readProductsExcel} from "../../../utils/excel-functions";
 import ReadFile from "../../../components/modals/excel-uploads/read-file";
+import ProductsModalDisplay from "../../../components/modals/excel-uploads/products/products-modal-display";
 
 
 export const FormContent = ({
@@ -253,7 +253,9 @@ const Content = ({totals, setTotals}) => {
 
                         notifyInfo("Saving supply process")
 
-                        let new_supplies = Object.assign(supplyValues);
+                        let new_supplies = {}
+                        new_supplies.supplier = supplyValues.supplier;
+                        new_supplies.reciever = supplyValues.reciever;
                         new_supplies.supply_date = new Date();
                         new_supplies.supply_date.setSeconds(new_supplies.supply_date.getSeconds() - 3);
                         const supply_res = await SuppliesDataService.create(new_supplies);
@@ -274,7 +276,7 @@ const Content = ({totals, setTotals}) => {
                                     setTotals({...totals, products: totals.products + 1});
                                 }
 
-                                const supplied_products_data = await SuppliedPartsDataService.create({
+                                const supplied_products_res = await SuppliedPartsDataService.create({
                                     product_supply: supply_res.data._id,
                                     quantity: parseInt(readItems[i].quantity),
                                     product: res.data._id,
@@ -283,7 +285,7 @@ const Content = ({totals, setTotals}) => {
 
 
                                 await ProductService.createProductOnMarket({
-                                    supplied_product: supplied_products_data.data._id,
+                                    supplied_product: supplied_products_res.data._id,
                                     unit_price: parseFloat(readItems[i].price),
                                     complete_info_status: readItems[i].value.complete_info_status,
                                     quantity: parseInt(readItems[i].quantity),
@@ -352,9 +354,9 @@ const Content = ({totals, setTotals}) => {
                     loading={loading}
                     setLoading={setLoading}/>
                 <div className={"col-12"}>
-                    <ModalDisplay items={readItems} setItems={setReadItems} save={SaveAll}
-                                  saveAllLoading={saveAllLoading}
-                                  supplyValues={supplyValues} setSupplyValues={setSupplyValues}/>
+                    <ProductsModalDisplay items={readItems} setItems={setReadItems} save={SaveAll}
+                                          saveAllLoading={saveAllLoading}
+                                          supplyValues={supplyValues} setSupplyValues={setSupplyValues}/>
                 </div>
             </>
         );

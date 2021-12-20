@@ -1,5 +1,6 @@
 import {show_modal} from "../../../utils/modal-funs";
 import React from "react";
+import {ContinueIcon} from "../../../icons";
 
 export default function ReadFile({readItems, setReadItems, readExcel}) {
     return (<div>

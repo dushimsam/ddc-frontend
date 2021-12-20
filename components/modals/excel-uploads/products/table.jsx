@@ -1,14 +1,32 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import ProductCategoryService from "../../../../services/product-categories/ProductCategoryService";
 import {show_modal} from "../../../../utils/modal-funs";
 import styles from "../../../../styles/pages/table.module.css";
 
 
-const Row = ({item, index, setItem, status, setCurrItem}) => {
+const Row = ({d, items, item, index, setItem, status, setCurrItem, supplyInfo}) => {
+    const [product_category, setProductCategory] = useState(null);
+
+    useEffect(async () => {
+        try {
+            const res = await ProductCategoryService.getProductCategory(item.value.product_category);
+            setProductCategory(res.data)
+        } catch (e) {
+        }
+    }, [items])
+
+
     return (
         <tr>
             <td>{index + 1}</td>
-            <td>{item.value.name}</td>
-            <td>{item.value.description}</td>
+            <td>{item.value?.name}</td>
+            <td>{product_category ? product_category.name : item.brand_name}</td>
+            <td>{item.value?.product_code}</td>
+            <td>{item.value?.weight}</td>
+            <td>{item?.quantity}</td>
+            <td>{item?.price}</td>
+            <td>{item?.supply_price}</td>
+
             <td>
                   <span className="btn"
                         onClick={() => {
@@ -57,16 +75,22 @@ const DisplayingTable = ({items, setCurrItem, setItems, handleSetItem, handleRem
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">NAME</th>
-                <th scope="col">DESCRIPTION</th>
+                <th scope="col">CATEGORY</th>
+                <th scope="col">CODE</th>
+                <th scope="col">WEIGHT</th>
+                <th scope="col">QUANTITY</th>
+                <th scope="col">UNIT-PRICE</th>
+                <th scope="col">SUPPLY-PRICE</th>
                 <th scope="col">ACTION</th>
                 <th scope="col">STATUS</th>
             </tr>
             </thead>
             <tbody>
             {items.map((d, index) => (
-                <Row key={d} setItems={setItems} index={index}
+                <Row d={d.value} key={d} items={items} setItems={setItems} index={index}
                      setCurrItem={setCurrItem}
                      item={d}
+                     supplyInfo={{quantity: d.quantity, supply_price: d.supply_price}}
                      status={d.status} handleRemove={handleRemove}
                      setItem={handleSetItem}/>
             ))}

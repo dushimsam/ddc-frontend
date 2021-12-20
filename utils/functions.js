@@ -4,7 +4,22 @@ import Router from "next/router";
 import SortTables from "./sort-tables";
 import $ from "jquery";
 import {doubleDecryption, doubleEncryption} from "./encryption-decryption";
+
 // import {useRouter} from "next/router";
+
+export function padZeros(num) {
+    var str = "" + num;
+    var pad = "0000"
+    return pad.substring(0, pad.length - str.length) + str;
+}
+
+export function randomInteger(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+export function generateProductCode() {
+    return padZeros(randomInteger(0, 1000)).toString()
+}
 
 export const isEmpty = (value) => {
     return (value == null || value.length === 0);
