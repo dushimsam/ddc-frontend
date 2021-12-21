@@ -122,3 +122,7 @@
   color: #f3a35d;
   font-weight: bold;
 }
+
+.qtyGroup {
+  line-height: 1.5rem;
+}

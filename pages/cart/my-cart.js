@@ -99,7 +99,7 @@ const SingleProduct = ({ item, handleSetAlert, currency, i }) => {
         </div>
         <div className="col-lg-4 col-12">
           <p className="">Quantity: </p>
-          <div className="input-group">
+          <div className={"input-group " + styles.qtyGroup}>
             <span className={"input-group-btn " + styles.borderedBtns}>
               <button
                 type="button"
