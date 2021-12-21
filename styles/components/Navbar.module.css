@@ -10,7 +10,6 @@
 
 .brandName {
   text-align: left;
-  color: #f3a35d;
   font-size: 20px;
   opacity: 1;
   cursor: pointer;
@@ -76,7 +75,7 @@
   font-size: 0.5rem;
   font-family: sans-serif;
   vertical-align: text-bottom;
-  background-color:#F3A35D;
+  background-color:#C84C6E;
 
 }
 

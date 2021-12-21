@@ -7,7 +7,7 @@ export const system_users = {
 
 const APP_NAME = "DDC Cosmetic";
 
-export const global_color = "#F3A35D"
+export const global_color = "#C84C6E"
 export const app_config = {
     APP_NAME: APP_NAME,
     APP_COMPANY_NAME: APP_NAME + " ltd.",
@@ -17,9 +17,9 @@ export const app_config = {
     APP_EMAIL: "info@ddc.com",
     APP_LOCATION: "KIGALI-RWANDA",
     APP_URL: "www.ddcosmetic.com",
-    APP_DISCRIPTO:"You can book , order , shop , buy cosmetic products on a reasonable price."
+    APP_DISCRIPTO: "You can book , order , shop , buy cosmetic products on a reasonable price."
 };
-export const GLOBAL_COLOR = "#ff5555";
+export const GLOBAL_COLOR = "#C84C6E";
 export const employeeUserTypeId = "60886c0d0ab4d315fbe2051d";
 export const supplierUserTypeId = "60886c2b0ab4d315fbe2051f";
 export const ALERT_EXPIRATION_PERIOD = 4000;

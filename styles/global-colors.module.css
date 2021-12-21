@@ -1,38 +1,41 @@
 .globalTextColor {
-  color: #f3a35d;
+    color: #C84C6E;
 }
+
 .globalHoverBackColor:hover {
-  background-color: #f3a35d;
-  transition: all 0.4s ease-in-out;
+    background-color: #C84C6E;
+    transition: all 0.4s ease-in-out;
 }
 
 .globalHoverTextColor:hover {
-  color: white;
+    color: white;
 }
+
 .globalBackColor {
-  background-color: #f3a35d;
+    background-color: #C84C6E;
 }
 
 .globalDeepOrange {
-  background-color: #ff570c;
+    background-color: #ff570c;
 }
-.globalBackColor {
-  background-color: #f3a35d;
+
+.deepGlobalColor {
+    color: #4f0e28;
 }
 
 .greyLikeColor {
-  color: #a0a0a0;
+    color: #a0a0a0;
 }
 
 .globalFooterColor {
-  background-color: #fafafa;
-  color: #6b6a6a !important;
+    background-color: #fafafa;
+    color: #6b6a6a !important;
 }
 
 .globalCopyrightColor {
-  background-color: #ebebeb;
+    background-color: #ebebeb;
 }
 
 .globalAddToCartBtn {
-  background-color: #e652dc;
+    background-color: #e652dc;
 }
