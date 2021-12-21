@@ -45,7 +45,7 @@ export default function CarouselPart() {
       <Carousel className={"row mt-5 mb-5"} style={{ height: "50vh" }}>
         <Carousel.Item>
           <img
-            className={"img-fluid"}
+            className={"img-fluid opacity-25"}
             style={{ width: "100%", height: "50vh" }}
             src="images/cosmeticbg.jpg"
             alt="First slide"
@@ -70,7 +70,7 @@ export default function CarouselPart() {
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className={"img-fluid"}
+            className={"img-fluid opacity-25"}
             style={{ width: "100%", height: "50vh" }}
             src="images/cosmeticbg.jpg"
             alt="First slide"
@@ -93,7 +93,7 @@ export default function CarouselPart() {
         </Carousel.Item>
         <Carousel.Item>
           <img
-            className={"img-fluid"}
+            className={"img-fluid opacity-25"}
             style={{ width: "100%", height: "50vh" }}
             src="images/cosmeticbg.jpg"
             alt="First slide"

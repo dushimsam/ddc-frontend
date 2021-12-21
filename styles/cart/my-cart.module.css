@@ -1,128 +1,124 @@
-
-.plus{
-    text-align: center;
-    font-size:25px;
-    background-clip: padding-box;
-    padding:10px;
-    vertical-align: middle;color: black;
-    cursor:pointer;
+.plus {
+  text-align: center;
+  font-size: 25px;
+  background-clip: padding-box;
+  padding: 10px;
+  vertical-align: middle;
+  color: black;
+  cursor: pointer;
 }
-.hr{
-    border-top: 1px solid #bbb;
+.hr {
+  border-top: 1px solid #bbb;
 }
 .cartContainer {
-    background: #FFFFFF 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0% no-repeat padding-box;
 }
 .productTitle {
-    font-size: 14px;
-    letter-spacing: 0.4px;
-    color: #707070;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  color: #707070;
 }
 .productTitle:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 .productCategory {
-    color: #707070;
-    font-size: 13px;
-    letter-spacing: 0.1px;
+  color: #707070;
+  font-size: 13px;
+  letter-spacing: 0.1px;
 }
 .productPartNumber {
-        color: #707070;
-    font-size: 13px;
-    letter-spacing: 0.1px;
+  color: #707070;
+  font-size: 13px;
+  letter-spacing: 0.1px;
 }
-.title{
-    font-size: 18px;
-    letter-spacing: 0.5px;
-    font-weight:bolder;
+.title {
+  font-size: 18px;
+  letter-spacing: 0.5px;
+  font-weight: bolder;
 }
-.container{
-    background: #FFFFFF 0% 0% no-repeat padding-box;
-    border-radius: 5px;
-    padding:5%;
+.container {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border-radius: 5px;
+  padding: 5%;
 }
-.page{
-    /* background: "black 0% 0% no-repeat padding-box"; */
-    background-color: black;
+.page {
+  /* background: "black 0% 0% no-repeat padding-box"; */
+  background-color: black;
 }
-.subtotalHead{
-    color: #707070;
+.subtotalHead {
+  color: #707070;
 }
-.subtotalValue{
-    color: #707070;
-    font-weight:bold;
-}
-
-.products{
-    max-height:50vh;
-    overflow-y:scroll;
+.subtotalValue {
+  color: #707070;
+  font-weight: bold;
 }
 
+.products {
+  max-height: 50vh;
+  overflow-y: scroll;
+}
 
 .btnNumber {
-    font-size: 25px;
-    margin-top: -9px;
-    color: #707070;
-    background-color: transparent;
-    border: none;
+  font-size: 25px;
+  color: inherit;
+  background-color: transparent;
+  border: none;
 }
 
-
-
 .quantityBox {
-    border: 1px solid #707070;
-    margin: 0 8px;
-    padding: 5px 10px;
-    font-size: 11px;
-    border-radius: 6px;
+  margin: 0 8px;
+  padding: 5px 5px;
+  font-size: inherit;
 }
 
 .productPrice {
-    color: #707070;
+  color: #707070;
 }
 .removeBtn {
-    margin-top: -20px;
+  margin-top: -20px;
 }
 
-.subTotal{
-    letter-spacing: 0.8px;
-    font-size: 16px;
-    color: #707070;
-    font-weight: bolder;
+.subTotal {
+  letter-spacing: 0.8px;
+  font-size: 16px;
+  color: #707070;
+  font-weight: bolder;
 }
 .btnContinue:hover {
-    color: #ff0700ba;
-    background-color: white;
-    border-color: #ff0700ba;
-    transition: all ease-in-out 0.4s;
+  color: #ff0700ba;
+  background-color: white;
+  border-color: #ff0700ba;
+  transition: all ease-in-out 0.4s;
 }
 
-.subTotalTitle{
-    font-size: 14px;
+.subTotalTitle {
+  font-size: 14px;
 }
 .removeBtn:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
-
- 
-
- 
- /*
+/*
   *  STYLE 3
   */
- 
+
 .products::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background-color: #f8f8f8;
+  border-radius: 10px;
+  background-color: #f8f8f8;
 }
 
-.products::-webkit-scrollbar{
-    width: 4px;
-    background-color: #f8f8f8;
+.products::-webkit-scrollbar {
+  width: 4px;
+  background-color: #f8f8f8;
 }
 .products::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #707070;
-    opacity: .7;
+  border-radius: 10px;
+  background-color: #707070;
+  opacity: 0.7;
+}
+
+.borderedBtns {
+  border: 1px solid #f3a35d;
+  color: #f3a35d;
+  font-weight: bold;
 }

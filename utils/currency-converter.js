@@ -46,7 +46,7 @@ export const currencyMapping = (currency, francs) =>
     ? "₩" + convertFromRdaToSkw(francs)
     : currency === dubaiCurrency
     ? "AED " + convertFromRdaToUae(francs)
-    : "RWF " + defaultCurrency(francs);
+    : defaultCurrency(francs) + "RWF ";
 
 export const customCurrencyMapping = (currency, user, francs) => {
   return currencyMapping(
