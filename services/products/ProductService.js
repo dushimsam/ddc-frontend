@@ -1,200 +1,214 @@
-import http from '../http-common'
+import http from "../http-common";
 
 const market_model_url = "products-on-market";
-const products_model_url = "products"
+const products_model_url = "products";
 
 class ProductService {
-    getAll() {
-        return http.get("/products");
-    }
+  getAll() {
+    return http.get("/products");
+  }
 
-    getAllByCategory(id) {
-        return http.get("/products/" + id)
-    }
+  getProductCategories() {
+    return http.get("/product-categories");
+  }
 
-    createProduct(data) {
-        return http.post("/products", data);
-    }
+  getProductsInCategory(id) {
+    return http.get("/products-on-market/category/" + id);
+  }
 
-    updateProduct(id, data) {
-        return http.put("/products/" + id, data);
-    }
+  getAllByCategory(id) {
+    return http.get("/products/" + id);
+  }
 
-    getCategorizedProducts(sub_category) {
-        return http.get("/products/sub-category/" + sub_category);
-    }
+  createProduct(data) {
+    return http.post("/products", data);
+  }
 
-    getAllProductsOnMarket() {
-        return http.get("/products-on-market");
-    }
+  updateProduct(id, data) {
+    return http.put("/products/" + id, data);
+  }
 
-    getProduct(id) {
-        return http.get("/products/" + id);
-    }
+  getCategorizedProducts(sub_category) {
+    return http.get("/products/sub-category/" + sub_category);
+  }
 
-    getPaginatedProducts(page = 1) {
-        return http.get("/products/paginated?limit=5&page=" + page);
-    }
+  getAllProductsOnMarket() {
+    return http.get("/products-on-market");
+  }
 
-    searchPaginatedProducts(search, page = 1, limit = 5) {
-        return http.get(`/products/search/paginated?name=${search}&limit=${limit}&page=${page}`);
-    }
+  getProduct(id) {
+    return http.get("/products/" + id);
+  }
 
-    deleteProduct(id) {
-        return http.delete("/products/" + id);
-    }
+  getPaginatedProducts(page = 1) {
+    return http.get("/products/paginated?limit=5&page=" + page);
+  }
 
-    deleteSparePartImage(id, imageId) {
-        return http.delete(`/products/delete-image/spare-part/${id}/image/${imageId}`)
-    }
+  searchPaginatedProducts(search, page = 1, limit = 5) {
+    return http.get(
+      `/products/search/paginated?name=${search}&limit=${limit}&page=${page}`
+    );
+  }
 
+  deleteProduct(id) {
+    return http.delete("/products/" + id);
+  }
 
-    //in stock
-    getPartsInStock() {
-        return http.get("/parts-in-stock");
-    }
+  deleteSparePartImage(id, imageId) {
+    return http.delete(
+      `/products/delete-image/spare-part/${id}/image/${imageId}`
+    );
+  }
 
+  //in stock
+  getPartsInStock() {
+    return http.get("/parts-in-stock");
+  }
 
-    getPaginatedPartsInStock(page = 1) {
-        return http.get("/parts-in-stock/paginated?limit=5&page=" + page);
-    }
+  getPaginatedPartsInStock(page = 1) {
+    return http.get("/parts-in-stock/paginated?limit=5&page=" + page);
+  }
 
-    searchPaginatedPartsInStock(search, page = 1) {
-        return http.get(`/parts-in-stock/search/paginated?name=${search}&limit=5&page=${page}`);
-    }
+  searchPaginatedPartsInStock(search, page = 1) {
+    return http.get(
+      `/parts-in-stock/search/paginated?name=${search}&limit=5&page=${page}`
+    );
+  }
 
-    getPartInStock(id) {
-        return http.get(`/parts-in-stock/${id}`);
-    }
+  getPartInStock(id) {
+    return http.get(`/parts-in-stock/${id}`);
+  }
 
-    createSparePartInStock(data) {
-        return http.post("/parts-in-stock", data);
-    }
+  createSparePartInStock(data) {
+    return http.post("/parts-in-stock", data);
+  }
 
-    getPartsOnMarketDetails() {
-        return http.get("/products-on-market/products");
-    }
+  getPartsOnMarketDetails() {
+    return http.get("/products-on-market/products");
+  }
 
-    getValidPartsOnMarket() {
-        return http.get("/products-on-market/valid")
-    }
+  getValidPartsOnMarket() {
+    return http.get("/products-on-market/valid");
+  }
 
+  addImage(id, formData) {
+    return http.put("/products/upload-image/" + id, formData);
+  }
 
-    addImage(id, formData) {
-        return http.put("/products/upload-image/" + id, formData)
-    }
+  getPartOnMarketById(id) {
+    return http.get(`/products-on-market/${id}`);
+  }
 
-    getPartOnMarketById(id) {
-        return http.get(`/products-on-market/${id}`);
-    }
+  createProductOnMarket(data) {
+    return http.post("/products-on-market", data);
+  }
 
-    createProductOnMarket(data) {
-        return http.post("/products-on-market", data);
-    }
+  getPartsOnMarketByModelSubCategoryYear(sub_category, model, releaseYear) {
+    return http.get(
+      `/products-on-market/sub-category/${sub_category}/model/${model}/release-year/${releaseYear}`
+    );
+  }
 
+  getPaginatedProductsOnMarket(page = 1) {
+    return http.get("/products-on-market/paginated?limit=5&page=" + page);
+  }
 
-    getPartsOnMarketByModelSubCategoryYear(sub_category, model, releaseYear) {
-        return http.get(`/products-on-market/sub-category/${sub_category}/model/${model}/release-year/${releaseYear}`);
-    }
+  getProductPaginatedOnMarket(page = 1) {
+    return http.get(
+      "/products-on-market/products/paginated?limit=5&page=" + page
+    );
+  }
 
+  getPartOnMarketDetails(id) {
+    return http.get("/products-on-market/products/" + id);
+  }
 
-    getPaginatedProductsOnMarket(page = 1) {
-        return http.get("/products-on-market/paginated?limit=5&page=" + page);
-    }
+  searchPaginatedPartsOnMarket(search, page = 1) {
+    return http.get(
+      `/products-on-market/search/paginated?name=${search}&limit=5&page=${page}`
+    );
+  }
 
-    getProductPaginatedOnMarket(page = 1) {
-        return http.get("/products-on-market/products/paginated?limit=5&page=" + page);
-    }
+  updatePartOnMarket(id, data) {
+    return http.put(`/products-on-market/${id}`, data);
+  }
 
-    getPartOnMarketDetails(id) {
-        return http.get("/products-on-market/products/" + id);
-    }
+  updatePartInStock(id, data) {
+    return http.put(`/parts-in-stock/${id}`, data);
+  }
 
+  getSparePartsOnMarketByGeneralCategory(id) {
+    return http.get(`/products/general-category/${id}`);
+  }
 
-    searchPaginatedPartsOnMarket(search, page = 1) {
-        return http.get(`/products-on-market/search/paginated?name=${search}&limit=5&page=${page}`);
-    }
+  deletePartOnMarket(id) {
+    return http.delete(`/products-on-market/${id}`);
+  }
 
-    updatePartOnMarket(id, data) {
-        return http.put(`/products-on-market/${id}`, data);
-    }
+  getNestedPart(id) {
+    return http.get(`/products-on-market/${id}`);
+  }
 
-    updatePartInStock(id, data) {
-        return http.put(`/parts-in-stock/${id}`, data);
-    }
+  getSecondHandParts(page = 1, limit) {
+    return http.get(
+      `/products-on-market/second_hand?limit=${limit}&page=${page}`
+    );
+  }
 
-    getSparePartsOnMarketByGeneralCategory(id) {
-        return http.get(`/products/general-category/${id}`);
-    }
+  searchPart(text) {
+    return http.get(`/products-on-market/search?name=${text}`);
+  }
 
-    deletePartOnMarket(id) {
-        return http.delete(`/products-on-market/${id}`);
-    }
+  setShowcase(id, status) {
+    if (status) return http.put(`/products/showcase/${id}`);
+    else return http.put(`/products/unshowcase/${id}`);
+  }
 
-    getNestedPart(id) {
-        return http.get(`/products-on-market/${id}`);
-    }
+  getSparePartDetails(id) {
+    return http.get(`/products/${id}/details`);
+  }
 
+  productNameExists(product_name) {
+    return http.get(`/products/product-name/exists/${product_name}`);
+  }
 
-    getSecondHandParts(page = 1, limit) {
-        return http.get(`/products-on-market/second_hand?limit=${limit}&page=${page}`)
-    }
+  getByProduct(id) {
+    return http.get(`/products-on-market/product/${id}`);
+  }
 
+  getByProductExists(id) {
+    return http.get(`/products-on-market/product/${id}/exists`);
+  }
 
-    searchPart(text) {
-        return http.get(`/products-on-market/search?name=${text}`)
-    }
+  getSparePartsOnMarketByCompany(id) {
+    return http.get("/products-on-market/company/" + id);
+  }
 
-    setShowcase(id, status) {
-        if (status)
-            return http.put(`/products/showcase/${id}`)
-        else
-            return http.put(`/products/unshowcase/${id}`)
-    }
+  getTopProducts() {
+    return http.get(`/products-on-market/top-products`);
+  }
 
-    getSparePartDetails(id) {
-        return http.get(`/products/${id}/details`)
-    }
+  toggleShowCaseOnMarket(id) {
+    return http.put(`/products-on-market/toogle/showcase/${id}`);
+  }
 
-    productNameExists(product_name) {
-        return http.get(`/products/product-name/exists/${product_name}`)
-    }
+  getJustForYouProducts(page = 1, limit = 40) {
+    return http.get(
+      `/products-on-market/recommendation?limit=${limit}&page=${page}`
+    );
+  }
 
-    getByProduct(id) {
-        return http.get(`/products-on-market/product/${id}`)
-    }
+  getOnMarketDetails(id) {
+    return http.get(`/products-on-market/spare-part/${id}/exists`);
+  }
 
+  getVanishingItems(page = 1, limit) {
+    return http.get(
+      `/${market_model_url}/vanishing-products?limit=${limit}&page=${page}`
+    );
+  }
 
-    getByProductExists(id) {
-        return http.get(`/products-on-market/product/${id}/exists`)
-    }
-
-
-    getSparePartsOnMarketByCompany(id) {
-        return http.get("/products-on-market/company/" + id)
-    }
-
-    getTopProducts() {
-        return http.get(`/products-on-market/top-products`)
-    }
-
-    toggleShowCaseOnMarket(id) {
-        return http.put(`/products-on-market/toogle/showcase/${id}`)
-    }
-
-    getJustForYouProducts(page = 1, limit = 40) {
-        return http.get(`/products-on-market/recommendation?limit=${limit}&page=${page}`)
-    }
-
-    getOnMarketDetails(id) {
-        return http.get(`/products-on-market/spare-part/${id}/exists`)
-    }
-
-    getVanishingItems(page = 1, limit) {
-        return http.get(`/${market_model_url}/vanishing-products?limit=${limit}&page=${page}`)
-    }
-
-    //Supp
+  //Supp
 }
 
-export default new ProductService()
+export default new ProductService();

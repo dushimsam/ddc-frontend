@@ -105,7 +105,7 @@ export default function Footer() {
               </div>
               <div className={"col-6 col-sm-5 d-flex flex-column"}>
                 <div className={""}>
-                  <p>+250 08 50 44 70</p>
+                  <p>+250 7805 044 70</p>
                   <p className={"mt-n3"}>https://ddc.vercel.app/</p>
                 </div>
                 <div className={""}>
@@ -123,7 +123,7 @@ export default function Footer() {
       </div>
 
       <div
-        className={`bg-app-red border-top border-light pb-3 pt-2 ${Styles.globalCopyrightColor}`}
+        className={`bg-app-red border-top border-light mx-lg-n5 pb-3 pt-2 ${Styles.globalCopyrightColor}`}
       >
         <p className="text-center font-weight-light h-6 mb-0 text-capitalize">
           &copy; {new Date().getFullYear()} {app_config.APP_NAME}, all rights

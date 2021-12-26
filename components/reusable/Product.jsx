@@ -14,6 +14,7 @@ export const Rating = ({ rating }) => {
   return stars?.map((star) => {
     return (
       <span
+        key={star}
         style={{ cursor: "pointer" }}
         className={star <= rating ? globalStyles.globalTextColor : ""}
       >
@@ -32,7 +33,6 @@ export default function Product({
 }) {
   let currency = useSelector((state) => state.appCurrency);
 
-  console.log(product);
   const dispatch = useDispatch();
 
   let cart = useSelector((state) => state.cart);
