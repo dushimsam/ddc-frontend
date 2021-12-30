@@ -4,7 +4,7 @@ import UpdateFormLayout from "../../../layouts/table-layouts/update-form-layout"
 import {alertFailer, alertSuccess} from "../../../utils/alerts"
 import FormLayout from "../../../layouts/form-layout"
 import {FormContent} from "./new"
-import {hide_current_modal, hide_modal_alert, show_modal} from "../../../utils/modal-funs";
+import {hide_current_modal, hide_modal_alert} from "../../../utils/modal-funs";
 
 
 const Content = ({item, getInitialData}) => {
@@ -91,8 +91,8 @@ const Content = ({item, getInitialData}) => {
                     alertSuccess(setAlert, "Product Updated");
                     setLoading(false);
                     getInitialData();
-                    hide_current_modal(setAlert, '#itemUpdateModal')
                 }
+                hide_current_modal(setAlert, '#itemUpdateModal')
             } catch (e) {
                 alertFailer(setAlert, e.response ? e.response.data.message : e.message || "Error occurred. Try again latter.")
                 hide_modal_alert(setAlert);
