@@ -90,9 +90,10 @@ const Content = ({item, getInitialData}) => {
                     await SparePartService.updateProduct(item._id, update_values);
                     alertSuccess(setAlert, "Product Updated");
                     setLoading(false);
-                    getInitialData();
+
                 }
-                hide_current_modal(setAlert, '#itemUpdateModal')
+                hide_current_modal(setAlert, '#itemUpdateModal');
+                getInitialData();
             } catch (e) {
                 alertFailer(setAlert, e.response ? e.response.data.message : e.message || "Error occurred. Try again latter.")
                 hide_modal_alert(setAlert);
