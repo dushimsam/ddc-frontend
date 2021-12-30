@@ -99,23 +99,12 @@ const UpdateImageContainer = ({defaultFiles, item, setDefaultFiles, getInitialDa
     const [deleteFiles, setDeleteFiles] = useState([]);
     const [alert, setAlert] = useState({message: "", class: "", show: false})
 
-    console.log("item here ",item)
 
     const removeSelected = () => {
         deleteFiles.forEach((value, index) => {
 
             if (!ITEM_CONTEXT) {
-                filesService.delete(replaceCharacter(item.photos[value].path, '%2F', '/'), "SPARE_PART", item._id)
-                    .then((res) => {
-                        alertSuccess(setAlert, "File is Deleted");
-                        var array = [...defaultFiles];
-                        array.splice(value, 1);
-                        setDefaultFiles(array);
-                        hide_modal_alert(setAlert);
-                        getInitialData();
-                    }).catch(e => console.log(e))
-            } else if (ITEM_CONTEXT === "SUPPLIED_CAR") {
-                filesService.delete(replaceCharacter(item.part_photos[value], '%2F', '/'), "SUPPLIED_CAR_PARTS", item._id)
+                filesService.delete(replaceCharacter(item.photos[value].path, '%2F', '/'), "PRODUCT", item._id)
                     .then((res) => {
                         alertSuccess(setAlert, "File is Deleted");
                         var array = [...defaultFiles];

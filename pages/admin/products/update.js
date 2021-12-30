@@ -62,7 +62,7 @@ const Content = ({item, getInitialData}) => {
 
 
     const Update = async () => {
-        if ((JSON.stringify(values) === JSON.stringify(defaultValues)) && imagesContainer.current.files.length < 1) {
+        if ((JSON.stringify(values) === JSON.stringify(defaultValues)) && imgFiles?.length < 1) {
             alertFailer(setAlert, "No Spare part update required");
             setAlert({show: false, class: "success", message: ""});
             window.setTimeout(() => {
@@ -79,6 +79,7 @@ const Content = ({item, getInitialData}) => {
                         formData.append("image", imgFiles[i]);
                         await SparePartService.addImage(item._id, formData)
                     }
+                    alertSuccess(setAlert, "Product Updated");
                 }
 
 

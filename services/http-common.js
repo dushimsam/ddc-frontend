@@ -2,7 +2,7 @@ import axios from "axios";
 import Router from "next/router";
 import AuthService from './auth/auth.service'
 
-export const domain = "https://ddc-backend.herokuapp.com";
+export const domain = "https://apis.getddc.com";
 
 
 const http = axios.create({
