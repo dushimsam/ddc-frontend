@@ -128,7 +128,9 @@ const Table = ({
 
     const handleSetFields = (item) => {
         let modelsYears = [
-            {name: "Name", value: item.name}, {name: "Product Code", value: item.product_code}, {
+            {name: "Name", value: item.name}, {name: "Product Code", value: item.product_code},
+            {name: "Category", value: item.product_category.name},
+            {
                 name: "Weight",
                 value: item?.weight
             }, {name: "Condition", value: item?.second_hand ? "USED" : "NEW"},

@@ -91,7 +91,7 @@ export const FormContent = ({
 
                 <div className="form-group  col-md-5 col-10">
                     <SelectControl label="Brand" handleChangeV2={handleChangeV2("product_category")}
-                                   value={values.product_category} validations="required|string">
+                                   value={values.product_category._id} validations="required|string">
                         <option value="">Select Brand</option>
                         {categories.map((item) => (
                             <option value={item._id} key={item._id}>
