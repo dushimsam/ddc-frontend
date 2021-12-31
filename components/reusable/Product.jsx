@@ -54,7 +54,7 @@ export default function Product({
   return (
     <div
       className={
-        "card  p-1  " + (!containerStyle ? styles.container : containerStyle)
+        "card p-1 " + (!containerStyle ? styles.container : containerStyle)
       }
       title={product?.product.name}
     >

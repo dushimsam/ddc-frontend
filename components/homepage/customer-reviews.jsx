@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import CustomerReview from "../reusable/CustomerReview";
 import ProductService from "../../services/products/ProductService";
 import { Cursors } from "../reusable/scrollor-cursors";
-import {Carousel} from "react-bootstrap";
+import { Carousel } from "react-bootstrap";
 
 const Products = ({
   loading,
@@ -40,7 +40,7 @@ const Products = ({
           spaceBetween={1}
         >
           {products.map((item) => (
-            <SwiperSlide>
+            <SwiperSlide key={item._id}>
               <CustomerReview
                 product={item}
                 productOnMarketId={item?._id}
@@ -61,16 +61,34 @@ const CustomerReviewsPart = () => {
 
   const breakPoints = {
     200: {
-      slidesPerView: 1.25,
+      slidesPerView: 1,
+    },
+    360: {
+      slidesPerView: 1,
+    },
+    410: {
+      slidesPerView: 1.1,
+    },
+    540: {
+      slidesPerView: 1.5,
+    },
+    768: {
+      slidesPerView: 2.1,
     },
     800: {
-      slidesPerView: 3,
+      slidesPerView: 2.1,
     },
     900: {
-      slidesPerView: 4,
+      slidesPerView: 2.1,
+    },
+    1000: {
+      slidesPerView: 2.5,
+    },
+    1200: {
+      slidesPerView: 3.1,
     },
     1300: {
-      slidesPerView: 2.3,
+      slidesPerView: 3.1,
     },
   };
 
@@ -96,7 +114,11 @@ const CustomerReviewsPart = () => {
       <div className={"row justify-content-between"}>
         <div className={"col-12"}>
           <h5 className={"text-center"}>Our happy customers</h5>
-          <Cursors currentSlide={currentSlide} jumpToSlide={jumpToSlide} />
+          <Cursors
+            zIndexing
+            currentSlide={currentSlide}
+            jumpToSlide={jumpToSlide}
+          />
         </div>
       </div>
       <div className={"row justify-content-center"}>

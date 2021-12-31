@@ -40,7 +40,7 @@ export const Products = ({
           spaceBetween={1}
         >
           {products.map((item) => (
-            <SwiperSlide>
+            <SwiperSlide key={item._id}>
               <Product
                 product={item}
                 productOnMarketId={item?._id}
@@ -58,16 +58,36 @@ export const Products = ({
 const Recommendations = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [productCategories, setProductCatgories] = useState([]);
+  const [productCategory, setProductCategory] = useState("Recommendations");
 
   const breakPoints = {
     200: {
-      slidesPerView: 1.25,
+      slidesPerView: 1,
+    },
+    290: {
+      slidesPerView: 1.1,
+    },
+    360: {
+      slidesPerView: 1.4,
+    },
+    440: {
+      slidesPerView: 1.7,
+    },
+    500: {
+      slidesPerView: 2,
+    },
+    768: {
+      slidesPerView: 2.3,
     },
     800: {
-      slidesPerView: 3,
+      slidesPerView: 2.5,
     },
     900: {
-      slidesPerView: 4,
+      slidesPerView: 2.8,
+    },
+    1000: {
+      slidesPerView: 3.4,
     },
     1300: {
       slidesPerView: 4,
@@ -82,38 +102,84 @@ const Recommendations = () => {
   };
 
   const [products, setProducts] = useState(items);
+  const [categProds, setCategProds] = useState(items);
 
   useEffect(() => {
     setLoading(true);
     ProductService.getJustForYouProducts()
       .then((res) => {
         setProducts(res.data.docs);
+        setCategProds(res.data.docs);
+        setLoading(false);
+      })
+      .catch((e) => console.log(e));
+    ProductService.getProductCategories()
+      .then((res) => {
+        setProductCatgories(res.data);
         setLoading(false);
       })
       .catch((e) => console.log(e));
   }, []);
 
+  const getProdsInSelectedCategory = (catId, catName) => {
+    setProductCategory(catName ? catName : "Recommandations");
+    if (catId) {
+      let filteredProds = products.filter((prod) => {
+        return prod.product.product_category._id == catId;
+      });
+      setCategProds(filteredProds);
+    } else {
+      setCategProds(products);
+    }
+  };
+
   return (
     <div className={"container pt-3"}>
-      <div className={"row justify-content-between"}>
-        <div className={"col-5"}>
+      <div className={"row d-flex justify-content-between"}>
+        <div className={"col-8 col-sm-4"}>
           <h5>Recommendations</h5>
           <Cursors currentSlide={currentSlide} jumpToSlide={jumpToSlide} />
         </div>
-        {/*<div className={"col-3"}>*/}
-        {/*    <h4>Skin care</h4>*/}
-        {/*</div>*/}
+        <div className="col-8 col-sm-2">
+          <select
+            name="product-categories"
+            id="prodct-categories__select"
+            className="w-100 p-1 col-12"
+            onChange={(e) =>
+              e.target.value != ""
+                ? getProdsInSelectedCategory(
+                    JSON.parse(e.target.value)._id,
+                    JSON.parse(e.target.value).name
+                  )
+                : getProdsInSelectedCategory("", "")
+            }
+          >
+            <option value="">Choose category</option>
+            {productCategories.map((prodCateg) => (
+              <option key={prodCateg._id} value={JSON.stringify(prodCateg)}>
+                {prodCateg.name}
+              </option>
+            ))}
+          </select>
+          <h6>{productCategory}</h6>
+        </div>
       </div>
       <div className={"row justify-content-center"}>
         <div className={"col-12"}>
-          <Products
-            loading={loading}
-            setCurrentSlide={setCurrentSlide}
-            breakPoints={breakPoints}
-            currentSlide={currentSlide}
-            jumpToSlide={jumpToSlide}
-            products={products}
-          />
+          {categProds != 0 ? (
+            <Products
+              loading={loading}
+              setCurrentSlide={setCurrentSlide}
+              breakPoints={breakPoints}
+              currentSlide={currentSlide}
+              jumpToSlide={jumpToSlide}
+              products={categProds}
+            />
+          ) : (
+            <h5 className="pt-2 text-center">
+              No recommended products in the selected category!
+            </h5>
+          )}
         </div>
       </div>
     </div>

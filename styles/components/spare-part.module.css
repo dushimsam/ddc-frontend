@@ -1,36 +1,35 @@
 .container {
-    max-width: 230px;
-    box-shadow: 0 10px 20px #0000000D;
+  max-width: 230px;
+  box-shadow: 0 3px 6px #e2e2e2;
+  min-width: 200px;
 }
 
 .container2 {
-    width: 200px;
-    box-shadow: 0 10px 20px #0000000D;
+  width: 200px;
+  box-shadow: 0 3px 6px #e2e2e2;
+  min-width: 200px;
 }
 
 .button:hover {
-    background-color: #D9534F;
+  background-color: #d9534f;
 }
 
 .button:hover svg path:nth-child(2) {
-    fill: white;
+  fill: white;
 }
 
-
-
 .addToCartButton {
-    border: 1.5px solid #ff5555;
+  border: 1.5px solid #ff5555;
 }
 
 .addToCartButton:hover {
-    transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 
-    background-color: #ff5555;
+  background-color: #ff5555;
 }
 
 .addToCartButton:hover svg {
-    transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
 
-
-    fill: white !important;
+  fill: white !important;
 }

@@ -11,7 +11,7 @@ const Products = ({ loading, products }) => {
   return (
     <div className={`p-0  mt-3 products-area pb-5  ${styles.products}`}>
       {loading ? (
-        <div className="row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-4">
+        <div className="row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4">
           {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item) => (
             <div key={item} className="col p-4 top-products">
               <div className="rounded py-0 bg-whiterounded">
@@ -25,7 +25,7 @@ const Products = ({ loading, products }) => {
           ))}
         </div>
       ) : (
-        <div className="row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-4 justify-content-center">
+        <div className="row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 justify-content-center">
           {products.map((item) => (
             <div key={item?._id} className="col p-4 top-products">
               <Product
@@ -46,6 +46,7 @@ const ProductsInCategory = () => {
   const [loading, setLoading] = useState(false);
   const [productCategories, setProductCatgories] = useState([]);
   const [products, setProducts] = useState([]);
+  const [productCategory, setProductCategory] = useState("All");
 
   useEffect(() => {
     setLoading(true);
@@ -63,7 +64,8 @@ const ProductsInCategory = () => {
       .catch((e) => console.log(e));
   }, []);
 
-  const getProdsInSelectedCategory = (prodId) => {
+  const getProdsInSelectedCategory = (prodId, prodName) => {
+    setProductCategory(prodName ? prodName : "All");
     if (prodId) {
       setLoading(true);
       ProductService.getProductsInCategory(prodId)
@@ -101,16 +103,28 @@ const ProductsInCategory = () => {
           <div>
             <div className={"container pt-5"}>
               <div className={"row d-flex justify-content-between"}>
-                <h5 className="col-8 col-sm-4 pl-0">Facial products</h5>
+                <h5 className="col-8 col-sm-4 pl-0">
+                  {productCategory ? productCategory : "All "} products
+                </h5>
                 <select
                   name="product-categories"
                   id="prodct-categories__select"
                   className="col-8 col-sm-2"
-                  onChange={(e) => getProdsInSelectedCategory(e.target.value)}
+                  onChange={(e) =>
+                    e.target.value != ""
+                      ? getProdsInSelectedCategory(
+                          JSON.parse(e.target.value)._id,
+                          JSON.parse(e.target.value).name
+                        )
+                      : getProdsInSelectedCategory("", "")
+                  }
                 >
                   <option value="">Choose category</option>
                   {productCategories.map((prodCateg) => (
-                    <option key={prodCateg._id} value={prodCateg._id}>
+                    <option
+                      key={prodCateg._id}
+                      value={JSON.stringify(prodCateg)}
+                    >
                       {prodCateg.name}
                     </option>
                   ))}

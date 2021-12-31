@@ -106,7 +106,7 @@ export default function Footer() {
               <div className={"col-6 col-sm-5 d-flex flex-column"}>
                 <div className={""}>
                   <p>+250 7805 044 70</p>
-                  <p className={"mt-n3"}>https://ddc.vercel.app/</p>
+                  <p className={"mt-n3"}>https://getddc.com/</p>
                 </div>
                 <div className={""}>
                   <p>Cosm. Inc.</p>
