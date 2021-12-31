@@ -54,7 +54,7 @@ export default function Product({
   return (
     <div
       className={
-        "card p-1 " + (!containerStyle ? styles.container : containerStyle)
+        "card  p-1  " + (!containerStyle ? styles.container : containerStyle)
       }
       title={product?.product.name}
     >
@@ -62,7 +62,7 @@ export default function Product({
         onClick={() =>
           Router.push(gotoPathDirect("/products", productOnMarketId))
         }
-        src={"/img/default.jpg"}
+        src={product?.product.imageUrls[0]}
         className={"img-fluid  m-auto cursor-pointer " + styles.image}
         onError={(e) => {
           e.target.onerror = null;

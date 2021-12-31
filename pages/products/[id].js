@@ -63,7 +63,7 @@ export default function ProductView() {
                 );
                 setPartOnMarket(data);
                 setDisabled(false)
-                setCurrentImage(data.part_in_stock.spare_part.imageUrls[0]);
+                setCurrentImage(data.product.imageUrls[0]);
 
                 //
                 // if (data.quantity < 1) {
