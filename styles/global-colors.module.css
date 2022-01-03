@@ -1,41 +1,41 @@
 .globalTextColor {
-    color: #C84C6E;
+  color: #c84c6e;
 }
 
 .globalHoverBackColor:hover {
-    background-color: #C84C6E;
-    transition: all 0.4s ease-in-out;
+  background-color: #c84c6e;
+  transition: all 0.4s ease-in-out;
 }
 
 .globalHoverTextColor:hover {
-    color: white;
+  color: white;
 }
 
 .globalBackColor {
-    background-color: #C84C6E;
+  background-color: #c84c6e;
 }
 
 .globalDeepOrange {
-    background-color: #ff570c;
+  background-color: #ff570c;
 }
 
 .deepGlobalColor {
-    color: #4f0e28;
+  color: #4f0e28;
 }
 
 .greyLikeColor {
-    color: #a0a0a0;
+  color: #a0a0a0;
 }
 
 .globalFooterColor {
-    background-color: #fafafa;
-    color: #6b6a6a !important;
+  background-color: #fafafa;
+  color: #6b6a6a !important;
 }
 
 .globalCopyrightColor {
-    background-color: #ebebeb;
+  background-color: #ebebeb;
 }
 
 .globalAddToCartBtn {
-    background-color: #e652dc;
+  background-color: #e652dc;
 }

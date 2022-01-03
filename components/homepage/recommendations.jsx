@@ -37,7 +37,13 @@ export const Products = ({
           breakpoints={breakPoints}
           onSlideChange={(swiper) => setCurrentSlide(swiper.activeIndex)}
           onSwiper={(swiper) => true}
-          spaceBetween={1}
+          spaceBetween={
+            products.length > 4
+              ? 1
+              : products.length > 3
+              ? 100
+              : (products.length = 2 ? 180 : 200)
+          }
         >
           {products.map((item) => (
             <SwiperSlide key={item._id}>
