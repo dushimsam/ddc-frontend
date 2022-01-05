@@ -5,7 +5,7 @@ export const system_users = {
     SHIPPER: "SHIPPER",
 };
 
-const APP_NAME = "DDC Cosmetic";
+const APP_NAME = "DDC Beauty";
 
 export const global_color = "#C84C6E"
 export const app_config = {
@@ -13,10 +13,11 @@ export const app_config = {
     APP_COMPANY_NAME: APP_NAME + " ltd.",
     APP_NAME_LOWER: "DDC Beauty",
     APP_LOGO: "/favicon_io/logo.png",
-    APP_PHONE: "+250 788656653",
-    APP_EMAIL: "info@ddc.com",
-    APP_LOCATION: "KIGALI-RWANDA",
-    APP_URL: "www.ddcosmetic.com",
+    APP_PHONE: "+250 7805 044 70",
+    APP_EMAIL: "deni_clai@yahoo.fr",
+    APP_LOCATION:{FULL:"Kigali LK 40 Road" , SHORT:"Muhima, TL 0240" },
+    APP_URL: "www.getddc.com",
+    APP_URL_HTTPS:"https://getddc.com/",
     APP_DISCRIPTO: "You can book , order , shop , buy cosmetic products on a reasonable price."
 };
 export const GLOBAL_COLOR = "#C84C6E";

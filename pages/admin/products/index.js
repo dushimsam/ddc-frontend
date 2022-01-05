@@ -129,7 +129,8 @@ const Table = ({
     const handleSetFields = (item) => {
         let modelsYears = [
             {name: "Name", value: item.name}, {name: "Product Code", value: item.product_code},
-            {name: "Category", value: item.product_category.name},
+            {name: "Category", value: item.product_category.name,  href: "/admin/categories",
+            _id: item.product_category._id},
             {
                 name: "Weight",
                 value: item?.weight

@@ -41,8 +41,9 @@ const SingleTdDetails = ({product, quantity, price, currency, user}) => {
             </td>
             <td>
                 <div className={"col-12"}>
+
                     <h5 className={"font-weight-bold text-primary cursor-pointer " + styles.mainInfoTitle}
-                        onClick={() => Router.push(gotoPath(
+                        onClick={() => onMarketInfo && Router.push(gotoPath(
                             "/admin/products/on-market",
                             onMarketInfo._id
                         ))}>{`${product?.name}`}</h5>
@@ -405,7 +406,7 @@ const ModalContainer = ({title, date, status, itemObj, data}) => {
 
                         <div className="row justify-content-center">
                             <div className={"col-6"}>
-                                <p className="justify-content-center font-weight-bold">{status === "supply" ? "SUPPLIED PARTS" : "ORDERED PARTS"}</p>
+                                <p className="justify-content-center font-weight-bold">{status === "supply" ? "SUPPLIED PRODUCTS" : "ORDERED PRODUCTS"}</p>
                             </div>
                         </div>
                         <div className="row">

@@ -98,7 +98,7 @@ const OrderTableValues = ({products, status, currency, user}) => {
         products?.map((item, index) => (
             <tr key={index}>
                 <td>{index + 1}</td>
-                <td>{"Name " + item.product.part_in_stock.spare_part.name + " , Part-Number " + item.product.part_in_stock.spare_part.part_number}</td>
+                <td>{"Name " + item.product.product.name + " , Part-Code " + item.product.product.product_code}</td>
                 <th>{item.quantity}</th>
                 <td>{customCurrencyMapping(currency, user, item.product.unit_price)}</td>
                 {status !== "ORDER" ?
@@ -181,7 +181,7 @@ export default function InvoiceDemo() {
     const searchOrder = (orderId) => {
         OrderService.getOrderDetails(orderId)
             .then((res) => {
-                let partOrders = res.data.partOrders;
+                let partOrders = res.data.productOrders;
 
                 let totalToPay = findTotalPrice(partOrders[partOrders.length - 1].products, res.data.delivery_zone.delivery_price || 0, "ORDER");
 
@@ -305,12 +305,12 @@ export default function InvoiceDemo() {
                                 <hr/>
                                 <div className="d-flex justify-content-between">
                                     <div>
-                                        <div>KN 1 RD , house 11</div>
-                                        <div>Muhima -Nyarugenge - KIGALI - RWANDA</div>
+                                        <div>{app_config.APP_LOCATION.SHORT}</div>
+                                        <div>{app_config.APP_LOCATION.FULL}</div>
                                         <div>{app_config.APP_PHONE}</div>
                                         <div>{app_config.APP_EMAIL}</div>
-                                        <a href="https://koreaautop.com/"
-                                           className="btn-link d-block">www.koreaautop.com</a>
+                                        <a href={app_config.APP_URL_HTTPS}
+                                           className="btn-link d-block">{app_config.APP_URL}</a>
                                     </div>
                                     <div className="text-right">
                                         {PAGE_STATUS === "ORDER" ?

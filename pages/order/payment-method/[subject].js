@@ -65,11 +65,7 @@ export default function PaymentMethod() {
     }, [])
 
     useEffect(() => {
-        if (order && order.status !== "PAYING") {
-            if (cart) {
-                setTotalToPay(findTotalPrice(cart, order.delivery_zone.delivery_price || 0, "CART", total_discount));
-            }
-        } else if (orderProducts.length > 0 && order) {
+   if (orderProducts.length > 0 && order) {
             setTotalToPay(findTotalPrice(orderProducts[orderProducts.length - 1].products, orderProducts[orderProducts.length - 1].order.delivery_zone.delivery_price || 0, "ORDER", total_discount));
         }
     }, [cart, order, orderProducts, total_discount])

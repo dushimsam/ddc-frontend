@@ -63,7 +63,7 @@ const Content = ({item, getInitialData}) => {
 
     const Update = async () => {
         if ((JSON.stringify(values) === JSON.stringify(defaultValues)) && imgFiles?.length < 1) {
-            alertFailer(setAlert, "No Spare part update required");
+            alertFailer(setAlert, "No product  update required");
             setAlert({show: false, class: "success", message: ""});
             window.setTimeout(() => {
                 setLoading(false);

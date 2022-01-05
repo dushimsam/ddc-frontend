@@ -197,8 +197,8 @@ const Content = ({totals, setTotals}) => {
                     }
 
 
-                    alertSuccess(setAlert, "Spare-part  created");
-                    setTotals({...totals, spareParts: totals.spareParts + 1})
+                    alertSuccess(setAlert, "New product  created");
+                    setTotals({...totals, products: totals.products + 1})
 
                     window.setTimeout(function () {
                         setIsFormValid(false)
@@ -303,7 +303,7 @@ const Content = ({totals, setTotals}) => {
                         }
 
                         notifySuccess("WOW CONGRATULATIONS 🎉🎉🎉");
-                        notifySuccess("👏👏👏 ALL PARTS ARE SAVED SUCCESSFULLY");
+                        notifySuccess("👏👏👏 ALL PRODUCTS ARE SAVED SUCCESSFULLY");
                         setReadItems([]);
                         RealTimeSaveService.removeData(PRODUCT_REGISTRATION_TEMP_STORAGE_KEY);
                         window.setTimeout(() => {
