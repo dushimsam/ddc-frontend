@@ -15,6 +15,87 @@ export const CartIcon = ({ height, width, fill }) => (
   </svg>
 );
 
+export const OurTargetIcon = ({ height, width, fill, stroke }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width ? width : "43"}
+    height={height ? height : "43"}
+    viewBox="0 0 43 43"
+  >
+    <g
+      id="Icon_feather-target"
+      data-name="Icon feather-target"
+      transform="translate(-1.5 -1.5)"
+    >
+      <path
+        id="Path_14"
+        data-name="Path 14"
+        d="M43,23A20,20,0,1,1,23,3,20,20,0,0,1,43,23Z"
+        fill="none"
+        stroke={stroke ? stroke : "#f3a35d"}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="3"
+      />
+      <path
+        id="Path_15"
+        data-name="Path 15"
+        d="M37,23A14,14,0,1,1,23,9,14,14,0,0,1,37,23Z"
+        fill="none"
+        stroke={stroke ? stroke : "#f3a35d"}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="3"
+      />
+      <path
+        id="Path_16"
+        data-name="Path 16"
+        d="M21,18a3,3,0,1,1-3-3A3,3,0,0,1,21,18Z"
+        transform="translate(5 5)"
+        fill="none"
+        stroke={stroke ? stroke : "#f3a35d"}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="3"
+      />
+    </g>
+  </svg>
+);
+
+export const OurVisionIcon = ({ height, width, fill }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width ? width : "42"}
+    height={height ? height : "42.012"}
+    viewBox="0 0 42 42.012"
+  >
+    <path
+      id="Icon_awesome-rocket"
+      data-name="Icon awesome-rocket"
+      d="M41.44,1.567a1.3,1.3,0,0,0-1-1A29.778,29.778,0,0,0,33.671,0C25.2,0,20.124,4.529,16.334,10.5H7.784a3.939,3.939,0,0,0-3.518,2.174L.211,20.783a1.969,1.969,0,0,0,1.763,2.848h8.515L8.645,25.475a2.626,2.626,0,0,0,0,3.713l4.177,4.177a2.626,2.626,0,0,0,3.714,0l1.844-1.844v8.52a1.969,1.969,0,0,0,2.847,1.763l8.1-4.053a3.931,3.931,0,0,0,2.174-3.52V25.665C37.456,21.866,42,16.771,42,8.345a29.107,29.107,0,0,0-.562-6.778ZM31.508,13.785A3.282,3.282,0,1,1,34.79,10.5a3.282,3.282,0,0,1-3.282,3.282Z"
+      transform="translate(-0.004)"
+      fill={fill ? fill : "#f3a35d"}
+    />
+  </svg>
+);
+
+export const OurStrengthIcon = ({ height, width, fill }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={width ? width : "40"}
+    height={height ? height : "40"}
+    viewBox="0 0 40 40"
+  >
+    <path
+      id="Icon_awesome-superpowers"
+      data-name="Icon awesome-superpowers"
+      d="M40,2.25C32.563,3.232,25.107,4.214,17.679,5.2A17.326,17.326,0,0,0,2.589,21.268,17.055,17.055,0,0,0,7.75,34.5L0,42.25,22.3,39.3A17.3,17.3,0,0,0,37.366,23.25a17.016,17.016,0,0,0-5.152-13.232ZM32.884,22.991A12.928,12.928,0,1,1,20.732,9.509,12.846,12.846,0,0,1,32.884,22.991Z"
+      transform="translate(0 -2.25)"
+      fill={fill ? fill : "#f3a35d"}
+    />
+  </svg>
+);
+
 export const FbIcon = ({ height, width, fill, stroke }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"

@@ -115,7 +115,7 @@ const CustomerReviewsPart = () => {
         <div className={"col-12"}>
           <h5 className={"text-center"}>Our happy customers</h5>
           <Cursors
-            zIndexing
+            rounded
             currentSlide={currentSlide}
             jumpToSlide={jumpToSlide}
           />
