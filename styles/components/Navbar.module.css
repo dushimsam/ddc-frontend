@@ -40,6 +40,11 @@
   margin-right: 1.5rem !important;
 }
 
+.nav_search_form {
+  width: 40% !important;
+  border-radius: 5px;
+}
+
 @media only screen and (max-width: 768px) {
   .myCartArea {
     margin: 1.2em 0 !important;
@@ -53,6 +58,9 @@
   .navbarBrandArea {
     width: 100%;
     cursor: pointer;
+  }
+  .nav_search_form {
+    width: 70% !important;
   }
   /* .badge{
         top: -10px !important;
@@ -75,8 +83,7 @@
   font-size: 0.5rem;
   font-family: sans-serif;
   vertical-align: text-bottom;
-  background-color:#C84C6E;
-
+  background-color: #c84c6e;
 }
 
 .userDropdown::after {
@@ -95,9 +102,4 @@
 
 .user {
   margin: 10cm;
-}
-
-.nav_search_form {
-  width: 70% !important;
-  border-radius: 5em;
 }
