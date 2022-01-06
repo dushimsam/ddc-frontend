@@ -39,12 +39,12 @@ export const FormContent = ({setIsFormValid, setValues, values, status, latest_s
             </div>
 
 
-            <div className="form-group col-md-8 col-12">
+            {/* <div className="form-group col-md-8 col-12">
                 <InputControl handleChangeV2={handleChangeV2("supply_price")} step="0.01"
                               value={latest_supply_price}
                               min={1} label="Latest Supply Price" type="number"
                               validations="required|regex:/^-?\d*(\.\d+)?$/"/>
-            </div>
+            </div> */}
         </div>
 
     );
@@ -85,7 +85,6 @@ const Content = ({item, getInitialData}) => {
         SupplyService.get(lastItem.product_supply)
             .then((res) => {
                 setSupplyDetails(res.data)
-                console.log("Supply details ", res.data)
             }).catch(e => console.log(e))
         // console.log("supplies ", item.part_in_stock)
         // console.log("latest supply", item.part_in_stock.supplies[item.part_in_stock.supplies.length - 1])
@@ -98,17 +97,10 @@ const Content = ({item, getInitialData}) => {
 
         SparePartService.updatePartOnMarket(item._id, update_values)
             .then((res) => {
-                SuppliedPartsDataService.update(suppliedPartDetails._id, {
-                    part_supply: suppliedPartDetails.part_supply,
-                    spare_part: suppliedPartDetails.spare_part,
-                    quantity: suppliedPartDetails.quantity,
-                    supply_price: parseFloat(latest_supply_price) * suppliedPartDetails.quantity
-                })
-                    .then((res) => {
-                        alertSuccess(setAlert, "Spare part on the market updated");
+
+                        alertSuccess(setAlert, "Product on the market updated");
                         getInitialData()
                         hide_current_modal(setAlert, '#itemUpdateModal')
-                    }).catch(e => console.log(e))
             }).catch((e) => {
             alertFailer(setAlert, e.response ? e.response.data.message : e.message || "Error occurred. Try again latter.");
             hide_modal_alert(setAlert);
@@ -128,7 +120,7 @@ const Content = ({item, getInitialData}) => {
                                               setValues={setValues} values={values}
                                               status={"update"}/>} alert={alert}
 
-                        title={"Update Unit Spare Part on Market"} setAlert={setAlert} btnTxt="Update"
+                        title={"Update Unit Price for "+item?.product.name} setAlert={setAlert} btnTxt="Update"
                         disable={isFormValid} callFun={Update} loading={loading} setLoading={setLoading}/>
                 </div>
             </div>
@@ -139,7 +131,7 @@ const Content = ({item, getInitialData}) => {
 
 const Update = ({item, getInitialData}) => {
     return <UpdateFormLayout Content={<Content item={item} getInitialData={getInitialData}/>}
-                             title={"CHANGE PART-ON-MARKET UNIT PRICE'S DETAILS"}/>
+                             title={"CHANGE PRODUCT-ON-MARKET UNIT PRICE'S DETAILS"}/>
 }
 
 export default Update
