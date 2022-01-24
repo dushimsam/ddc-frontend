@@ -7,7 +7,7 @@ import NavBar from "../../components/navbar";
 import Footer from "../../components/Footer";
 import { RightArrowIcon, LineIcon } from "../../icons";
 
-const Products = ({ loading, products }) => {
+const Products = ({ loading, products, length }) => {
   return (
     <div className={`p-0  mt-3 products-area pb-5  ${styles.products}`}>
       {loading ? (
@@ -26,6 +26,13 @@ const Products = ({ loading, products }) => {
         </div>
       ) : (
         <div className="row row-cols-1 row-cols-xs-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-4 justify-content-center">
+          {products.length < 1 ? (
+            <h5 className="text-center">
+              No products ready for sale in this category currently!
+            </h5>
+          ) : (
+            ""
+          )}
           {products.map((item) => (
             <div key={item?._id} className="col p-4 top-products">
               <Product
@@ -43,44 +50,40 @@ const Products = ({ loading, products }) => {
 };
 
 const ProductsInCategory = () => {
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [productCategories, setProductCatgories] = useState([]);
   const [products, setProducts] = useState([]);
   const [productCategory, setProductCategory] = useState("All");
+  const [categProds, setCategProds] = useState([]);
 
   useEffect(() => {
     setLoading(true);
     ProductService.getProductCategories()
       .then((res) => {
         setProductCatgories(res.data);
-        setLoading(false);
+        setLoading(true);
       })
       .catch((e) => console.log(e));
     ProductService.getAllProductsOnMarket()
       .then((res) => {
         setProducts(res.data);
+        setCategProds(res.data);
         setLoading(false);
       })
       .catch((e) => console.log(e));
   }, []);
 
-  const getProdsInSelectedCategory = (prodId, prodName) => {
-    setProductCategory(prodName ? prodName : "All");
-    if (prodId) {
-      setLoading(true);
-      ProductService.getProductsInCategory(prodId)
-        .then((res) => {
-          setProducts(res.data);
-          setLoading(false);
-        })
-        .catch((e) => console.log(e));
+  const getProdsInSelectedCategory = (catId, catName) => {
+    setProductCategory(catName ? catName : "All");
+    if (catId) {
+      let filteredProds = products.filter((prod) => {
+        return prod.product.product_category._id == catId;
+      });
+      setCategProds(filteredProds);
+      setLoading(false);
     } else {
-      ProductService.getAllProductsOnMarket()
-        .then((res) => {
-          setProducts(res.data);
-          setLoading(false);
-        })
-        .catch((e) => console.log(e));
+      setCategProds(products);
+      setLoading(false);
     }
   };
 
@@ -132,7 +135,11 @@ const ProductsInCategory = () => {
               </div>
               <div className={"row d-flex justify-content-center"}>
                 <div className={"col-12"}>
-                  <Products loading={loading} products={products} />
+                  <Products
+                    loading={loading}
+                    products={categProds}
+                    length={categProds.length}
+                  />
                 </div>
               </div>
             </div>
