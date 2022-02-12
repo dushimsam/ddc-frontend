@@ -95,17 +95,17 @@ export default function Footer() {
             <div className={"row d-flex"}>
               <div className={"col-6 col-sm-5 d-flex flex-column"}>
                 <div className={""}>
-                  <p>Kigali LK 40 Road</p>
-                  <p className={"mt-n3"}>Muhima, TL 0240</p>
+                  <p>MIC building, Nyarugenge,</p>
+                  <p className={"mt-n3"}>KN 2 Ave, Kigali</p>
                 </div>
                 <div className={""}>
                   <p>Monday - Friday</p>
-                  <p className={"mt-n3"}>24/24 hr</p>
+                  <p className={"mt-n3"}>8AM - 9PM</p>
                 </div>
               </div>
               <div className={"col-6 col-sm-5 d-flex flex-column"}>
                 <div className={""}>
-                  <p>+250 7805 044 70</p>
+                  <p>+250788 504 470</p>
                   <p className={"mt-n3"}>https://getddc.com/</p>
                 </div>
                 <div className={""}>
